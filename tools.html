@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sell, borrow or Roth calculator · Crypto Kōkua</title>
+<meta name="description" content="Compare selling crypto, borrowing against it, or holding it in a Roth IRA, with 2026 tax rates.">
+<meta name="theme-color" content="#0b0a0f">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<script>try{var t=localStorage.getItem('ck-theme');if(t)document.documentElement.dataset.ck=t}catch(e){}</script>
+</head>
+<body>
+<main id="main">
+<section class="hero t-ember"><div class="wrap">
+ <span class="kicker" style="color:#fff">Tools</span><h1>Sell, borrow or Roth?</h1>
+ <p class="lead" style="margin-top:16px">Enter your own numbers to compare cashing out, borrowing against your crypto, and the same growth inside a Roth IRA. Long-term holdings, 2026 federal rates.</p>
+</div></section>
+<section class="band t-sand"><div class="wrap split" style="align-items:start">
+ <div class="widget">
+  <div class="tgl" id="presets" style="margin-bottom:18px"><button data-v="100000">$100K</button><button aria-pressed="true" data-v="500000">$500K</button><button data-v="1000000">$1M</button></div>
+  <label class="f">Portfolio value today ($)<input id="cV" type="number" inputmode="numeric" value="500000" min="0"></label>
+  <label class="f">What you paid in total ($)<input id="cB" type="number" inputmode="numeric" value="200000" min="0"></label>
+  <div class="row2"><label class="f">Other taxable income ($)<input id="cI" type="number" inputmode="numeric" value="40000" min="0"></label>
+   <label class="f">Filing status<select id="cS"><option value="s">Single</option><option value="m">Married jointly</option></select></label></div>
+  <div class="row2"><label class="f">Borrow (loan-to-value %)<input id="cL" type="number" value="25" min="5" max="60"></label>
+   <label class="f">Loan interest rate (%)<input id="cR" type="number" value="6" step="0.1" min="0"></label></div>
+  <label class="f" style="display:flex;gap:10px;align-items:center"><input id="cH" type="checkbox" checked style="width:auto;margin:0"> Include Hawaiʻi state tax (top rate 7.25%)</label>
+ </div>
+ <div class="widget t-night" style="background:var(--night);color:#f6f3f8">
+  <div class="wout" style="grid-template-columns:1fr">
+   <div class="o"><h4>Sell everything</h4><div class="v" id="oSell"></div><p id="oSellP"></p></div>
+   <div class="o"><h4>Borrow instead</h4><div class="v" id="oBor"></div><p id="oBorP"></p></div>
+   <div class="o"><h4>Inside a Roth IRA</h4><div class="v acc" id="oRoth"></div><p id="oRothP"></p></div>
+  </div>
+  <p class="small mut" style="margin:16px 0 0">Estimates only. Federal brackets: 0% / 15% / 20% plus 3.8% NIIT above $200,000 single or $250,000 joint. Hawaiʻi tax shown at the top 7.25% rate on the gain, so yours may be lower. Talk to a tax professional before acting.</p>
+ </div>
+</div></section>
+</main>
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+<script>{
+const {$,$$}=CK;const BR={s:{z:49450,f:545500,n:200000},m:{z:98900,f:613700,n:250000}};
+const num=id=>Math.max(0,+$(id).value||0),money=n=>'$'+Math.round(n).toLocaleString('en-US');
+const calc=()=>{const V=num('#cV'),B=Math.min(num('#cB'),V),O=num('#cI'),b=BR[$('#cS').value],L=Math.min(num('#cL'),85)/100,R=num('#cR')/100;
+ const g=Math.max(0,V-B),ti=O+g,fif=Math.max(0,Math.min(ti,b.f)-Math.max(O,b.z)),tw=Math.max(0,ti-Math.max(O,b.f));
+ const fed=fif*.15+tw*.2+Math.min(g,Math.max(0,ti-b.n))*.038,hi=$('#cH').checked?g*.0725:0;
+ $('#oSell').textContent=money(V-fed-hi);$('#oSellP').textContent=`You keep this after ${money(fed)} federal${hi?` and up to ${money(hi)} Hawaiʻi`:''} tax on a ${money(g)} gain.`;
+ $('#oBor').textContent=money(V*L);$('#oBorP').textContent=`Cash in hand, $0 tax, about ${money(V*L*R)} a year in interest. Liquidation if prices fall about ${Math.max(0,Math.round((1-L/.86)*100))}%.`;
+ $('#oRoth').textContent=money(V);$('#oRothP').textContent='All of it, tax-free, after age 59½ and five years. Only the 1% trade fee along the way.'};
+['#cV','#cB','#cI','#cS','#cL','#cR','#cH'].forEach(id=>$(id).addEventListener('input',calc));
+$('#presets').addEventListener('click',e=>{const b=e.target.closest('[data-v]');if(!b)return;$('#cV').value=b.dataset.v;$('#cB').value=b.dataset.v*.4;$$('#presets button').forEach(x=>x.setAttribute('aria-pressed',x===b));calc()});calc();
+}</script>
+</body>
+</html>

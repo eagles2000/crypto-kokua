@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Live markets · Crypto Kōkua</title>
+<meta name="description" content="Live crypto, stock and precious metal prices with 24-hour change.">
+<meta name="theme-color" content="#0b0a0f">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<script>try{var t=localStorage.getItem('ck-theme');if(t)document.documentElement.dataset.ck=t}catch(e){}</script>
+</head>
+<body>
+<main id="main">
+<section class="hero t-night"><div class="wrap">
+ <span class="kicker">Markets</span><h1>Live prices, up or down at a glance.</h1>
+ <p class="lead" style="margin-top:16px">Crypto, stock indexes, popular stocks and precious metals in one place. Green is up and red is down over the last 24 hours (stocks: since the last close).</p>
+ <div class="btns"><a class="btn pri" href="#crypto">Crypto</a><a class="btn ghost" href="#stocks">Stocks</a><a class="btn ghost" href="#metals">Metals</a><button class="btn ghost" id="rf">Refresh</button></div>
+</div></section>
+<section class="band " id="crypto"><div class="wrap"><div class="sech"><div><h2>Crypto</h2><p class="mut" style="margin-top:8px">Prices in U.S. dollars from CoinGecko. Trend shows the last 7 days.</p></div><span class="status" data-status></span></div><div class="tblw"><table class="mtable" data-group="crypto"></table></div></div></section>
+<section class="band t-sand" id="stocks"><div class="wrap"><div class="sech"><div><h2>Stocks and indexes</h2><p class="mut" style="margin-top:8px">Major indexes and popular stocks, including crypto companies. May be delayed.</p></div><span class="status" data-status></span></div><div class="tblw"><table class="mtable" data-group="stocks"></table></div></div></section>
+<section class="band t-gold" id="metals"><div class="wrap"><div class="sech"><div><h2>Precious metals</h2><p class="mut" style="margin-top:8px">Price per troy ounce, from futures markets. May be delayed.</p></div><span class="status" data-status></span></div><div class="tblw"><table class="mtable" data-group="metals"></table></div></div></section>
+<section class="band t-night"><div class="wrap"><p class="mut small" style="margin:0">Prices are for education only, not trading advice. Stock and metal prices may be delayed up to 15 minutes or more.</p></div></section>
+</main>
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+<script>{
+const {$,$$}=CK;
+$$('[data-group]').forEach(t=>{const g=t.dataset.group;t.innerHTML='<thead><tr><th>Asset</th><th class="n">Price</th><th class="n">Change</th><th class="n hide-sm">Trend</th></tr></thead><tbody>'+CKP.assets.filter(a=>a.g===g).map(a=>`<tr><td><div class="who"><span class="coin" data-coin="${a.k}"></span><div>${a.n}<span>${a.k}${a.unit?' · per ounce':''}</span></div></div></td><td class="n"><b data-px="${a.k}"></b></td><td class="n"><b data-ch="${a.k}"></b></td><td class="n hide-sm"><svg class="spark" data-spark="${a.k}" width="110" height="34" viewBox="0 0 110 34" preserveAspectRatio="none"></svg></td></tr>`).join('')+'</tbody>'});
+CKP.paint();$('#rf').onclick=()=>CKP.refresh();
+}</script>
+</body>
+</html>
