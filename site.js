@@ -10,7 +10,7 @@ const L=id=>{const t=T.find(x=>x.id===id);return [t.title,`learn.html#${id}`,id]
 /* ---------- navigation (edit here to grow the site) ---------- */
 const NAV=[
  {label:'Learn',cols:[
-   {h:'The basics',links:['basics','hot-cold','keys','safety','glossary'].map(L)},
+   {h:'The basics',links:['basics','hot-cold','keys','safety','research','glossary'].map(L)},
    {h:'How-to guides',links:['buy','exodus-to-kraken','gift','cold-move','cash-out'].map(L)},
    {h:'Money and retirement',links:[...['cards','taxes','borrow','roth','scenarios'].map(L),['All lessons','learn.html']]}]},
  {label:'Platforms',cols:[
@@ -78,6 +78,8 @@ document.body.insertAdjacentHTML('beforeend',`
  <label>Quick pick</label><div class="chips"><button class="btn sm" data-g="f">Woman's voice</button><button class="btn sm" data-g="m">Man's voice</button></div>
  <label for="vSel">All voices</label><select id="vSel"></select>
  <label for="vRate">Speed: <span id="vRateL">1.0</span>×</label><input id="vRate" type="range" min="0.6" max="1.6" step="0.1" value="1">
+ <label style="display:flex;gap:10px;align-items:center;font-weight:600"><input type="checkbox" id="vAuto" style="width:22px;height:22px;accent-color:var(--ember)"> Read lessons aloud automatically when I open them</label>
+ <p class="small mut" style="margin-top:6px">Questions you ask with the microphone are always read aloud.</p>
  <div class="btns"><button class="btn pri" id="vTest">Test voice</button><button class="btn" data-close>Done</button></div></div></dialog>
 <dialog id="idlg" aria-labelledby="iT"><div class="dh"><div class="t"><h2 id="iT">Install Crypto Kōkua</h2></div><button class="x" data-close aria-label="Close">✕</button></div>
  <div class="db"><p>Crypto Kōkua installs like an app straight from your browser. No app store needed.</p>
@@ -97,7 +99,7 @@ const openLesson=id=>{const i=T.findIndex(t=>t.id===id);if(i<0)return false;idx=
 $('#dX').onclick=()=>dlg.close();
 dlg.addEventListener('close',()=>{stop();if(T.some(t=>'#'+t.id===location.hash))history.replaceState(null,'',location.pathname)});
 $('#prev').onclick=()=>openLesson(T[(idx-1+T.length)%T.length].id);$('#next').onclick=()=>openLesson(T[(idx+1)%T.length].id);
-document.addEventListener('click',e=>{const b=e.target.closest('[data-open]');if(b&&openLesson(b.dataset.open)){e.preventDefault();closeMenus();const r=$('.results');if(r)r.style.display='none'}});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-open]');if(b&&openLesson(b.dataset.open)){e.preventDefault();closeMenus();if(autoRead)readOpen()}});
 
 /* ---------- voice ---------- */
 const ss=window.speechSynthesis;let voices=[],vName=null,rate=1;
@@ -115,11 +117,12 @@ const speak=(text,btn)=>{if(!ss)return;stop();const parts=text.replace(/\s+/g,' 
  parts.forEach((p,i)=>{const u=new SpeechSynthesisUtterance(p.trim());if(v)u.voice=v;u.rate=rate;if(i===parts.length-1)u.onend=()=>{if(speakingBtn===btn)stop()};ss.speak(u)});
  if(btn){speakingBtn=btn;btn.classList.add('speaking');$('span',btn).textContent='Stop'}};
 $('#listen').onclick=e=>{const b=e.currentTarget;if(speakingBtn===b){stop();return}speak($('#dT').textContent+'. '+$('#dB').innerText,b)};
-$('#voiceBtn').onclick=()=>{loadV();$('#vRate').value=rate;$('#vRateL').textContent=(+rate).toFixed(1);$('#vdlg').showModal()};
+$('#voiceBtn').onclick=()=>{loadV();$('#vAuto').checked=autoRead;$('#vRate').value=rate;$('#vRateL').textContent=(+rate).toFixed(1);$('#vdlg').showModal()};
 $('#vSel').onchange=e=>{vName=e.target.value;try{localStorage.setItem('ck-voice',vName)}catch(x){}};
 $('#vRate').oninput=e=>{rate=+e.target.value;$('#vRateL').textContent=rate.toFixed(1);try{localStorage.setItem('ck-rate',rate)}catch(x){}};
 $$('[data-g]').forEach(b=>b.onclick=()=>{const v=voices.find(x=>gender(x)===b.dataset.g&&/en-US/i.test(x.lang))||voices.find(x=>gender(x)===b.dataset.g);
  $$('[data-g]').forEach(x=>x.setAttribute('aria-pressed',x===b));if(v){vName=v.name;$('#vSel').value=v.name;try{localStorage.setItem('ck-voice',vName)}catch(x){}speak('Aloha. This is how I will sound when I read the lessons.')}});
+$('#vAuto').onchange=e=>{autoRead=e.target.checked;try{localStorage.setItem('ck-autoread',autoRead?'1':'0')}catch(x){}};
 $('#vTest').onclick=()=>speak('Aloha. Welcome to Crypto Kōkua. Never share your secret recovery phrase with anyone.');
 $('#vdlg').addEventListener('close',()=>{if(!speakingBtn&&ss)ss.cancel()});
 
@@ -135,14 +138,27 @@ $('#themeBtn').onclick=()=>setTheme(root.dataset.ck==='dark'?'light':'dark');
 /* ---------- search ---------- */
 const plain=h=>{const d=document.createElement('div');d.innerHTML=h;return d.textContent.toLowerCase()};
 const IDX=T.map(t=>({t,s:(t.title+' '+t.blurb+' '+plain(t.body)).toLowerCase()}));
-const syn={ledger:'hot-cold',trezor:'hot-cold',seed:'keys',phrase:'keys',words:'keys',password:'keys',scam:'safety',ira:'roth',itrust:'roth',retire:'roth',loan:'borrow',debit:'cards',card:'cards',tax:'taxes',sell:'cash-out',send:'exodus-to-kraken',gift:'gift'};
-const search=q=>{q=q.toLowerCase().trim();if(!q)return[];const w=q.split(/\s+/).filter(x=>x.length>1);
- return IDX.map(o=>{let sc=0;w.forEach(x=>{if(o.t.title.toLowerCase().includes(x))sc+=5;if(o.s.includes(x))sc+=1;for(const k in syn)if(x.startsWith(k)&&syn[k]===o.t.id)sc+=6});return{...o,sc}}).filter(o=>o.sc>0).sort((a,b)=>b.sc-a.sc).slice(0,5)};
-$$('form.ask').forEach(f=>{const q=$('input',f),res=$('.results',f);
- q.addEventListener('input',()=>{const r=search(q.value);res.innerHTML=r.length?r.map(o=>`<button type="button" data-open="${o.t.id}">${o.t.title}<span>${o.t.blurb}</span></button>`).join(''):(q.value.trim()?'<button type="button" disabled>No match yet. Try "wallet", "taxes" or "Kraken".</button>':'');res.style.display=res.innerHTML?'block':'none'});
- f.addEventListener('submit',e=>{e.preventDefault();const r=search(q.value);if(r[0])openLesson(r[0].t.id)});
- const SR=window.SpeechRecognition||window.webkitSpeechRecognition,mic=$('.mic',f);
- if(mic)mic.onclick=()=>{if(!SR){q.placeholder='Voice search not supported in this browser';return}try{const r=new SR();r.lang='en-US';r.onresult=ev=>{q.value=ev.results[0][0].transcript;q.dispatchEvent(new Event('input'));const m=search(q.value);if(m[0])openLesson(m[0].t.id)};r.start();q.placeholder='Listening…'}catch(err){q.placeholder='Microphone not available here'}};
+const syn={ledger:'hot-cold',trezor:'hot-cold',hardware:'hot-cold',cold:'hot-cold',seed:'keys',phrase:'keys',words:'keys',password:'keys',address:'keys',scam:'safety',fraud:'safety',ira:'roth',itrust:'roth',retire:'roth',roth:'roth',loan:'borrow',borrow:'borrow',debit:'cards',card:'cards',tax:'taxes',irs:'taxes',1099:'taxes',sell:'cash-out',cash:'cash-out',withdraw:'cash-out',send:'exodus-to-kraken',transfer:'exodus-to-kraken',gift:'gift',coingecko:'research',coinmarketcap:'research',marketcap:'research',tradingview:'research',chart:'research',research:'research',explorer:'research',price:'research',prices:'research',buy:'buy',bank:'buy',glossary:'glossary',meaning:'glossary'};
+const STOP=new Set('a an and are as at be best can could do does for from get go good great how i if in is it its like look looking me my of on or place places should site sites some that the there this to use want what whats when where which who why will with would you your about tell explain'.split(' '));
+const search=q=>{q=q.toLowerCase().replace(/[^a-z0-9\s.]/g,' ').trim();if(!q)return[];const w=q.split(/\s+/).filter(x=>x.length>1&&!STOP.has(x));if(!w.length)return[];
+ return IDX.map(o=>{let sc=0;const tl=o.t.title.toLowerCase();w.forEach(x=>{if(tl.includes(x))sc+=4;if(o.s.includes(x))sc+=1;for(const k in syn)if(x.startsWith(k)&&syn[k]===o.t.id)sc+=7});return{...o,sc}}).filter(o=>o.sc>=3).sort((a,b)=>b.sc-a.sc).slice(0,5)};
+let autoRead=false;try{autoRead=localStorage.getItem('ck-autoread')==='1'}catch(e){}
+const readOpen=()=>setTimeout(()=>{const b=$('#listen');if(b&&dlg.open&&speakingBtn!==b)b.click()},250);
+$$('form.ask').forEach(f=>{const q=$('input',f),res=$('.results',f),mic=$('.mic',f);let viaVoice=false,rec=null,silence=null;
+ const show=()=>{const r=search(q.value);res.innerHTML=r.length?r.map(o=>`<button type="button" data-ask="${o.t.id}">${o.t.title}<span>${o.t.blurb}</span></button>`).join(''):(q.value.trim()?'<button type="button" disabled>No lesson on that yet. Try words like "wallet", "taxes", "Kraken" or "prices".</button>':'');res.style.display=res.innerHTML?'block':'none'};
+ let typing=null;q.addEventListener('input',()=>{viaVoice=false;clearTimeout(typing);typing=setTimeout(show,350)});
+ const go=id=>{res.style.display='none';if(openLesson(id)&&(viaVoice||autoRead))readOpen();viaVoice=false};
+ res.addEventListener('click',e=>{const b=e.target.closest('[data-ask]');if(b){e.stopPropagation();go(b.dataset.ask)}});
+ f.addEventListener('submit',e=>{e.preventDefault();stopRec();const r=search(q.value);if(r[0])go(r[0].t.id);else show()});
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ const setMic=on=>{if(!mic)return;mic.classList.toggle('on',on);mic.setAttribute('aria-label',on?'Stop listening':'Speak your question');q.placeholder=on?'Listening… tap the mic when you are done':'Ask about wallets, taxes, Kraken…'};
+ function stopRec(){clearTimeout(silence);if(rec){try{rec.stop()}catch(e){}rec=null}setMic(false)}
+ if(mic)mic.onclick=()=>{if(rec){stopRec();return}if(!SR){q.placeholder='Voice questions work in Chrome, Edge and Safari';return}
+  try{rec=new SR();rec.lang='en-US';rec.continuous=true;rec.interimResults=true;let finalText='';
+   rec.onresult=ev=>{let interim='';for(let i=ev.resultIndex;i<ev.results.length;i++){const tx=ev.results[i][0].transcript;if(ev.results[i].isFinal)finalText+=tx+' ';else interim+=tx}
+    q.value=(finalText+interim).trim();viaVoice=true;clearTimeout(silence);silence=setTimeout(()=>{stopRec();show();viaVoice=true},2500)};
+   rec.onerror=()=>stopRec();rec.onend=()=>{if(rec){rec=null;setMic(false);if(q.value.trim()){show();viaVoice=true}}};
+   q.value='';res.style.display='none';rec.start();setMic(true)}catch(err){q.placeholder='Microphone not available here';rec=null}};
 });
 document.addEventListener('click',e=>{if(!e.target.closest('form.ask'))$$('.results').forEach(r=>r.style.display='none')});
 
