@@ -146,6 +146,11 @@
  <div class="btns"><a class="btn pri" href="markets.html">All markets</a></div>
 </div></section>
 
+<section class="band t-sand"><div class="wrap">
+ <div class="sech"><div><span class="kicker">News</span><h2 class="rv">Crypto news, fresh every 15 minutes.</h2><p class="mut" style="margin-top:10px">Headlines from The Block, CoinDesk, Decrypt and Cointelegraph. Tap one to read the full story on their site.</p></div><a class="btn" href="news.html">All headlines</a></div>
+ <div class="newsgrid" id="newsHome"><p class="mut">Loading headlines…</p></div>
+</div></section>
+
 <section class="band" id="about"><div class="wrap">
  <span class="kicker">About</span><h2 class="rv">Built to be trusted.</h2>
  <div class="pillars rv" style="grid-template-columns:repeat(4,minmax(0,1fr))">
@@ -181,8 +186,10 @@ const roth=V=>{const t=tax(V,V*.4,40000);$('#rS').textContent=money(V-t.fed-t.hi
 tg('#rTg',roth);roth(500000);
 // markets table
 let mg='crypto';
-const mt=()=>{const rows=CKP.assets.filter(a=>a.g===mg);$('#mT').innerHTML='<thead><tr><th>Asset</th><th class="n">Price</th><th class="n">24h</th><th class="n hide-sm">Trend</th></tr></thead><tbody>'+rows.map(a=>`<tr><td><div class="who"><span class="coin" data-coin="${a.k}"></span><div>${a.n}<span>${a.k}${a.unit?' · per ounce':''}</span></div></div></td><td class="n"><b data-px="${a.k}"></b></td><td class="n"><b data-ch="${a.k}"></b></td><td class="n hide-sm"><svg class="spark" data-spark="${a.k}" width="110" height="34" viewBox="0 0 110 34" preserveAspectRatio="none"></svg></td></tr>`).join('')+'</tbody>';CKP.paint()};
+const mt=()=>{const rows=CKP.assets.filter(a=>a.g===mg);$('#mT').innerHTML='<thead><tr><th>Asset</th><th class="n">Price</th><th class="n">24h</th><th class="n hide-sm">Trend</th></tr></thead><tbody>'+rows.map(a=>`<tr data-href="${CKP.url(a)}"><td><div class="who"><span class="coin" data-coin="${a.k}"></span><div><a href="${CKP.url(a)}" target="_blank" rel="noopener">${a.n}</a><span>${a.k}${a.unit?' · per ounce':''} · <span class="ext">${CKP.where(a)} ↗</span></span></div></div></td><td class="n"><b data-px="${a.k}"></b></td><td class="n"><b data-ch="${a.k}"></b></td><td class="n hide-sm"><svg class="spark" data-spark="${a.k}" width="110" height="34" viewBox="0 0 110 34" preserveAspectRatio="none"></svg></td></tr>`).join('')+'</tbody>';CKP.paint()};
 tg('#mTg',g=>{mg=g;mt()});mt();
+CK.renderNews(document.getElementById('newsHome'),6);
+document.addEventListener('click',e=>{const tr=e.target.closest('.mtable tr[data-href]');if(tr&&!e.target.closest('a'))window.open(tr.dataset.href,'_blank','noopener')});
 }</script>
 </body>
 </html>

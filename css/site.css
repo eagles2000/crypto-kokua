@@ -319,3 +319,21 @@ label.f input,label.f select{display:block;width:100%;margin-top:6px;font:inheri
 @media(max-width:860px){.split{grid-template-columns:1fr}.split.rev>:first-child{order:0}.stage{height:600px}}
 @media(max-width:600px){.pillars,.pgrid,.pgrid.two,.steps,.grid,.wout,.row2,.photo .tiles{grid-template-columns:1fr}.stage{transform:scale(.88);height:560px;margin:-20px 0}.f1{left:-14px}.f2{right:-18px}.hdr .btn.pri .lbl{display:none}.ask input{padding-right:104px}.mtable{font-size:13.5px}.spark{width:70px}.hide-sm{display:none}.vault{height:400px}.cardsb .plastic.b2{transform:rotate(6deg) translate(14px,30px)}}
 .ask .mic.on{color:#fff;background:var(--ember);border-radius:999px;animation:pulse 1.6s infinite}
+
+/* news */
+.newsgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:30px}
+.news{display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;text-decoration:none;color:var(--ink);transition:transform .2s,border-color .2s}
+.news:hover{transform:translateY(-3px);border-color:var(--ember)}
+.news .src{display:flex;justify-content:space-between;gap:10px;font-size:13px;font-weight:800;color:var(--ember)}
+.news .src em{font-style:normal;font-weight:600;color:var(--mut)}
+.news b{font-size:17px;line-height:1.35;font-weight:700}
+.news .go{margin-top:auto;font-size:13.5px;font-weight:700;color:var(--mut)}
+.newslist{grid-template-columns:repeat(2,minmax(0,1fr))}
+/* clickable price rows */
+.mtable tbody tr{cursor:pointer;transition:background .15s}
+.mtable tbody tr:hover{background:var(--soft)}
+.mtable .who a{color:inherit;text-decoration:none}
+.mtable .who a:hover{text-decoration:underline}
+.mtable .ext{font-size:12px;color:var(--mut);font-weight:600}
+@media(max-width:1020px){.newsgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.newsgrid,.newslist{grid-template-columns:1fr}}

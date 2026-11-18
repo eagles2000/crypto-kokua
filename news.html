@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crypto news · Crypto Kōkua</title>
+<meta name="description" content="Latest crypto headlines from The Block, CoinDesk, Decrypt and Cointelegraph, updated every 15 minutes.">
+<meta name="theme-color" content="#0b0a0f">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<script>try{var t=localStorage.getItem('ck-theme');if(t)document.documentElement.dataset.ck=t}catch(e){}</script>
+</head>
+<body>
+<main id="main">
+<section class="hero t-night"><div class="wrap">
+ <span class="kicker">News</span><h1>Crypto news from trusted sources.</h1>
+ <p class="lead" style="margin-top:16px">The latest headlines from The Block, CoinDesk, Decrypt and Cointelegraph, updated every 15 minutes. Tap a headline to read the full story on the publisher's site.</p>
+ <div class="btns"><button class="btn ghost" id="nRf">Refresh</button></div>
+</div></section>
+<section class="band t-sand"><div class="wrap">
+ <div class="sech"><h2>Latest headlines</h2><div class="filters" id="nF"></div></div>
+ <p class="small mut" id="nUp" style="margin-top:10px"></p>
+ <div class="newsgrid newslist" id="nList"><p class="mut">Loading headlines…</p></div>
+ <p class="small mut" style="margin-top:24px">Headlines and links belong to their publishers. Crypto Kōkua doesn't write or endorse these stories. News isn't advice to buy or sell.</p>
+</div></section>
+</main>
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+<script>{
+const {$,$$}=CK;let cur='All';const srcs=['All','The Block','CoinDesk','Decrypt','Cointelegraph'];
+$('#nF').innerHTML=srcs.map(s=>`<button data-s="${s}" aria-pressed="${s===cur}">${s}</button>`).join('');
+const draw=async()=>{const d=await CK.renderNews($('#nList'),40,cur);if(d)$('#nUp').textContent='Updated '+CK.ago(d.updated)+'. Sources: '+d.sources.map(s=>s.name+(s.ok?'':' (unavailable)')).join(', ')+'.'};
+$('#nF').addEventListener('click',e=>{const b=e.target.closest('[data-s]');if(!b)return;cur=b.dataset.s;$$('#nF button').forEach(x=>x.setAttribute('aria-pressed',x===b));draw()});
+$('#nRf').onclick=draw;draw();setInterval(draw,15*60000);
+}</script>
+</body>
+</html>

@@ -18,7 +18,8 @@ const NAV=[
    {h:'Wallets and IRA',links:[['Exodus','platforms.html#exodus','','Free hot wallet'],['Ledger','platforms.html#ledger','','Hardware cold wallet'],['Trezor','platforms.html#trezor','','Open-source cold wallet'],['iTrustCapital','platforms.html#itrustcapital','','Crypto Roth IRA']]},
    {h:'Compare',links:[['Debit and credit cards','platforms.html#cards','','Rewards, fees, requirements'],['Exchange comparison','platforms.html#compare','','Side by side']]}]},
  {label:'Markets',cols:[
-   {h:'Live prices',links:[['Crypto','markets.html#crypto','','Bitcoin, Ethereum, XRP and more'],['Stocks and indexes','markets.html#stocks','','S&P 500, Nasdaq, NVIDIA'],['Precious metals','markets.html#metals','','Gold, silver, platinum']]}]},
+   {h:'Live prices',links:[['Crypto','markets.html#crypto','','Bitcoin, Ethereum, XRP and more'],['Stocks and indexes','markets.html#stocks','','S&P 500, Nasdaq, NVIDIA'],['Precious metals','markets.html#metals','','Gold, silver, platinum']]},
+   {h:'News',links:[['Crypto news','news.html','','Headlines from The Block, CoinDesk and more']]}]},
  {label:'Tools',cols:[
    {h:'Calculators',links:[['Sell, borrow or Roth','tools.html','','Compare your options'],['Dollar-cost averaging','#','soon','']]},
    {h:'Downloads',links:[['Free starter guide (PDF)','downloads/Crypto_Kokua_Starter_Guide.pdf','','Print it or email it'],['Install the app','#install','','Chrome, Brave, iPhone']]}]},
@@ -192,6 +193,8 @@ const fmt=(a,v=a.p)=>a.idx?v.toLocaleString('en-US',{maximumFractionDigits:0}):v
 const pct=ch=>(ch>=0?'▲ ':'▼ ')+Math.abs(ch).toFixed(2)+'%';
 const sparkPath=(arr,w,h)=>{if(!arr||arr.length<2)return'';const mn=Math.min(...arr),mx=Math.max(...arr),r=mx-mn||1;return arr.map((v,i)=>`${i?'L':'M'}${(i/(arr.length-1)*w).toFixed(1)} ${(h-2-(v-mn)/r*(h-4)).toFixed(1)}`).join(' ')};
 P.fmt=fmt;P.pct=pct;P.sparkPath=sparkPath;
+P.url=a=>a.cg&&a.g==='crypto'?`https://www.coingecko.com/en/coins/${a.cg}`:a.y?`https://finance.yahoo.com/quote/${encodeURIComponent(a.y)}`:'#';
+P.where=a=>a.g==='crypto'?'CoinGecko':'Yahoo Finance';
 const tween=(el,from,to,a)=>{if(!from||matchMedia('(prefers-reduced-motion: reduce)').matches||from===to){el.textContent=fmt(a,to);return}
  const t0=performance.now(),d=700;const step=t=>{const k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3);el.textContent=fmt(a,from+(to-from)*e);if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step);
  el.classList.remove('flash-up','flash-down');void el.offsetWidth;el.classList.add(to>=from?'flash-up':'flash-down')};
@@ -236,7 +239,13 @@ try{if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').ca
 
 /* ---------- helpers for pages ---------- */
 const slug=p=>p.n.toLowerCase().replace(/[^a-z]/g,'');
-window.CK={$,$$,openLesson,speak,slug,
+const ago=d=>{if(!d)return'';const m=Math.max(1,Math.round((Date.now()-new Date(d))/60000));return m<60?m+' min ago':m<1440?Math.round(m/60)+' hr ago':Math.round(m/1440)+' days ago'};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let newsCache=null;
+const loadNews=async()=>{if(newsCache&&Date.now()-newsCache.t<5*60000)return newsCache.d;const r=await fetch('/api/news',{cache:'no-store'});if(!r.ok)throw new Error('news');const d=await r.json();newsCache={t:Date.now(),d};return d};
+const newsCard=i=>`<a class="news" href="${esc(i.link)}" target="_blank" rel="noopener"><span class="src">${esc(i.source)}<em>${ago(i.date)}</em></span><b>${esc(i.title)}</b><span class="go">Read at ${esc(i.source)} ↗</span></a>`;
+const renderNews=async(el,limit,filter)=>{try{const d=await loadNews();const items=d.items.filter(i=>!filter||filter==='All'||i.source===filter).slice(0,limit);el.innerHTML=items.length?items.map(newsCard).join(''):'<p class="mut">No headlines right now. Check back soon.</p>';return d}catch(e){el.innerHTML='<p class="mut">Headlines load on the published site. If they don\'t appear, try again in a few minutes.</p>';return null}};
+window.CK={$,$$,openLesson,speak,slug,renderNews,ago,
  lessonCard:t=>`<button class="tcard" data-open="${t.id}"><div class="ic">${ico(t.ic)}</div><div class="cat">${t.cat}</div><h3>${t.title}</h3><p>${t.blurb}</p><span class="more">Open lesson →</span></button>`,
  platformCard:(p,full)=>`<article class="pc" id="${slug(p)}"><div class="mk" style="background:${p.c}">${p.n[0]}</div><div><h3>${p.n}</h3><div class="kind">${p.k}</div></div>
   <div>${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div><p>${p.d}</p>${full?`<ul>${p.pts.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}
