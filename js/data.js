@@ -62,9 +62,45 @@ const T=[
 <ol><li>Open Kraken and tap <b>Deposit</b>, then choose <b>USD</b>.</li>
 <li>Choose <b>ACH</b> (free) and connect your bank through the secure login screen. Some banks use small test deposits instead.</li>
 <li>Enter an amount and confirm. Funds usually arrive in 1 to 5 business days. New accounts may have a short hold before crypto bought with ACH can be withdrawn.</li>
-<li>Open <b>Kraken Pro</b> (same login, much lower fees), search the coin, for example BTC/USD, choose Buy and confirm.</li>
+<li>Open <b>Kraken Pro</b> (same login, much lower fees), search the coin, for example BTC/USD, choose Buy and confirm. For the lowest fee, use a <a href="learn.html#limit-orders" data-open="limit-orders">limit order</a>.</li>
 <li>Optional: set up <b>recurring buys</b>, such as $50 a week. Buying on a schedule, called dollar-cost averaging, takes the guesswork out of timing.</li></ol>
 <p class="mut">Same idea elsewhere: Coinbase under Settings, Payment methods. Uphold under Transact, From: Bank. Crypto.com under Transfer, Deposit, Fiat.</p>`},
+{id:'limit-orders',cat:'How-to',ic:'chart',title:'Limit orders: the cheapest way to buy and sell',blurb:'Pick your own price, pay the lower maker fee, and avoid the hidden markups of simple Buy buttons.',links:[['https://pro.kraken.com','Kraken Pro'],['https://crypto.com/exchange','Crypto.com Exchange']],body:`
+<p>A <b>limit order</b> lets you choose the exact price you will pay or accept. A buy limit fills only at your price <b>or lower</b>. A sell limit fills only at your price <b>or higher</b>. If the market never reaches your price, nothing happens; the order simply waits until you cancel it.</p>
+<h4>Why it saves money: maker vs. taker</h4>
+<ul><li><b>Maker:</b> your order waits on the order book. This is the <b>cheaper</b> fee.</li><li><b>Taker:</b> your order fills instantly against someone else's. This is the <b>more expensive</b> fee. Market orders are always taker.</li></ul>
+<div class="tbl"><table><thead><tr><th>Platform (starting tier)</th><th class="n">Maker</th><th class="n">Taker</th><th class="n">On a $1,000 buy</th></tr></thead><tbody>
+<tr><td>Kraken Pro</td><td class="n">0.40%</td><td class="n">0.80%</td><td class="n">About $4 vs. $8</td></tr>
+<tr><td>Crypto.com Exchange</td><td class="n">0.25%</td><td class="n">0.50%</td><td class="n">About $2.50 vs. $5</td></tr>
+<tr><td>Simple app "Buy" buttons</td><td class="n" colspan="2">Fee plus hidden spread</td><td class="n">Often $10 to $25+</td></tr></tbody></table></div>
+<div class="box"><b class="l">The golden rule for the maker fee</b>When <b>buying</b>, set your price a little <b>below</b> the current price. When <b>selling</b>, set it a little <b>above</b>. Then turn on <b>Post Only</b>, which means "only place this order if it will wait on the book." If your price would fill instantly at the taker fee, the exchange cancels it instead of charging you more.</div>
+<div class="box warn"><b class="l">Common mistake</b>Setting a buy price above the current market price (or a sell price below it) makes the order fill immediately at the taker fee. Post Only protects you from this.</div>
+<h4>Reading the order book</h4>
+<ul><li>The order book has two sides: <b>Bids</b> (buyers, usually green) and <b>Asks</b> (sellers, usually red).</li><li>The gap between the highest bid and the lowest ask is the <b>spread</b>.</li><li>For a maker buy, use a price at or below the highest bid. For a maker sell, use a price at or above the lowest ask.</li></ul>
+<h4>On Kraken Pro (pro.kraken.com)</h4>
+<p class="mut">Same login as your regular Kraken account; the Kraken Pro phone app works the same way. Fund your account first with a free ACH deposit. Kraken may hold new ACH deposits from being withdrawn for up to 7 days, but you can trade with them right away.</p>
+<ol><li><b>Pick your market</b> with the search near the top left, for example BTC/USD.</li>
+<li><b>Open the order form</b> on the right and click <b>Buy</b>.</li>
+<li><b>Choose Limit</b> as the order type (not Market).</li>
+<li><b>Enter your limit price</b> at or slightly below the highest bid.</li>
+<li><b>Enter how much:</b> the coin amount in <i>Quantity</i>, or the dollars to spend in <i>Total</i>.</li>
+<li><b>Check Post only</b> and leave <i>Time in force</i> on <b>GTC</b> (good until canceled).</li>
+<li><b>Review</b> the estimated total and fee, then click the green <b>Buy</b> button and confirm.</li>
+<li><b>Track it</b> under <b>Open orders</b> at the bottom. You can edit or cancel it there at no cost.</li></ol>
+<h4>On the Crypto.com Exchange (crypto.com/exchange)</h4>
+<p class="mut">This is the Exchange, not the Crypto.com App. Your account must be verified. Fund it by moving USD or crypto over from the App, or with an ACH Instant Deposit on the Exchange. Make sure the money shows in your Exchange spot balance first.</p>
+<ol><li><b>Log in</b> at crypto.com/exchange.</li>
+<li><b>Click Trade, then Spot,</b> and pick your pair, for example BTC/USD.</li>
+<li><b>In the order panel,</b> click <b>Buy</b> and choose <b>Limit</b>.</li>
+<li><b>Enter your price</b> at or slightly below the highest bid.</li>
+<li><b>Enter the quantity</b> or the dollar amount. The minimum order is $1.</li>
+<li><b>Turn on Post Only</b> and set <i>Time in Force</i> to <b>GTC</b>.</li>
+<li><b>Click Buy BTC</b> (it names your coin), review, and confirm.</li>
+<li><b>Track it</b> under <b>Open Orders</b> below the chart, where you can cancel it.</li></ol>
+<h4>Selling with a limit order</h4>
+<p>Same steps with three changes: choose <b>Sell</b>, set your price at or slightly <b>above</b> the lowest ask, and keep <b>Post Only</b> on.</p>
+<div class="box"><b class="l">Before-you-click checklist</b><ul style="margin:0"><li>Am I on Kraken Pro or the Crypto.com Exchange, not a simple app buy screen?</li><li>Is the order type Limit, and did I pick Buy or Sell correctly?</li><li>Is my buy price below the current price, or my sell price above it?</li><li>Is Post Only on, and Time in Force set to GTC?</li><li>Did I double-check the quantity and dollar total? An extra zero is the most expensive typo in crypto.</li></ul></div>
+<p class="mut">If an order doesn't fill, the price hasn't reached your number yet. Leave it, move it closer, or cancel for free. If a Post Only order vanishes right away, your price would have filled instantly, so the exchange canceled it; move your price a little further from the market and try again. Fees are starting-tier rates as of November 2026.</p>`},
 {id:'exodus-to-kraken',cat:'How-to',ic:'send',title:'Send from Exodus to Kraken',blurb:'Move crypto from your Exodus wallet to an exchange safely, with a test send first.',links:[['https://www.exodus.com','Exodus'],['https://www.kraken.com','Kraken']],body:`
 <ol><li><b>In Kraken:</b> tap Deposit, pick the coin, and choose the <b>network</b>. Copy the deposit address, plus any memo or tag shown.</li>
 <li><b>In Exodus:</b> tap the same coin, then Send. Paste the Kraken address (and memo, if needed).</li>
@@ -164,7 +200,7 @@ const T=[
 ];
 
 const EX=[
-{n:'Kraken',k:'Exchange',c:'#5741d9',u:'https://www.kraken.com',s:'https://support.kraken.com',d:'Founded 2011 and known for security. Three apps: Kraken for simple buys, Kraken Pro for much lower fees, and Krak for the debit card and payments.',pts:['Kraken Pro fees start around 0.25% to 0.40%','Krak Card: free Visa debit, up to 2% back','Flexline loans for high-net-worth users'],tags:['Best overall pick','Low fees']},
+{n:'Kraken',k:'Exchange',c:'#5741d9',u:'https://www.kraken.com',s:'https://support.kraken.com',d:'Founded 2011 and known for security. Three apps: Kraken for simple buys, Kraken Pro for much lower fees, and Krak for the debit card and payments.',pts:['Kraken Pro: 0.40% maker, 0.80% taker at the starting tier','Krak Card: free Visa debit, up to 2% back','Flexline loans for high-net-worth users'],tags:['Best overall pick','Low fees']},
 {n:'Coinbase',k:'Exchange',c:'#0052ff',u:'https://www.coinbase.com',s:'https://help.coinbase.com',d:'The largest U.S. exchange and a public company, with the most beginner-friendly app. Use Coinbase Advanced (same login) for lower fees.',pts:['Borrow USDC against Bitcoin, from about 5% to 6%','Coinbase One Card: Amex credit, 2% to 4% in BTC','Coinbase debit card not offered in Hawaiʻi'],tags:['Easiest to start','Loans']},
 {n:'Uphold',k:'Exchange',c:'#49cc68',u:'https://uphold.com',s:'https://support.uphold.com',d:'Trade anything to anything in one step: dollars to crypto, crypto to gold. Popular with XRP holders. Fees are built into the quoted price.',pts:['Essential card: no annual fee, 2% in XRP','Elite metal card: $99.99/yr, 3% to 4% in XRP','Direct deposit supported'],tags:['XRP rewards','Metals']},
 {n:'Crypto.com',k:'Exchange',c:'#103f68',u:'https://crypto.com',s:'https://help.crypto.com',d:'A mobile-first app headquartered in Singapore with U.S. operations. Its CRO token powers card tiers and perks.',pts:['Visa prepaid card with a free basic tier','Higher tiers need a subscription or 12-month CRO lockup','Visa Signature credit card in the U.S.'],tags:['Card perks','Mobile app']}];

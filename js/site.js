@@ -11,7 +11,7 @@ const L=id=>{const t=T.find(x=>x.id===id);return [t.title,`learn.html#${id}`,id]
 const NAV=[
  {label:'Learn',cols:[
    {h:'The basics',links:['basics','hot-cold','keys','safety','research','glossary'].map(L)},
-   {h:'How-to guides',links:['buy','exodus-to-kraken','gift','cold-move','cash-out'].map(L)},
+   {h:'How-to guides',links:['buy','limit-orders','exodus-to-kraken','gift','cold-move','cash-out'].map(L)},
    {h:'Money and retirement',links:[...['cards','taxes','borrow','roth','scenarios'].map(L),['All lessons','learn.html']]}]},
  {label:'Platforms',cols:[
    {h:'Exchanges',links:[['Kraken','platforms.html#kraken','','Low fees, strong security'],['Coinbase','platforms.html#coinbase','','Easiest to start'],['Uphold','platforms.html#uphold','','Anything-to-anything trades'],['Crypto.com','platforms.html#cryptocom','','Mobile app and card perks']]},
@@ -139,7 +139,7 @@ $('#themeBtn').onclick=()=>setTheme(root.dataset.ck==='dark'?'light':'dark');
 /* ---------- search ---------- */
 const plain=h=>{const d=document.createElement('div');d.innerHTML=h;return d.textContent.toLowerCase()};
 const IDX=T.map(t=>({t,s:(t.title+' '+t.blurb+' '+plain(t.body)).toLowerCase()}));
-const syn={ledger:'hot-cold',trezor:'hot-cold',hardware:'hot-cold',cold:'hot-cold',seed:'keys',phrase:'keys',words:'keys',password:'keys',address:'keys',scam:'safety',fraud:'safety',ira:'roth',itrust:'roth',retire:'roth',roth:'roth',loan:'borrow',borrow:'borrow',debit:'cards',card:'cards',tax:'taxes',irs:'taxes',1099:'taxes',sell:'cash-out',cash:'cash-out',withdraw:'cash-out',send:'exodus-to-kraken',transfer:'exodus-to-kraken',gift:'gift',coingecko:'research',coinmarketcap:'research',marketcap:'research',tradingview:'research',chart:'research',research:'research',explorer:'research',price:'research',prices:'research',buy:'buy',bank:'buy',glossary:'glossary',meaning:'glossary'};
+const syn={ledger:'hot-cold',trezor:'hot-cold',hardware:'hot-cold',cold:'hot-cold',seed:'keys',phrase:'keys',words:'keys',password:'keys',address:'keys',scam:'safety',fraud:'safety',ira:'roth',itrust:'roth',retire:'roth',roth:'roth',loan:'borrow',borrow:'borrow',debit:'cards',card:'cards',tax:'taxes',irs:'taxes',1099:'taxes',sell:'cash-out',cash:'cash-out',withdraw:'cash-out',send:'exodus-to-kraken',transfer:'exodus-to-kraken',gift:'gift',coingecko:'research',coinmarketcap:'research',marketcap:'research',tradingview:'research',chart:'research',research:'research',explorer:'research',price:'research',prices:'research',buy:'buy',bank:'buy',limit:'limit-orders',maker:'limit-orders',taker:'limit-orders',order:'limit-orders',orders:'limit-orders',post:'limit-orders',fee:'limit-orders',fees:'limit-orders',cheap:'limit-orders',cheapest:'limit-orders',bid:'limit-orders',glossary:'glossary',meaning:'glossary'};
 const STOP=new Set('a an and are as at be best can could do does for from get go good great how i if in is it its like look looking me my of on or place places should site sites some that the there this to use want what whats when where which who why will with would you your about tell explain'.split(' '));
 const search=q=>{q=q.toLowerCase().replace(/[^a-z0-9\s.]/g,' ').trim();if(!q)return[];const w=q.split(/\s+/).filter(x=>x.length>1&&!STOP.has(x));if(!w.length)return[];
  return IDX.map(o=>{let sc=0;const tl=o.t.title.toLowerCase();w.forEach(x=>{if(tl.includes(x))sc+=4;if(o.s.includes(x))sc+=1;for(const k in syn)if(x.startsWith(k)&&syn[k]===o.t.id)sc+=7});return{...o,sc}}).filter(o=>o.sc>=3).sort((a,b)=>b.sc-a.sc).slice(0,5)};
