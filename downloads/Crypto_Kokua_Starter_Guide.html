@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>The Beginner's Guide to Crypto: Wallets, Exchanges, Taxes and Retirement</title>
+<style>
+  :root{
+    --navy:#0f2a44; --teal:#0e7c86; --teal-l:#e6f4f5; --gold:#c8962e; --gold-l:#fbf4e4;
+    --red:#a33a2f; --red-l:#fbeceb; --ink:#1f2933; --muted:#5b6876; --line:#d9e1e8; --bg:#f6f8fa;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;font-size:16px}
+  .page{max-width:900px;margin:0 auto;background:#fff;box-shadow:0 0 0 1px var(--line)}
+  .cover{background:linear-gradient(135deg,var(--navy) 0%,#163d61 60%,var(--teal) 100%);color:#fff;padding:72px 56px 56px}
+  .cover .eyebrow{letter-spacing:.18em;text-transform:uppercase;font-size:13px;color:#bfe3e6;margin:0 0 14px}
+  .cover h1{font-family:Georgia,"Times New Roman",serif;font-size:42px;line-height:1.15;margin:0 0 16px;font-weight:700}
+  .cover .sub{font-size:19px;color:#e3eef5;max-width:640px;margin:0 0 36px}
+  .cover .meta{display:flex;flex-wrap:wrap;gap:10px}
+  .cover .chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:6px 12px;border-radius:999px;font-size:13px}
+  .cover .prepared{margin-top:40px;font-size:14px;color:#cfe0ea}
+  main{padding:40px 56px 56px}
+  h2{font-family:Georgia,"Times New Roman",serif;color:var(--navy);font-size:28px;margin:56px 0 8px;padding-top:8px;border-top:3px solid var(--teal)}
+  h2 .num{color:var(--teal);margin-right:10px}
+  h3{color:var(--navy);font-size:20px;margin:30px 0 6px}
+  h4{color:var(--teal);font-size:16px;margin:20px 0 4px;text-transform:uppercase;letter-spacing:.05em}
+  p{margin:8px 0 12px}
+  .lead{font-size:17px;color:var(--muted)}
+  ul,ol{padding-left:24px;margin:8px 0 14px}
+  li{margin:4px 0}
+  a{color:var(--teal);text-decoration:underline;text-underline-offset:2px}
+  .toc a,.profile .hd a{text-decoration:none}
+  .profile .hd a{color:#fff}
+  .profile .hd span a{color:#bfe3e6}
+  .go{display:inline-block;margin:4px 8px 4px 0;padding:6px 14px;border-radius:999px;background:var(--teal);color:#fff !important;text-decoration:none !important;font-weight:600;font-size:14px}
+  table{width:100%;border-collapse:collapse;margin:14px 0 20px;font-size:14.5px}
+  th{background:var(--navy);color:#fff;text-align:left;padding:9px 10px;font-weight:600}
+  td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:nth-child(even) td{background:#fafcfd}
+  .box{border-radius:8px;padding:14px 18px;margin:16px 0;border-left:5px solid}
+  .tip{background:var(--teal-l);border-color:var(--teal)}
+  .warn{background:var(--red-l);border-color:var(--red)}
+  .note{background:var(--gold-l);border-color:var(--gold)}
+  .box strong.label{display:block;text-transform:uppercase;letter-spacing:.06em;font-size:12.5px;margin-bottom:4px}
+  .tip strong.label{color:var(--teal)} .warn strong.label{color:var(--red)} .note strong.label{color:#8a6414}
+  .toc{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:20px 26px;margin:10px 0 0}
+  .toc h3{margin-top:0}
+  .toc ol{columns:2;column-gap:36px;margin:0}
+  .toc li{break-inside:avoid}
+  .toc a{text-decoration:none;color:var(--ink)}
+  .toc a:hover{color:var(--teal)}
+  .steps{counter-reset:s;list-style:none;padding-left:0}
+  .steps>li{counter-increment:s;position:relative;padding:4px 0 8px 44px;margin:6px 0}
+  .steps>li::before{content:counter(s);position:absolute;left:0;top:3px;width:30px;height:30px;border-radius:50%;background:var(--teal);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0}
+  .card{border:1px solid var(--line);border-radius:10px;padding:16px 18px;background:#fff}
+  .card h4{margin-top:0}
+  .profile{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:22px 0}
+  .profile .hd{background:var(--navy);color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px}
+  .profile .hd h3{color:#fff;margin:0;font-size:21px}
+  .profile .hd span{font-size:13px;color:#bfe3e6}
+  .profile .bd{padding:6px 20px 14px}
+  .kv{display:grid;grid-template-columns:170px 1fr;gap:4px 14px;margin:10px 0}
+  .kv div:nth-child(odd){font-weight:600;color:var(--navy)}
+  .small{font-size:13.5px;color:var(--muted)}
+  .disclaimer{margin-top:48px;padding:18px 22px;background:var(--bg);border:1px solid var(--line);border-radius:8px;font-size:13.5px;color:var(--muted)}
+  footer{padding:22px 56px;background:var(--navy);color:#cfe0ea;font-size:13px}
+  @media (max-width:720px){
+    .cover,main,footer{padding-left:22px;padding-right:22px}
+    .cover h1{font-size:32px}
+    .toc ol{columns:1}
+    .grid2{grid-template-columns:1fr}
+    .kv{grid-template-columns:1fr}
+    table{font-size:13px}
+  }
+  @media print{
+    body{background:#fff;font-size:11.5pt}
+    .page{box-shadow:none;max-width:none}
+    .cover{-webkit-print-color-adjust:exact;print-color-adjust:exact;page-break-after:always;min-height:96vh}
+    th,.box,.profile .hd,footer,.steps>li::before{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    h2{page-break-before:always;margin-top:0}
+    h2.nobreak{page-break-before:avoid}
+    h3,h4{page-break-after:avoid}
+    tr,.box,.card{page-break-inside:avoid}
+    thead{display:table-header-group}
+    a{color:var(--teal);text-decoration:underline}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+<header class="cover">
+<p class="eyebrow">A Plain-English Starter Guide</p>
+<h1>The Beginner's Guide to Crypto</h1>
+<p class="sub">Wallets, keys and recovery phrases. Buying, sending and cashing out. Debit cards, taxes, borrowing, and tax-free crypto inside a Roth IRA.</p>
+<div class="meta">
+<span class="chip">Kraken</span><span class="chip">Coinbase</span><span class="chip">Uphold</span><span class="chip">Crypto.com</span>
+<span class="chip">Exodus</span><span class="chip">Ledger</span><span class="chip">Trezor</span><span class="chip">Tangem</span><span class="chip">iTrustCapital</span>
+</div>
+<p class="prepared">Prepared by David Cantrell  |  Information current as of November 2026</p>
+</header>
+<main>
+<div class="toc">
+<h3>What's Inside</h3>
+<ol>
+<li><a href="#s1">Crypto in Plain English</a></li>
+<li><a href="#s2">Hot Wallets vs. Cold Wallets</a></li>
+<li><a href="#s3">Your Keys and Codes Explained</a></li>
+<li><a href="#s4">The Golden Safety Rules</a></li>
+<li><a href="#s5">Your Getting-Started Roadmap</a></li>
+<li><a href="#s6">The Four Exchanges</a></li>
+<li><a href="#s7">The Wallets: Exodus, Ledger, Trezor, Tangem</a></li>
+<li><a href="#s8">Step-by-Step Walkthroughs (incl. Limit Orders)</a></li>
+<li><a href="#s9">Crypto Debit and Credit Cards</a></li>
+<li><a href="#s10">Taxes: What You Owe and When</a></li>
+<li><a href="#s11">Borrowing Against Your Crypto</a> (including XRP, Ethereum, Solana and more)</li>
+<li><a href="#s12">Crypto in a Roth IRA (iTrustCapital)</a></li>
+<li><a href="#s13">Five Years Out: $100K, $500K, $1M</a></li>
+<li><a href="#s14">Quick Reference Directory</a></li>
+<li><a href="#s15">Glossary</a></li>
+</ol>
+</div>
+<!-- 1 -->
+<h2 id="s1"><span class="num">1</span>Crypto in Plain English</h2>
+<p class="lead">Cryptocurrency is digital money that lives on a public, shared record called a blockchain. No bank holds it for you. Instead, whoever controls the secret key to an address controls the coins at that address.</p>
+<ul>
+<li><strong>Blockchain:</strong> a public ledger that records every transaction. Once a transaction is confirmed, it cannot be reversed or "charged back."</li>
+<li><strong>Coin or token:</strong> the asset itself, such as Bitcoin (BTC), Ethereum (ETH), Solana (SOL), XRP or USDC.</li>
+<li><strong>Stablecoin:</strong> a token designed to stay worth $1, such as USDC. Useful for moving dollars quickly or parking value without price swings.</li>
+<li><strong>Network:</strong> the blockchain a coin travels on. Some tokens (like USDC) exist on several networks. You must always send on the network the receiver supports.</li>
+</ul>
+<h3>Exchange vs. Wallet: the two tools you will use</h3>
+<div class="grid2">
+<div class="card"><h4>Exchange (Centralized)</h4>
+<p>A company, like Kraken or Coinbase, that connects to your bank so you can <strong>buy, sell and cash out</strong>. The exchange holds your crypto for you, much like a brokerage holds stocks.</p>
+<p class="small">Requires ID verification. Easiest on-ramp and off-ramp to dollars.</p></div>
+<div class="card"><h4>Wallet (Self-Custody)</h4>
+<p>An app or device, like Exodus, Ledger or Trezor, where <strong>you alone hold the keys</strong>. No company can freeze or lose your coins, but no company can rescue you if you lose your recovery phrase.</p>
+<p class="small">No account or ID needed. You are your own bank.</p></div>
+</div>
+<div class="box note"><strong class="label">The saying to remember</strong>"Not your keys, not your coins." Crypto on an exchange is an IOU from that company. Crypto in a wallet whose recovery phrase you hold is truly yours.</div>
+<!-- 2 -->
+<h2 id="s2"><span class="num">2</span>Hot Wallets vs. Cold Wallets</h2>
+<table>
+<tr><th style="width:20%"></th><th>Hot Wallet</th><th>Cold Wallet (Hardware)</th></tr>
+<tr><td><strong>What it is</strong></td><td>Software on an internet-connected phone or computer</td><td>A small physical device that keeps your keys offline</td></tr>
+<tr><td><strong>Examples</strong></td><td>Exodus, the wallet built into exchanges, browser wallets</td><td>Ledger, Trezor, Tangem</td></tr>
+<tr><td><strong>Cost</strong></td><td>Free</td><td>About $55 to $399, one time</td></tr>
+<tr><td><strong>Convenience</strong></td><td>Very high. Send, swap and spend in seconds</td><td>Lower. You plug in or pair the device and press a button to approve (or tap a Tangem card to your phone)</td></tr>
+<tr><td><strong>Security</strong></td><td>Good, but exposed to phone or computer malware and phishing</td><td>Best. Keys never touch the internet, so a hacked computer cannot sign transactions</td></tr>
+<tr><td><strong>Best for</strong></td><td>Spending money and smaller amounts</td><td>Long-term savings and larger amounts</td></tr>
+</table>
+<div class="box tip"><strong class="label">A simple rule of thumb</strong>Think of a hot wallet as your <strong>pocket wallet</strong> and a cold wallet as your <strong>home safe</strong>. Many people keep a few hundred or a few thousand dollars in Exodus for everyday use, and everything they plan to hold for years on a Ledger, Trezor or Tangem. Exodus can even connect to a Trezor or Ledger so you get the easy Exodus screen with hardware-level protection.</div>
+<!-- 3 -->
+<h2 id="s3"><span class="num">3</span>Your Keys and Codes Explained</h2>
+<p class="lead">This is the most important section in the guide. Every wallet uses the same handful of codes. Know which ones are safe to share and which ones must never leave your hands.</p>
+<table>
+<tr><th style="width:24%">Code</th><th>What it does</th><th style="width:22%">Safe to share?</th></tr>
+<tr><td><strong>Public address</strong><br/><span class="small">(receive address)</span></td><td>Like an account number or email address. A long string of letters and numbers (often also shown as a QR code) that people use to <strong>send you</strong> crypto. Example format: <code>bc1q...</code> for Bitcoin or <code>0x...</code> for Ethereum.</td><td><strong style="color:var(--teal)">YES.</strong> Share freely to receive funds.</td></tr>
+<tr><td><strong>Private key</strong></td><td>The secret that proves you own an address and lets you spend from it. Most wallets keep this hidden and generate it from your recovery phrase.</td><td><strong style="color:var(--red)">NEVER.</strong></td></tr>
+<tr><td><strong>Secret Recovery Phrase</strong><br/><span class="small">(seed phrase, "12 words," "24 words")</span></td><td>A list of 12 or 24 ordinary English words, in a specific order, that is the <strong>master key</strong> to the entire wallet. Anyone with these words can rebuild your wallet on any device and take everything. Exodus uses 12 words. Ledger uses 24. Trezor uses 12, 20 or 24. Tangem uses backup cards instead, with an optional 12 or 24-word phrase.</td><td><strong style="color:var(--red)">NEVER.</strong> Not to support, not to family by text, not to anyone.</td></tr>
+<tr><td><strong>Passphrase</strong><br/><span class="small">("25th word")</span></td><td>An optional extra word or phrase you add on top of your recovery phrase on a Ledger or Trezor. It opens a separate, hidden wallet. Even if someone finds your 24 words, they cannot reach the passphrase wallet without it. <strong>If you forget it, that wallet is gone forever.</strong> Recommended only after you are comfortable with the basics.</td><td><strong style="color:var(--red)">NEVER.</strong> Store it separately from the 24 words.</td></tr>
+<tr><td><strong>PIN</strong></td><td>A 4 to 8 digit (Ledger) or up to 50 digit (Trezor) code that unlocks the physical device. Tangem calls its version an <strong>access code</strong>. Several wrong attempts wipe the device, which is fine because your recovery phrase can restore it.</td><td>No.</td></tr>
+<tr><td><strong>App password / Face ID</strong></td><td>Locks the Exodus or exchange app on your phone. It does <strong>not</strong> replace your recovery phrase.</td><td>No.</td></tr>
+<tr><td><strong>2FA code</strong></td><td>Six-digit code from an authenticator app (Google Authenticator, Authy) or a security key that protects exchange logins. Authenticator apps are safer than text messages.</td><td>No. Real support staff never ask for it.</td></tr>
+<tr><td><strong>Memo / Destination Tag</strong></td><td>An extra number some coins (XRP, XLM, ATOM and others) require when sending to an exchange. It tells the exchange which customer the deposit belongs to.</td><td>Yes. Must be included when the exchange shows one.</td></tr>
+</table>
+<h3>How to store your recovery phrase</h3>
+<ol>
+<li>Write the words by hand, in order, on paper or a steel backup plate. Double-check spelling.</li>
+<li><strong>Never</strong> photograph it, type it into a notes app, email it, or save it to the cloud.</li>
+<li>Keep it somewhere fire-safe and private, such as a home safe or safe deposit box. Some people keep two copies in two locations.</li>
+<li>Make sure one trusted person knows <em>where</em> it is kept (not what it says) as part of your estate plan.</li>
+</ol>
+<!-- 4 -->
+<h2 id="s4"><span class="num">4</span>The Golden Safety Rules</h2>
+<div class="box warn"><strong class="label">Read this before you buy anything</strong>
+<ol style="margin-bottom:0">
+<li><strong>No legitimate company will ever ask for your recovery phrase.</strong> Not Exodus, Ledger, Trezor, Kraken or Coinbase. Anyone who asks is a scammer, always.</li>
+<li><strong>Always send a small test amount first</strong> when using a new address. Once it arrives, send the rest.</li>
+<li><strong>Check the first and last 4 to 6 characters</strong> of every pasted address. Some malware swaps copied addresses.</li>
+<li><strong>Match the network.</strong> Sending on the wrong network can lose funds permanently.</li>
+<li><strong>Buy hardware wallets only from the maker</strong> (<a href="https://www.ledger.com">ledger.com</a>, <a href="https://trezor.io">trezor.io</a>, <a href="https://tangem.com">tangem.com</a>) or an official reseller. Never buy used, and never use a device that arrives with words already written down.</li>
+<li><strong>Bookmark the real websites.</strong> Fake sites and fake "support" accounts on social media are the most common traps.</li>
+<li><strong>Ignore anyone promising guaranteed returns,</strong> "doubling" your crypto, or urgent action. Romance and investment scams often start with a friendly stranger.</li>
+<li><strong>Turn on app-based 2FA</strong> for every exchange and your email account.</li>
+</ol></div>
+<!-- 5 -->
+<h2 id="s5"><span class="num">5</span>Your Getting-Started Roadmap</h2>
+<ol class="steps">
+<li><strong>Pick one main exchange.</strong> Kraken is a strong first choice: low fees on Kraken Pro, a long security record, and a good debit card. (See Section 6.)</li>
+<li><strong>Verify your identity.</strong> Have your driver's license or passport and your Social Security number ready. Approval is often same-day.</li>
+<li><strong>Secure the account.</strong> Turn on an authenticator app for 2FA and use a unique, strong password.</li>
+<li><strong>Link your bank</strong> and make a small first deposit. (Walkthrough 8A.)</li>
+<li><strong>Buy a small amount</strong> of a major coin to learn the process. Once you are comfortable, learn the limit order (Walkthrough 8F). It is the cheapest way to buy and sell.</li>
+<li><strong>Install a self-custody wallet</strong> such as Exodus, write down the 12 words, and practice sending a small amount from the exchange to the wallet and back.</li>
+<li><strong>As your holdings grow,</strong> add a Ledger, Trezor or Tangem for long-term storage.</li>
+<li><strong>Keep records</strong> from day one (dates, amounts, prices). It makes tax time painless. (Section 10.)</li>
+</ol>
+<!-- 6 -->
+<h2 id="s6"><span class="num">6</span>The Four Exchanges</h2>
+<p class="lead">All four serve U.S. customers, connect to U.S. bank accounts, and issue IRS tax forms. Here is how they compare, followed by a profile of each.</p>
+<table>
+<tr><th> </th><th><a href="https://www.kraken.com" style="color:#fff">Kraken</a></th><th><a href="https://www.coinbase.com" style="color:#fff">Coinbase</a></th><th><a href="https://uphold.com" style="color:#fff">Uphold</a></th><th><a href="https://crypto.com" style="color:#fff">Crypto.com</a></th></tr>
+<tr><td><strong>Best for</strong></td><td>Low fees, strong security</td><td>Easiest for first-timers; borrowing</td><td>Simple "anything to anything" trades; metals</td><td>Mobile app users; card perks</td></tr>
+<tr><td><strong>Low-fee mode</strong></td><td>Kraken Pro</td><td>Coinbase Advanced</td><td>Built-in spread (no low-fee mode)</td><td>Crypto.com Exchange</td></tr>
+<tr><td><strong>Debit card</strong></td><td>Yes: Krak Card</td><td>Yes: Coinbase Card*</td><td>Yes: Essential and Elite</td><td>Yes: Visa prepaid</td></tr>
+<tr><td><strong>Credit card</strong></td><td>No</td><td>Coinbase One Card (Amex)</td><td>No</td><td>Visa Signature</td></tr>
+<tr><td><strong>Borrow for cash</strong></td><td>Flexline (high-net-worth only)</td><td>Yes, USDC loans</td><td>Yes, Instant Credit (select states)</td><td>Check app</td></tr>
+<tr><td><strong>Headquarters</strong></td><td>U.S.</td><td>U.S. (public company)</td><td>U.S. and U.K.</td><td>Singapore, with U.S. operations</td></tr>
+</table>
+<p class="small">*The Coinbase Card (debit) is not offered to Hawaiʻi residents. See Section 9.</p>
+<div class="profile"><div class="hd"><h3><a href="https://www.kraken.com">Kraken</a></h3><span><a href="https://www.kraken.com">kraken.com</a>  |  Kraken app, Kraken Pro app, Krak app</span></div><div class="bd"><p><a class="go" href="https://www.kraken.com">Go to Kraken ↗</a></p>
+<p>Founded in 2011, Kraken is one of the oldest and most security-focused U.S. exchanges. It has three apps: <strong>Kraken</strong> (simple buying), <a href="https://pro.kraken.com"><strong>Kraken Pro</strong></a> (the same account with much lower trading fees), and <strong>Krak</strong> (a money app with the Krak debit card and payments).</p>
+<div class="kv">
+<div>Fees</div><div>The simple app's instant buy is convenient but costs more. Kraken Pro charges far less: 0.40% for limit orders that wait on the order book (maker) and 0.80% for orders that fill instantly (taker) at the starting tier, dropping as your volume grows. Use Pro with limit orders for anything over a few hundred dollars (Walkthrough 8F).</div>
+<div>Funding</div><div>ACH bank transfer (free, takes a few days to clear), wire transfer, or debit card (higher fee).</div>
+<div>Debit card</div><div>Krak Card: free Visa debit, spend from 600+ assets, up to 2% back in dollars or Bitcoin depending on your average balance across Kraken.</div>
+<div>Borrowing</div><div>Flexline offers fixed-rate crypto-backed loans, but only to high-net-worth "ECP-qualified" users. Kraken Borrow US lets you borrow only to buy more crypto (margin), not to withdraw cash.</div>
+</div>
+<h4>How to sign up</h4>
+<ol>
+<li>Download the Kraken app or visit <a href="https://www.kraken.com">kraken.com</a> and choose <em>Create Account</em>.</li>
+<li>Enter email, password and state of residence, then confirm your email.</li>
+<li>Complete verification: name, address, date of birth, SSN, photo ID and a selfie.</li>
+<li>Enable 2FA under <em>Security</em> (use an authenticator app).</li>
+<li>Link your bank under <em>Deposit &gt; USD &gt; ACH</em>.</li>
+</ol>
+</div></div>
+<div class="profile"><div class="hd"><h3><a href="https://www.coinbase.com">Coinbase</a></h3><span><a href="https://www.coinbase.com">coinbase.com</a>  |  Coinbase app (plus Coinbase Advanced)</span></div><div class="bd"><p><a class="go" href="https://www.coinbase.com">Go to Coinbase ↗</a></p>
+<p>The largest U.S. exchange and a publicly traded company. Known for the most beginner-friendly app. Its standard "Buy" button carries higher fees, so switch to <a href="https://www.coinbase.com/advanced-trade"><strong>Coinbase Advanced</strong></a> (same login) for lower costs.</p>
+<div class="kv">
+<div>Funding</div><div>ACH, wire, debit card, PayPal, Apple Pay.</div>
+<div>Cards</div><div><strong>Coinbase Card:</strong> Visa debit, no annual fee (not available in Hawaiʻi). <strong>Coinbase One Card:</strong> American Express credit card with 2% to 4% back in Bitcoin; requires a paid Coinbase One membership (from $4.99 a month or $49.99 a year) and a credit check.</div>
+<div>Borrowing</div><div>Borrow USDC (a digital dollar) against Bitcoin and other coins. Rates have recently been advertised starting around 5% to 6%, variable or fixed. No monthly payments; repay anytime. (Section 11.)</div>
+<div>Membership</div><div>Coinbase One is an optional subscription that adds zero-fee trading on many trades, boosted rewards and account protection.</div>
+</div>
+<h4>How to sign up</h4>
+<ol><li>Download the Coinbase app and tap <em>Get Started</em>.</li><li>Verify your phone, email, ID and SSN.</li><li>Add a bank under <em>Settings &gt; Payment methods</em>.</li><li>Turn on 2FA with an authenticator app or security key.</li></ol>
+</div></div>
+<div class="profile"><div class="hd"><h3><a href="https://uphold.com">Uphold</a></h3><span><a href="https://uphold.com">uphold.com</a>  |  Uphold app</span></div><div class="bd"><p><a class="go" href="https://uphold.com">Go to Uphold ↗</a></p>
+<p>Uphold's signature feature is "anything-to-anything" trading: you can go straight from dollars to crypto, crypto to precious metals, or one coin to another in a single step. Very popular with XRP holders. Fees are built into the buy and sell price (the "spread"), so check the quote before confirming.</p>
+<div class="kv">
+<div>Funding</div><div>ACH, wire, debit card. Direct deposit of your paycheck is also supported.</div>
+<div>Debit card</div><div><strong>Essential:</strong> no annual fee, 2% back in XRP (monthly cap). <strong>Elite:</strong> metal card, $99.99 a year, 3% to 4% back in XRP depending on what you spend from, no ATM or foreign transaction fees. Not available in Louisiana, New York or U.S. territories.</div>
+<div>Note</div><div>Spending dollars or stablecoins with the card is not a taxable event. Spending crypto is (Section 10).</div>
+</div>
+</div></div>
+<div class="profile"><div class="hd"><h3><a href="https://crypto.com">Crypto.com</a></h3><span><a href="https://crypto.com">crypto.com</a>  |  Crypto.com App</span></div><div class="bd"><p><a class="go" href="https://crypto.com">Go to Crypto.com ↗</a></p>
+<p>A large, mobile-first platform headquartered in Singapore with U.S. operations. The app handles buying, selling, the card, and rewards. Its own token, <strong>CRO</strong>, powers most perks.</p>
+<div class="kv">
+<div>Funding</div><div>ACH, wire, debit card.</div>
+<div>Cards</div><div><strong>Visa prepaid card:</strong> a free Basic tier, then higher tiers unlocked either by a monthly "Level Up" subscription or by locking up CRO for 12 months. Higher tiers pay more cashback in CRO plus perks. <strong>Visa Signature credit card</strong> is also offered in the U.S.</div>
+<div>App vs. Exchange</div><div>The Crypto.com <strong>App</strong> builds a hidden spread (often 0.5% to 2%) into its simple buy price. The separate <a href="https://crypto.com/exchange"><strong>Crypto.com Exchange</strong></a> (same company, same verified identity) has posted fees of 0.25% maker and 0.50% taker at the starting tier. See Walkthrough 8F.</div>
+<div>Watch out</div><div>The best rewards require locking large amounts of CRO, a volatile token, for a year. Do the math before chasing a premium tier. Tiers and rates change often; check <a href="https://crypto.com/cards">crypto.com/cards</a>.</div>
+</div>
+</div></div>
+<!-- 7 -->
+<h2 id="s7"><span class="num">7</span>The Wallets: Exodus, Ledger, Trezor, Tangem</h2>
+<div class="profile"><div class="hd"><h3><a href="https://www.exodus.com">Exodus (Hot Wallet)</a></h3><span><a href="https://www.exodus.com">exodus.com</a>  |  iPhone, Android, Mac, Windows, Linux, browser extension</span></div><div class="bd"><p><a class="go" href="https://www.exodus.com">Download Exodus ↗</a></p>
+<p>Exodus is one of the most popular, beginner-friendly self-custody wallets, made by a U.S. company. It is free, requires no account or ID, and shows all your coins in one clean portfolio screen.</p>
+<div class="kv">
+<div>Recovery</div><div>A <strong>12-word secret recovery phrase</strong> (Exodus calls it your "secret phrase"). Always 12 words. Find it under <em>Settings &gt; Security &gt; Back Up</em> (wording varies slightly by version).</div>
+<div>Features</div><div>Holds hundreds of coins, built-in swaps between coins, staking (earn rewards on coins like SOL, ADA, ETH), NFT gallery, buy and sell through partner providers.</div>
+<div>Hardware pairing</div><div>Connects to <strong>Trezor</strong> on desktop and <strong>Ledger</strong> on mobile, so you can use the Exodus screen while keys stay on the device.</div>
+<div>Fees</div><div>Exodus itself is free. You pay the normal network fee to send. Swaps and in-app purchases include a spread from the provider.</div>
+<div>Support</div><div>Exodus support (<a href="https://support.exodus.com">support.exodus.com</a>) will <strong>never</strong> ask for your 12 words. Exodus cannot recover your wallet if you lose them.</div>
+</div>
+<h4>Setting up Exodus</h4>
+<ol><li>Download only from <a href="https://www.exodus.com">exodus.com</a> or the official App Store / Google Play listing (publisher: Exodus Movement, Inc.).</li><li>Open the app. A wallet is created instantly.</li><li>Set a passcode or Face ID.</li><li>Immediately back up the 12 words on paper and complete the verification quiz.</li><li>Tap any coin, then <em>Receive</em>, to see your public address.</li></ol>
+</div></div>
+<div class="profile"><div class="hd"><h3><a href="https://www.ledger.com">Ledger (Cold Wallet)</a></h3><span><a href="https://www.ledger.com">ledger.com</a>  |  companion app: Ledger Wallet (formerly Ledger Live)</span></div><div class="bd"><p><a class="go" href="https://www.ledger.com">Shop Ledger ↗</a></p>
+<p>The best-selling hardware wallet brand, made by Ledger SAS of France. Keys live inside a certified secure chip and every transaction must be approved on the device itself.</p>
+<table>
+<tr><th>Model</th><th>Price (USD)</th><th>Highlights</th></tr>
+<tr><td>Nano S Plus</td><td>$79</td><td>Best value; USB-C; works with computers and Android</td></tr>
+<tr><td>Nano X</td><td>$149</td><td>Bluetooth and battery; works with iPhone</td></tr>
+<tr><td>Nano Gen5</td><td>$179</td><td>Newer touchscreen Nano</td></tr>
+<tr><td>Flex</td><td>$249</td><td>Large E Ink touchscreen; strong all-around pick</td></tr>
+<tr><td>Stax</td><td>$399</td><td>Premium curved E Ink screen</td></tr>
+</table>
+<p><strong>Recovery:</strong> 24 words. Optional passphrase supported. <strong>Buy only at <a href="https://www.ledger.com">ledger.com</a></strong> or an authorized reseller. Ledger's 2020 customer email leak still fuels phishing letters and emails, so ignore any message asking you to "verify" your device or phrase.</p>
+</div></div>
+<div class="profile"><div class="hd"><h3><a href="https://trezor.io">Trezor (Cold Wallet)</a></h3><span><a href="https://trezor.io">trezor.io</a>  |  companion app: Trezor Suite</span></div><div class="bd"><p><a class="go" href="https://trezor.io">Shop Trezor ↗</a></p>
+<p>The original hardware wallet (2014), made by SatoshiLabs in the Czech Republic. Trezor's firmware is fully open-source, meaning outside experts can inspect the code.</p>
+<table>
+<tr><th>Model</th><th>Price (USD)</th><th>Highlights</th></tr>
+<tr><td>Safe 3</td><td>About $59 to $79</td><td>Best value; buttons and small screen; secure chip</td></tr>
+<tr><td>Safe 5</td><td>About $129 to $169</td><td>Color touchscreen; the best fit for most people</td></tr>
+<tr><td>Safe 7</td><td>$249</td><td>Bluetooth for iPhone, larger screen, wireless charging</td></tr>
+</table>
+<p><strong>Recovery:</strong> 12, 20 or 24 words, with optional multi-share backup (splits your backup into several pieces) and an on-device passphrase. Works directly with Exodus on desktop. <strong>Buy only at <a href="https://trezor.io">trezor.io</a></strong> or an authorized reseller.</p>
+</div></div>
+<div class="profile"><div class="hd"><h3><a href="https://tangem.com">Tangem (Cold Wallet)</a></h3><span><a href="https://tangem.com">tangem.com</a>&nbsp; |&nbsp; companion app: Tangem (iPhone and Android)</span></div><div class="bd"><p><a class="go" href="https://tangem.com">Shop Tangem ↗</a></p>
+<p>A cold wallet made by Tangem AG of Zug, Switzerland (founded 2017). Instead of a gadget with buttons and a screen, it is a set of <strong>credit-card-sized cards</strong> (or a ring) with a secure chip inside. You <strong>tap a card to the back of your phone</strong> to approve each transaction. It is one of the most popular cold wallets for everyday people because it is simple and inexpensive.</p>
+<table>
+<tr><th>Pack</th><th>Price (USD)</th><th>Highlights</th></tr>
+<tr><td>2-card set</td><td>$54.90 to $59.90</td><td>One main card and one backup</td></tr>
+<tr><td>3-card set</td><td>$69.90</td><td>Two backups; the best choice for most people</td></tr>
+<tr><td>Tangem Ring + 2 cards</td><td>About $140 to $160</td><td>A ceramic ring with the same chip, worn on your finger</td></tr>
+</table>
+<div class="kv">
+<div>Security chip</div><div>Certified EAL6+ secure element (the same class of chip used in passports and bank cards), developed with Samsung. Your private key is created inside the card and never leaves it.</div>
+<div>How it connects</div><div>NFC tap to an iPhone or Android phone. No battery, no cables, no desktop app.</div>
+<div>Recovery</div><div><strong>Backup cards:</strong> every card in the set holds the same wallet, so any card can be used if another is lost. Newer cards also offer an <strong>optional 12 or 24-word recovery phrase</strong>.</div>
+<div>Access code</div><div>Set during setup and entered when you use a card, so a lost or stolen card is useless on its own.</div>
+<div>Cost to own</div><div>One-time purchase, no subscription. 25-year warranty. Water and dust resistant.</div>
+</div>
+<h4>Setting up Tangem</h4>
+<ol><li>Install the <strong>Tangem</strong> app from the official App Store or Google Play listing.</li><li>Hold your first card flat against the back of your phone until it reads, then choose <em>Create wallet</em>.</li><li>Add your backup cards by scanning each one when asked. If you want, also generate a seed phrase and write it on paper.</li><li>Set an <strong>access code</strong> and keep a written copy somewhere safe.</li><li>To receive, tap the coin, then <em>Receive</em>. To send, enter the details and <strong>tap your card</strong> to approve.</li><li>Store the backup cards in <strong>different safe places</strong>, such as a home safe and a safe deposit box.</li></ol>
+<div class="box warn"><strong class="label">Know the limits</strong>If you lose <strong>every</strong> card and did not create a seed phrase, the crypto is gone for good. With a 2-card set, losing one card and forgetting the access code can also lock you out, which is why the 3-card set is recommended. The card has no screen, so you check addresses on your phone, and its firmware is closed-source (it has been independently audited instead). <strong>Buy only at <a href="https://tangem.com">tangem.com</a></strong> or an authorized reseller.</div>
+</div></div>
+<!-- 8 -->
+<h2 id="s8"><span class="num">8</span>Step-by-Step Walkthroughs</h2>
+<h3>8A. Link your bank and buy crypto (Kraken example)</h3>
+<ol class="steps">
+<li>Open Kraken and tap <strong>Deposit</strong> (or <em>Transfer &gt; Deposit</em>), then choose <strong>USD</strong>.</li>
+<li>Choose <strong>ACH</strong> (free) and connect your bank through the secure login screen (Plaid). Some banks use small test deposits instead.</li>
+<li>Enter an amount and confirm. Your bank usually releases funds in 1 to 5 business days. New accounts may have a short hold before you can withdraw crypto bought with ACH funds.</li>
+<li>When the dollars appear, open <strong>Kraken Pro</strong>, search the coin (for example, BTC/USD), choose <em>Buy</em>, enter an amount and confirm. For the lowest fee, use a limit order (Walkthrough 8F).</li>
+<li>Optional: set up <strong>recurring buys</strong> (for example, $50 every week). Buying a fixed amount on a schedule, called dollar-cost averaging, takes the guesswork out of timing.</li>
+</ol>
+<p class="small">The same flow works on Coinbase (<em>Settings &gt; Payment methods</em>), Uphold (<em>Transact &gt; From: Bank</em>) and Crypto.com (<em>Transfer &gt; Deposit &gt; Fiat</em>).</p>
+<h3>8B. Send crypto from Exodus to Kraken</h3>
+<ol class="steps">
+<li><strong>In Kraken:</strong> tap <em>Deposit</em>, pick the coin (for example, Bitcoin), and choose the <strong>network</strong>. Copy the deposit address. If Kraken shows a <strong>memo or tag</strong>, copy that too.</li>
+<li><strong>In Exodus:</strong> tap the same coin, then <em>Send</em>. Paste the Kraken address into the address field (and memo, if required).</li>
+<li><strong>Check:</strong> the coin and the network match on both sides, and the first and last characters of the address match exactly.</li>
+<li><strong>Send a small test first</strong> (for example, $20 worth). Review the network fee and confirm.</li>
+<li>Wait for confirmations. Bitcoin can take 10 to 60 minutes; many other networks take seconds to minutes. Kraken shows the deposit as pending, then credited.</li>
+<li>Once the test arrives, send the remainder the same way.</li>
+</ol>
+<div class="box note"><strong class="label">Good to know</strong>Moving your own crypto between your own wallets and accounts is <strong>not a taxable event</strong>. Keep a record of what you originally paid so you can report your cost basis when you eventually sell. Exchanges only know the cost of coins you bought on their platform.</div>
+<h3>8C. Helping a beginner receive crypto from you</h3>
+<p>If you are giving crypto to someone who has never used it, the safest approach is for them to set up <strong>their own</strong> wallet or account and give you only their public receive address.</p>
+<ol class="steps">
+<li><strong>They choose where to receive it.</strong> Exodus is easiest for holding; Kraken or Coinbase is easiest if they may want to cash out to their bank.</li>
+<li><strong>They back up their recovery phrase</strong> (Exodus) or turn on 2FA (exchange) before anything is sent. Sit with them while they do this if you can.</li>
+<li><strong>They tap the coin, then <em>Receive</em>,</strong> and send you the address by text or email. For an exchange, they also confirm the network and any memo or tag.</li>
+<li><strong>You send a small test</strong> from your Exodus. They confirm it arrived.</li>
+<li><strong>You send the rest.</strong> Save the transaction ID (Exodus shows it in the activity list) as your record.</li>
+<li><strong>Give them this guide</strong> and the Golden Safety Rules. New crypto owners are prime scam targets.</li>
+</ol>
+<div class="box warn"><strong class="label">Avoid "handing over" a wallet</strong>Giving someone your recovery phrase so they can "use your wallet" means you both control it forever. Either of you could empty it, and any device that held the words is a risk. Sending to a fresh wallet they create is cleaner and safer.</div>
+<div class="box note"><strong class="label">Gift tax basics</strong>A gift is not income to the person receiving it. In 2026 you can give up to $19,000 per person per year without filing anything. Above that, the giver files IRS <a href="https://www.irs.gov/forms-pubs/about-form-709">Form 709</a>, but tax is rarely owed because of the large lifetime exemption. The recipient generally takes over <em>your</em> original cost basis, so tell them what you paid and when.</div>
+<h3>8D. Move savings from an exchange to a hardware wallet</h3>
+<ol class="steps">
+<li>Set up the Ledger or Trezor, write down its recovery words, and install the coin's app (Ledger Wallet or Trezor Suite). With a Tangem, open the Tangem app and tap your card.</li>
+<li>In the companion app, choose <em>Receive</em>. <strong>Confirm the address on the device screen</strong>, not just the computer.</li>
+<li>In your exchange, choose <em>Withdraw</em> or <em>Send</em>, paste the address, select the matching network, and send a test amount.</li>
+<li>After the test arrives, send the rest. Exchanges may charge a small withdrawal fee.</li>
+</ol>
+<h3>8E. Cash out to your bank</h3>
+<ol class="steps">
+<li>If your crypto is in a wallet, send it to your exchange first (Walkthrough 8B).</li>
+<li>On the exchange, <strong>Sell</strong> the coin for USD.</li>
+<li>Choose <strong>Withdraw &gt; USD</strong> to your linked bank. ACH is usually free and arrives in 1 to 3 business days; wires are faster for a fee.</li>
+<li>Save the trade confirmation. Selling is a taxable event (Section 10).</li>
+</ol>
+<div class="box tip"><strong class="label">Need the money today?</strong>Kraken offers <strong>instant USD withdrawals</strong> that arrive in minutes, 24/7, including weekends and holidays, for 1.5% with a <strong>$50 maximum fee</strong> ($20 minimum withdrawal; your bank must support instant payments). Coinbase charges 1.5% with no cap, and Uphold charges 1.75%. On a $10,000 cash-out, that is $50 at Kraken versus $150 at Coinbase.</div>
+<h3>8F. Place a limit order (Kraken Pro and Crypto.com Exchange)</h3>
+<p>A <strong>limit order</strong> lets you choose the exact price you will pay or accept. A buy limit fills only at your price <strong>or lower</strong>. A sell limit fills only at your price <strong>or higher</strong>. If the market never reaches your price, nothing happens; the order simply waits until you cancel it.</p>
+<h4>Why it saves money: maker vs. taker</h4>
+<ul>
+<li><strong>Maker:</strong> your order waits on the order book. This is the <strong>cheaper</strong> fee.</li>
+<li><strong>Taker:</strong> your order fills instantly against someone else's. This is the <strong>more expensive</strong> fee. Market orders are always taker.</li>
+</ul>
+<table>
+<tr><th>Platform (starting tier)</th><th>Maker fee</th><th>Taker fee</th><th>On a $1,000 buy</th></tr>
+<tr><td>Kraken Pro</td><td>0.40%</td><td>0.80%</td><td>About $4 vs. $8</td></tr>
+<tr><td>Crypto.com Exchange</td><td>0.25%</td><td>0.50%</td><td>About $2.50 vs. $5</td></tr>
+<tr><td>Simple app "Buy" buttons</td><td colspan="2">Fee plus hidden spread</td><td>Often $10 to $25 or more</td></tr>
+</table>
+<div class="box tip"><strong class="label">The golden rule for the maker fee</strong>When <strong>buying</strong>, set your price a little <strong>below</strong> the current price. When <strong>selling</strong>, set it a little <strong>above</strong>. Then turn on <strong>Post Only</strong>, which means "only place this order if it will wait on the book." If your price would fill instantly at the taker fee, the exchange cancels it instead of charging you more.</div>
+<div class="box warn"><strong class="label">Common mistake</strong>Setting a <strong>buy</strong> price <strong>above</strong> the current market price (or a sell price below it) makes the order fill immediately at the taker fee. Post Only protects you from this.</div>
+<h4>Reading the order book</h4>
+<ul>
+<li>The order book has two sides: <strong>Bids</strong> (buyers, usually green) and <strong>Asks</strong> (sellers, usually red).</li>
+<li>The gap between the highest bid and the lowest ask is the <strong>spread</strong>.</li>
+<li>For a maker <strong>buy</strong>, use a price at or below the highest bid. For a maker <strong>sell</strong>, use a price at or above the lowest ask.</li>
+</ul>
+<h4>On Kraken Pro (pro.kraken.com)</h4>
+<p class="small">Same login as your regular Kraken account. The Kraken Pro phone app works the same way. Fund your account first with a free ACH deposit (Walkthrough 8A). Kraken may hold new ACH deposits from being withdrawn for up to 7 days, but you can trade with them right away.</p>
+<ol class="steps">
+<li><strong>Pick your market.</strong> Use the market search near the top left and choose the pair, for example BTC/USD.</li>
+<li><strong>Open the order form</strong> on the right side of the screen and click <strong>Buy</strong>.</li>
+<li><strong>Choose the order type:</strong> select <strong>Limit</strong> (not Market).</li>
+<li><strong>Enter your Limit price.</strong> Check the order book and enter a price at or slightly below the highest bid.</li>
+<li><strong>Enter how much:</strong> type the coin amount in <em>Quantity</em>, or the dollars you want to spend in <em>Total</em>. The two boxes adjust to match each other.</li>
+<li><strong>Set the options:</strong> check <strong>Post only</strong> and leave <em>Time in force</em> on <strong>GTC</strong> (good until canceled).</li>
+<li><strong>Review</strong> the estimated total and fee at the bottom of the form.</li>
+<li><strong>Submit:</strong> click the green <strong>Buy</strong> button, read the confirmation, and confirm.</li>
+<li><strong>Track it</strong> under <strong>Open orders</strong> in the panel at the bottom of the screen. You can edit the price or cancel from there at no cost. Filled orders move to your history and the coins appear in your balances.</li>
+</ol>
+<h4>On the Crypto.com Exchange (crypto.com/exchange)</h4>
+<p class="small">This is the Exchange, not the Crypto.com App. Your account must be verified (Starter level or higher). Fund it by transferring USD or crypto over from the App, or by an ACH <em>Instant Deposit</em> on the Exchange, which lets you trade right away while the bank transfer settles. Make sure the money shows in your Exchange <strong>spot</strong> balance before trading.</p>
+<ol class="steps">
+<li><strong>Log in</strong> at crypto.com/exchange (<em>Log In</em> in the upper right).</li>
+<li><strong>Go to spot trading:</strong> click <em>Trade</em>, then <em>Spot</em>, and pick your pair, for example BTC/USD.</li>
+<li><strong>In the order panel,</strong> click the <strong>Buy</strong> side and choose <strong>Limit</strong> as the order type.</li>
+<li><strong>Enter your Price</strong> at or slightly below the highest bid.</li>
+<li><strong>Enter the Quantity</strong> (or the order value in dollars). The minimum order is $1.</li>
+<li><strong>Set the options:</strong> turn on <strong>Post Only</strong> and set <em>Time in Force</em> to <strong>GTC</strong>.</li>
+<li><strong>Submit:</strong> click <strong>Buy BTC</strong> (the button names the coin you chose), review, and confirm.</li>
+<li><strong>Track it</strong> under the <strong>Open Orders</strong> tab below the chart, where you can cancel it. Filled orders move to <em>Order History</em> and <em>Trade History</em>.</li>
+</ol>
+<p class="small">To cash out from Crypto.com, move USD from the Exchange back to the App if needed, then withdraw by ACH. Crypto.com does not charge for standard ACH withdrawals.</p>
+<h4>Selling with a limit order (both platforms)</h4>
+<p>Follow the same steps with three changes: choose <strong>Sell</strong> instead of Buy, set your price at or slightly <strong>above</strong> the lowest ask, and keep <strong>Post Only</strong> on.</p>
+<div class="box note"><strong class="label">Before-you-click checklist</strong>
+<ul style="margin-bottom:0">
+<li>Am I on <strong>Kraken Pro</strong> or the <strong>Crypto.com Exchange</strong>, not a simple app buy screen?</li>
+<li>Is the order type <strong>Limit</strong>, and did I pick the right side, <strong>Buy</strong> or <strong>Sell</strong>?</li>
+<li>Is my buy price <strong>below</strong> the current price, or my sell price <strong>above</strong> it?</li>
+<li>Is <strong>Post Only</strong> on and Time in Force set to <strong>GTC</strong>?</li>
+<li>Did I double-check the <strong>quantity</strong> and the <strong>dollar total</strong>? An extra zero is the most expensive typo in crypto.</li>
+<li>Did I check the <strong>estimated fee</strong> on the confirmation screen?</li>
+</ul></div>
+<div class="box tip"><strong class="label">If your order does not fill</strong>The price simply has not reached your number. Leave it, edit the price closer to the market, or cancel it for free. If a Post Only order disappears right after you place it, your price would have filled instantly as a taker, so the exchange canceled it. Move your price a little further from the current price and try again.</div>
+<p class="small">Button names and screen layouts change from time to time, but the steps stay the same: pick the pair, choose Limit, set the price, set the amount, turn on Post Only, confirm. Fees shown are starting-tier rates as of November 2026.</p>
+<!-- 9 -->
+<h2 id="s9"><span class="num">9</span>Crypto Debit and Credit Cards</h2>
+<p class="lead">A crypto card lets you spend at any store that takes Visa or Amex. The card converts your crypto (or dollars) at checkout. Yes, all four exchanges now offer a card.</p>
+<table>
+<tr><th>Card</th><th>Type</th><th>Cost</th><th>Rewards</th><th>What it takes</th></tr>
+<tr><td><a href="https://blog.kraken.com/product/krak/us-launch"><strong>Krak Card</strong></a> (Kraken)</td><td>Visa debit</td><td>Free</td><td>Up to 2% back in USD or BTC</td><td>Kraken account and Krak app. Reward tier depends on your 30-day average balance across Kraken; small balances earn little or nothing.</td></tr>
+<tr><td><a href="https://www.coinbase.com"><strong>Coinbase Card</strong></a></td><td>Visa debit</td><td>Free</td><td>Crypto back on purchases</td><td>Coinbase account. <strong>Not available to Hawaiʻi residents.</strong></td></tr>
+<tr><td><a href="https://www.coinbase.com/one"><strong>Coinbase One Card</strong></a></td><td>Amex credit</td><td>No card fee; requires Coinbase One (from $4.99/mo)</td><td>2% to 4% back in BTC</td><td>Coinbase One membership, credit approval (good to excellent credit), address in the 50 states or D.C.</td></tr>
+<tr><td><a href="https://www.uphold.com/en-us/card"><strong>Uphold Essential</strong></a></td><td>Visa debit</td><td>No annual fee; per-use fees</td><td>2% back in XRP (monthly cap)</td><td>Uphold account. No credit check. Not in LA, NY or territories.</td></tr>
+<tr><td><a href="https://www.uphold.com/en-us/card"><strong>Uphold Elite</strong></a></td><td>Visa debit (metal)</td><td>$99.99/year</td><td>3% to 4% back in XRP (monthly cap)</td><td>Same as Essential.</td></tr>
+<tr><td><a href="https://crypto.com/cards"><strong>Crypto.com Visa</strong></a></td><td>Visa prepaid</td><td>Free Basic tier; paid or staked upgrades</td><td>Cashback in CRO, higher by tier</td><td>Crypto.com account. Higher tiers need a monthly subscription or a 12-month CRO lockup.</td></tr>
+<tr><td><a href="https://crypto.com/cards"><strong>Crypto.com Visa Signature</strong></a></td><td>Visa credit</td><td>Tiered</td><td>Cashback in crypto</td><td>Credit approval; best rates tied to CRO.</td></tr>
+</table>
+<div class="box tip"><strong class="label">Tax tip for card users</strong>Every time a card spends <em>crypto</em>, you are technically selling that crypto, which can create a small taxable gain or loss. Funding everyday spending from <strong>dollars or a stablecoin</strong> keeps your records simple. Rewards you earn are generally treated as a purchase rebate, but keep the statements.</div>
+<!-- 10 -->
+<h2 id="s10"><span class="num">10</span>Taxes: What You Owe and When</h2>
+<p class="lead">The IRS treats crypto as <strong>property</strong>, like stock. You owe tax when you dispose of it at a gain, not when it goes up in value.</p>
+<div class="grid2">
+<div class="card"><h4>Taxable events</h4><ul style="margin:0"><li>Selling crypto for dollars</li><li>Trading one coin for another (including swaps in Exodus)</li><li>Spending crypto with a card or on purchases</li><li>Earning crypto (staking rewards, mining, airdrops, pay): taxed as income when received</li><li>A loan being liquidated (counts as a sale)</li></ul></div>
+<div class="card"><h4>Not taxable</h4><ul style="margin:0"><li>Buying crypto with dollars</li><li>Holding, no matter how much it rises</li><li>Moving crypto between your own wallets and accounts</li><li>Giving a gift (giver may file Form 709 if over $19,000)</li><li>Borrowing against your crypto</li><li>Any trading inside a Roth IRA</li></ul></div>
+</div>
+<h3>Short-term vs. long-term</h3>
+<ul>
+<li><strong>Held one year or less:</strong> short-term gain, taxed at your ordinary income rate (10% to 37% federal).</li>
+<li><strong>Held more than one year:</strong> long-term gain, taxed at the lower 0%, 15% or 20% federal rates. Simply waiting past the one-year mark can cut your tax bill dramatically.</li>
+</ul>
+<h3>2026 federal long-term capital gains rates</h3>
+<table>
+<tr><th>Rate</th><th>Single (taxable income)</th><th>Married Filing Jointly</th></tr>
+<tr><td>0%</td><td>Up to $49,450</td><td>Up to $98,900</td></tr>
+<tr><td>15%</td><td>$49,451 to $545,500</td><td>$98,901 to $613,700</td></tr>
+<tr><td>20%</td><td>Over $545,500</td><td>Over $613,700</td></tr>
+</table>
+<ul>
+<li><strong>Net Investment Income Tax:</strong> an extra 3.8% on investment gains for income above $200,000 (single) or $250,000 (married filing jointly).</li>
+<li><strong>State tax:</strong> most states also tax gains. <a href="https://tax.hawaii.gov">Hawaiʻi</a>, for example, taxes long-term capital gains at a maximum rate of 7.25%. A few states (such as Florida, Texas, Nevada) have no income tax.</li>
+<li><strong>Losses help:</strong> selling at a loss offsets gains, plus up to $3,000 a year of other income, with the rest carried forward.</li>
+</ul>
+<h3>Reporting: Form 1099-DA</h3>
+<p>U.S. exchanges now send customers and the IRS <a href="https://www.irs.gov/forms-pubs/about-form-1099-da"><strong>Form 1099-DA</strong></a>. For sales in 2025, the form showed only sale proceeds. Starting with 2026 sales (forms arriving in early 2027), exchanges must also report your cost basis, but only for coins bought on and never moved off that exchange after January 1, 2026. For anything you transferred in from a wallet, <strong>you</strong> must supply the cost basis on <a href="https://www.irs.gov/forms-pubs/about-form-8949">Form 8949</a>. That is why good records matter.</p>
+<div class="box tip"><strong class="label">Make tax time easy</strong>Use a crypto tax tool (such as <a href="https://koinly.io">Koinly</a>, <a href="https://www.cointracker.io">CoinTracker</a> or <a href="https://tokentax.co">TokenTax</a>) that imports from your exchanges and wallets by read-only connection or public address, then produces Form 8949. Work with a CPA familiar with crypto for larger portfolios.</div>
+<!-- 11 -->
+<h2 id="s11"><span class="num">11</span>Borrowing Against Your Crypto</h2>
+<p class="lead">Instead of selling (and paying tax), you can pledge crypto as collateral and borrow against it. You keep the coins and any future price gains, and borrowing itself is not a taxable event.</p>
+<h3>How it works</h3>
+<ol class="steps">
+<li>You lock crypto (for example, Bitcoin) as collateral.</li>
+<li>You borrow a percentage of its value, called the <strong>loan-to-value (LTV)</strong>. Borrow $25,000 against $100,000 of Bitcoin and your LTV is 25%.</li>
+<li>Interest accrues on the loan. Some platforms require no monthly payments; you repay when you choose.</li>
+<li>If the price of your collateral falls and your LTV rises past the platform's limit, your collateral is automatically sold (<strong>liquidated</strong>) to repay the loan. A liquidation counts as a sale for tax purposes, and you lose upside on those coins.</li>
+</ol>
+<h3>Where U.S. customers can borrow</h3>
+<ul>
+<li><strong><a href="https://www.coinbase.com/loans">Coinbase</a>:</strong> the most accessible option. Borrow USDC against Bitcoin (up to $5 million) and against Ethereum (up to $1 million), plus XRP, Dogecoin, Cardano and Litecoin (up to $100,000). Variable and fixed rates, advertised starting around 5% to 6%. For Bitcoin and Ethereum, liquidation occurs if LTV reaches 86%. Not available in New York.</li>
+<li><strong>Kraken Flexline:</strong> fixed-rate loans of 10% to 25% APR for terms of two days to two years, limited to high-net-worth "Eligible Contract Participants."</li>
+<li><strong><a href="https://uphold.com/en-us/exa-card">Uphold Instant Credit</a>:</strong> borrow against Bitcoin, Ethereum or XRP through the Exactly Protocol, at fixed rates from 4.28% APR, with no credit check and no early repayment penalty. Select U.S. states.</li>
+<li><strong>Specialist lenders:</strong> companies like <a href="https://ledn.io">Ledn</a> offer fixed-rate Bitcoin-backed loans in dollars, typically around 9% to 12% APR at up to 50% LTV.</li>
+</ul>
+<div class="box warn"><strong class="label">Borrow conservatively</strong>Crypto can fall 50% or more in a bad year. Keeping your LTV at <strong>25% or lower</strong> gives you a large cushion. At 25% LTV on Coinbase, your collateral would have to fall about 70% before liquidation. Set price alerts and be ready to add collateral or repay if prices drop.</div>
+<h3>Borrowing on other coins (no swap to Bitcoin needed)</h3>
+<p>If you hold XRP, Ethereum, Solana or another coin, you can often borrow against it directly. Rates and rules change often, so check the lender's website before applying.</p>
+<table>
+<tr><th style="width:16%">Coin</th><th>Where (U.S.)</th><th>Typical terms</th></tr>
+<tr><td><strong>XRP</strong></td><td><a href="https://www.coinbase.com/loans">Coinbase</a>, <a href="https://uphold.com/en-us/exa-card">Uphold</a>, <a href="https://archlending.com/crypto-loans">Arch Lending</a>, <a href="https://flare.network">Flare</a> (FXRP)</td><td>Coinbase: up to $100,000 USDC, up to 49% LTV, liquidation at 62.5%, variable rate. Uphold: fixed from 4.28% APR. Arch: about 13.5% interest plus a 1.5% fee, $25,000 minimum, starts at 45% LTV.</td></tr>
+<tr><td><strong>Ethereum</strong></td><td>Coinbase, Uphold, Arch, <a href="https://www.figure.com/crypto-backed-loan/crypto-loan-calculator/">Figure</a>, Kraken Flexline, <a href="https://aave.com">Aave</a></td><td>Coinbase: up to $1 million, up to 75% LTV, liquidation at 86%. Figure: fixed 9.999% APR at 50% LTV or 12.62% APR up to 75%, 12 months. Arch: 10.49% APR, starts at 55% LTV.</td></tr>
+<tr><td><strong>Solana</strong></td><td>Figure, Arch</td><td>Figure: same rates as Ethereum. Arch: starts at 45% LTV, margin call at 55%, partial liquidation at 65%.</td></tr>
+<tr><td><strong>Dogecoin, Cardano, Litecoin</strong></td><td>Coinbase</td><td>Same as XRP on Coinbase: up to $100,000, up to 49% LTV, liquidation at 62.5%.</td></tr>
+<tr><td><strong>100+ other coins</strong></td><td><a href="https://nexo.com">Nexo</a></td><td>Returned to the U.S. in February 2026 through licensed partners. Advertises credit lines from 2.9% APR for its best tier. Read its U.S. terms carefully.</td></tr>
+</table>
+<ul>
+<li><strong>Flare and FXRP</strong> are for experienced users. You turn XRP into FXRP on the Flare blockchain and borrow stablecoins on apps like Kinetic or Mystic. You manage your own wallet and take on smart-contract risk, with no customer support line.</li>
+<li><strong>Kamino</strong>, the largest Solana lending app, bars U.S. persons in its terms, so U.S. residents should not use it.</li>
+<li><strong>Hawaiʻi residents:</strong> some lenders do not serve every state. One review site lists Hawaiʻi among the states Arch does not serve. Confirm your state before you apply.</li>
+</ul>
+<div class="box warn"><strong class="label">Smaller coins, smaller loans</strong>Lenders let you borrow less against XRP, Solana and other smaller coins because they can fall faster. Example: you pledge $10,000 of XRP on Coinbase and borrow $3,000 (30% LTV). XRP would have to fall about 52% before liquidation. Borrow the full 49% and a drop of only about 22% triggers it. Keep loans on these coins at 25% to 30% LTV or less, and set a price alert above your liquidation price.</div>
+<h3>Before you borrow: a checklist</h3>
+<ol>
+<li>Check that the lender serves your state.</li>
+<li>Compare the <strong>APR</strong>, which includes fees, not just the interest rate.</li>
+<li>Choose fixed or variable. Variable rates can rise sharply when markets are busy.</li>
+<li>Know your liquidation price and set an alert above it.</li>
+<li>Have a repayment plan. Unpaid interest grows the loan.</li>
+<li>Remember that a liquidation counts as a sale for taxes.</li>
+</ol>
+<!-- 12 -->
+<h2 id="s12"><span class="num">12</span>Crypto in a Roth IRA (iTrustCapital)</h2>
+<p class="lead">A Roth IRA lets your investments grow and be withdrawn <strong>tax-free</strong> in retirement. iTrustCapital is a leading platform that lets you hold and trade crypto, gold and silver (and now stocks) inside a Roth, Traditional or SEP IRA.</p>
+<h3>Why it is powerful</h3>
+<ul>
+<li>Buy, sell and trade between coins inside the IRA with <strong>no taxable events</strong> and no gains to report each year.</li>
+<li>After age 59½, once your Roth has been open at least five years, <strong>every dollar you withdraw, including all gains, is tax-free.</strong></li>
+<li>No annual account fees; you pay only a 1% fee when you buy or sell crypto.</li>
+</ul>
+<h3>The rules to know</h3>
+<table>
+<tr><th style="width:32%">Rule</th><th>2026 Detail</th></tr>
+<tr><td>Annual contribution limit</td><td>$7,500, or $8,600 if age 50 or older (combined across all your IRAs)</td></tr>
+<tr><td>Who can contribute</td><td>You need <strong>earned income</strong> (wages or self-employment income) at least equal to your contribution. Social Security, pensions and investment income do not count. A working spouse can fund a spousal Roth for a non-working spouse.</td></tr>
+<tr><td>Income limit</td><td>Full contribution if modified AGI is under $153,000 (single) or $242,000 (married filing jointly); phases out above that</td></tr>
+<tr><td>Rollovers and transfers</td><td>Moving money from an existing IRA, 401(k) or old employer plan <strong>does not count</strong> toward the annual limit and needs no earned income. Pre-tax money converted to a Roth is taxed as income in the year converted.</td></tr>
+<tr><td>Tax-free withdrawals</td><td>Age 59½ or older <strong>and</strong> the five-year rule met (clock starts January 1 of the year of your first Roth contribution). Your original contributions can come out anytime, tax and penalty free.</td></tr>
+<tr><td>Required withdrawals</td><td>None during the owner's lifetime</td></tr>
+<tr><td>Funding method</td><td>Dollars only. You cannot deposit crypto from Exodus or an exchange into an IRA. Existing crypto IRAs at other providers can transfer in kind.</td></tr>
+</table>
+<div class="profile"><div class="hd"><h3><a href="https://www.itrustcapital.com">iTrustCapital at a Glance</a></h3><span><a href="https://www.itrustcapital.com">itrustcapital.com</a></span></div><div class="bd"><p><a class="go" href="https://www.itrustcapital.com">Go to iTrustCapital ↗</a></p>
+<div class="kv">
+<div>Account types</div><div>Roth IRA, Traditional IRA, SEP IRA; plus a non-IRA "Premium Custody" account</div>
+<div>Assets</div><div>100+ cryptocurrencies, physical gold and silver, and thousands of stocks and ETFs</div>
+<div>Fees</div><div>No setup, monthly or annual fees. 1% per crypto buy or sell. Metals priced at a markup over spot.</div>
+<div>Minimums</div><div>$1,000 to open; additional deposits generally $500 or more</div>
+<div>Trading</div><div>24/7 crypto trading inside the IRA</div>
+<div>Security</div><div>Institutional custody; closed-loop system (dollars in, dollars out to your linked bank only)</div>
+<div>Phone support</div><div><a href="tel:+15626008399">(562) 600-8399</a>, Monday to Friday, 7 AM to 5 PM Pacific (4 AM to 2 PM Hawaiʻi time)</div>
+<div>Email</div><div><a href="mailto:info@itrustcapital.com">info@itrustcapital.com</a></div>
+<div>Help center</div><div><a href="https://help.itrustcapital.com">help.itrustcapital.com</a></div>
+<div>Company</div><div>Based in Irvine, California</div>
+</div>
+<h4>How to open an account</h4>
+<ol>
+<li>Go to <a href="https://www.itrustcapital.com">itrustcapital.com</a> and click <em>Create Account</em>. Enter a username, email, password and mobile number, then verify your email.</li>
+<li>Start an account application and choose <strong>Roth IRA</strong>.</li>
+<li>Enter personal details and your beneficiaries; upload ID.</li>
+<li>Choose how to fund: a new contribution from your bank, a transfer from another IRA, or a rollover from a 401(k).</li>
+<li>Once funded, buy crypto from the dashboard. All trading inside the IRA is tax-free.</li>
+<li>Switch 2FA from text messages to an authenticator app (iTrustCapital recommends this).</li>
+</ol>
+</div></div>
+<div class="box note"><strong class="label">Taxable account or Roth?</strong>They work well together. The taxable exchange account gives you flexibility to spend and borrow anytime. The Roth gives you tax-free growth for money you will not need until after 59½. Many people use both.</div>
+<!-- 13 -->
+<h2 id="s13"><span class="num">13</span>Five Years Out: $100K, $500K and $1M</h2>
+<p class="lead">Suppose you build a crypto portfolio over five years. Here is what three common choices could look like at three portfolio sizes. These are simplified illustrations, not predictions.</p>
+<p class="small"><strong>Assumptions:</strong> single filer; $40,000 of other taxable income (after deductions); you paid 40% of today's value (so 60% is gain); everything held more than one year; 2026 federal rates. Married couples filing jointly would owe less because their brackets are wider.</p>
+<h3>Option 1: Sell everything (taxable account)</h3>
+<table>
+<tr><th>Portfolio value</th><th>You paid</th><th>Gain</th><th>Federal tax (incl. 3.8% NIIT)</th><th>Hawaiʻi tax (up to)</th><th>Approx. you keep</th></tr>
+<tr><td>$100,000</td><td>$40,000</td><td>$60,000</td><td>$7,583</td><td>$4,350</td><td>About $88,000</td></tr>
+<tr><td>$500,000</td><td>$200,000</td><td>$300,000</td><td>$48,903</td><td>$21,750</td><td>About $429,000</td></tr>
+<tr><td>$1,000,000</td><td>$400,000</td><td>$600,000</td><td>$110,028</td><td>$43,500</td><td>About $846,000</td></tr>
+</table>
+<p class="small">If those same coins were held one year or less, the gain would be taxed at ordinary income rates (up to 37%), roughly doubling the federal bill at the larger sizes. Selling over two or more tax years can also keep more of the gain in lower brackets.</p>
+<h3>Option 2: Borrow instead of selling (25% LTV)</h3>
+<table>
+<tr><th>Portfolio value</th><th>Cash borrowed</th><th>Interest per year (at 6%)</th><th>Interest per year (at 10%)</th><th>Tax owed to borrow</th></tr>
+<tr><td>$100,000</td><td>$25,000</td><td>$1,500</td><td>$2,500</td><td>$0</td></tr>
+<tr><td>$500,000</td><td>$125,000</td><td>$7,500</td><td>$12,500</td><td>$0</td></tr>
+<tr><td>$1,000,000</td><td>$250,000</td><td>$15,000</td><td>$25,000</td><td>$0</td></tr>
+</table>
+<p class="small">You keep 100% of your coins and their upside, but you owe interest and face liquidation risk if prices crash. Best for short-term needs or when you expect to repay.</p>
+<h3>Option 3: The same growth inside a Roth IRA</h3>
+<table>
+<tr><th>Roth value at withdrawal</th><th>Federal tax</th><th>State tax</th><th>You keep</th></tr>
+<tr><td>$100,000</td><td>$0</td><td>$0</td><td>$100,000</td></tr>
+<tr><td>$500,000</td><td>$0</td><td>$0</td><td>$500,000</td></tr>
+<tr><td>$1,000,000</td><td>$0</td><td>$0</td><td>$1,000,000</td></tr>
+</table>
+<p class="small">Assumes a qualified withdrawal (age 59½ or older and the five-year rule met). The 1% iTrustCapital trading fee applies when buying and selling. Remember that a Roth can only be funded with dollars, up to the annual limit plus any rollovers.</p>
+<!-- 14 -->
+<h2 id="s14"><span class="num">14</span>Quick Reference Directory</h2>
+<table>
+<tr><th>Company</th><th>Type</th><th>Website</th><th>App(s)</th></tr>
+<tr><td>Kraken</td><td>Exchange</td><td><a href="https://www.kraken.com">kraken.com</a>  |  <a href="https://support.kraken.com">support.kraken.com</a></td><td>Kraken, Kraken Pro, Krak</td></tr>
+<tr><td>Coinbase</td><td>Exchange</td><td><a href="https://www.coinbase.com">coinbase.com</a>  |  <a href="https://help.coinbase.com">help.coinbase.com</a></td><td>Coinbase</td></tr>
+<tr><td>Uphold</td><td>Exchange</td><td><a href="https://uphold.com">uphold.com</a>  |  <a href="https://support.uphold.com">support.uphold.com</a></td><td>Uphold</td></tr>
+<tr><td>Crypto.com</td><td>Exchange</td><td><a href="https://crypto.com">crypto.com</a>  |  <a href="https://help.crypto.com">help.crypto.com</a></td><td>Crypto.com App</td></tr>
+<tr><td>Exodus</td><td>Hot wallet</td><td><a href="https://www.exodus.com">exodus.com</a>  |  <a href="https://support.exodus.com">support.exodus.com</a></td><td>Exodus</td></tr>
+<tr><td>Ledger</td><td>Cold wallet</td><td><a href="https://www.ledger.com">ledger.com</a>  |  <a href="https://support.ledger.com">support.ledger.com</a></td><td>Ledger Wallet</td></tr>
+<tr><td>Tangem</td><td>Cold wallet</td><td><a href="https://tangem.com">tangem.com</a></td><td>Tangem</td></tr>
+<tr><td>Trezor</td><td>Cold wallet</td><td><a href="https://trezor.io">trezor.io</a>  |  <a href="https://trezor.io/support">trezor.io/support</a></td><td>Trezor Suite</td></tr>
+<tr><td>iTrustCapital</td><td>Crypto IRA</td><td><a href="https://www.itrustcapital.com">itrustcapital.com</a>  |  <a href="tel:+15626008399">(562) 600-8399</a></td><td>Web and mobile</td></tr>
+<tr><td>Arch Lending</td><td>Crypto loans</td><td><a href="https://archlending.com/crypto-loans">archlending.com</a></td><td>Web</td></tr>
+<tr><td>Figure</td><td>Crypto loans</td><td><a href="https://www.figure.com/crypto-backed-loan/crypto-loan-calculator/">figure.com</a></td><td>Figure Markets</td></tr>
+<tr><td>Nexo</td><td>Crypto loans</td><td><a href="https://nexo.com">nexo.com</a></td><td>Nexo</td></tr>
+<tr><td>Ledn</td><td>Bitcoin loans</td><td><a href="https://ledn.io">ledn.io</a></td><td>Web</td></tr>
+<tr><td>IRS</td><td>Tax guidance</td><td><a href="https://www.irs.gov/digital-assets">irs.gov/digital-assets</a></td><td> </td></tr>
+</table>
+<div class="box warn"><strong class="label">Type addresses yourself</strong>Always type these website addresses directly or use a saved bookmark. Do not click links in unexpected emails, texts or social media messages, and do not trust search ads, which scammers sometimes buy.</div>
+<h3>More to read</h3>
+<table>
+<tr><th style="width:34%">Topic</th><th>Where to find it</th></tr>
+<tr><td>Krak Card (Kraken debit card)</td><td><a href="https://blog.kraken.com/product/krak/us-launch">Kraken blog: Krak Card U.S. launch</a></td></tr>
+<tr><td>Tangem packs and prices</td><td><a href="https://tangem.com/en/pricing/">tangem.com/en/pricing</a></td></tr>
+<tr><td>Kraken Pro (low-fee trading)</td><td><a href="https://pro.kraken.com">pro.kraken.com</a></td></tr>
+<tr><td>Coinbase crypto-backed loans</td><td><a href="https://www.coinbase.com/loans">coinbase.com/loans</a></td></tr>
+<tr><td>Uphold Instant Credit (loans)</td><td><a href="https://uphold.com/en-us/exa-card">uphold.com/en-us/exa-card</a></td></tr>
+<tr><td>Borrowing on XRP with Flare</td><td><a href="https://flare.network">flare.network</a></td></tr>
+<tr><td>Aave (DeFi lending)</td><td><a href="https://aave.com">aave.com</a></td></tr>
+<tr><td>Borrowing lessons on the website</td><td><a href="https://www.cryptokokua.com/learn.html#borrow-xrp">cryptokokua.com: Borrowing against XRP</a></td></tr>
+<tr><td>Coinbase Advanced (low-fee trading)</td><td><a href="https://www.coinbase.com/advanced-trade">coinbase.com/advanced-trade</a></td></tr>
+<tr><td>Coinbase One membership and card</td><td><a href="https://www.coinbase.com/one">coinbase.com/one</a></td></tr>
+<tr><td>Uphold Debit Card</td><td><a href="https://www.uphold.com/en-us/card">uphold.com/en-us/card</a></td></tr>
+<tr><td>Crypto.com card tiers</td><td><a href="https://crypto.com/cards">crypto.com/cards</a></td></tr>
+<tr><td>iTrustCapital fees</td><td><a href="https://www.itrustcapital.com/price">itrustcapital.com/price</a></td></tr>
+<tr><td>Roth IRA rules (IRS)</td><td><a href="https://www.irs.gov/retirement-plans/roth-iras">irs.gov: Roth IRAs</a></td></tr>
+<tr><td>Crypto tax rules (IRS)</td><td><a href="https://www.irs.gov/digital-assets">irs.gov/digital-assets</a></td></tr>
+<tr><td>Form 1099-DA</td><td><a href="https://www.irs.gov/forms-pubs/about-form-1099-da">irs.gov: About Form 1099-DA</a></td></tr>
+<tr><td>Form 8949 (reporting sales)</td><td><a href="https://www.irs.gov/forms-pubs/about-form-8949">irs.gov: About Form 8949</a></td></tr>
+<tr><td>Form 709 (gift tax return)</td><td><a href="https://www.irs.gov/forms-pubs/about-form-709">irs.gov: About Form 709</a></td></tr>
+<tr><td>Hawaiʻi state taxes</td><td><a href="https://tax.hawaii.gov">tax.hawaii.gov</a></td></tr>
+<tr><td>Crypto tax software</td><td><a href="https://koinly.io">Koinly</a>  |  <a href="https://www.cointracker.io">CoinTracker</a>  |  <a href="https://tokentax.co">TokenTax</a></td></tr>
+</table>
+<!-- 15 -->
+<h2 id="s15"><span class="num">15</span>Glossary</h2>
+<table>
+<tr><th style="width:26%">Term</th><th>Meaning</th></tr>
+<tr><td>Airdrop</td><td>Free tokens sent to wallets, usually to promote a project. Taxable as income when received.</td></tr>
+<tr><td>Cold storage</td><td>Keeping keys offline, usually on a hardware wallet.</td></tr>
+<tr><td>Cost basis</td><td>What you paid for a coin, including fees. Used to calculate your gain or loss.</td></tr>
+<tr><td>Custodial</td><td>A company holds your crypto for you (exchanges).</td></tr>
+<tr><td>Dollar-cost averaging</td><td>Buying a fixed dollar amount on a regular schedule regardless of price.</td></tr>
+<tr><td>FXRP</td><td>A token on the Flare blockchain that tracks XRP one-to-one, so XRP can be used in lending apps.</td></tr>
+<tr><td>Gas / network fee</td><td>The fee paid to the blockchain to process a transaction.</td></tr>
+<tr><td>Health factor</td><td>On DeFi lending apps like Aave, a safety score for a loan. Above 1 is safe; at 1 or below, collateral is sold.</td></tr>
+<tr><td>KYC</td><td>"Know Your Customer": the ID check exchanges are required to perform.</td></tr>
+<tr><td>Limit order</td><td>An order to buy at or below, or sell at or above, a price you choose. It waits until the market reaches your price.</td></tr>
+<tr><td>Liquidation</td><td>Automatic sale of loan collateral when its value falls too far.</td></tr>
+<tr><td>LTV</td><td>Loan-to-value: the loan amount divided by the collateral's value.</td></tr>
+<tr><td>Maker / taker</td><td>A maker order waits on the order book and pays the lower fee. A taker order fills instantly and pays the higher fee.</td></tr>
+<tr><td>Market order</td><td>An order that buys or sells immediately at the best available price. Always charged the taker fee.</td></tr>
+<tr><td>NFC</td><td>The short-range wireless tap a Tangem card uses to talk to your phone.</td></tr>
+<tr><td>Non-custodial / self-custody</td><td>You hold your own keys (Exodus, Ledger, Trezor).</td></tr>
+<tr><td>Order book</td><td>The live list of buy orders (bids) and sell orders (asks) waiting on an exchange.</td></tr>
+<tr><td>Post Only</td><td>An order setting that guarantees the maker fee by canceling the order if it would fill instantly.</td></tr>
+<tr><td>Spread</td><td>The hidden cost built into a buy or sell price.</td></tr>
+<tr><td>Stablecoin</td><td>A token designed to hold a steady $1 value, such as USDC.</td></tr>
+<tr><td>Staking</td><td>Locking certain coins to help secure a network in exchange for rewards.</td></tr>
+<tr><td>Swap</td><td>Trading one coin directly for another. A taxable event in a regular account.</td></tr>
+<tr><td>Transaction ID (TXID)</td><td>A unique receipt number for a blockchain transaction, searchable on a block explorer.</td></tr>
+</table>
+<div class="disclaimer">
+<strong>Important:</strong> This guide is for general education only and is not financial, investment, legal or tax advice. Crypto is volatile and you can lose some or all of your money. Product features, fees, rates, card rewards, state availability and tax figures change often; confirm current details directly with each company and with a qualified tax professional before acting. Tax figures reflect 2026 federal rules and simplified assumptions. Company names are used for identification only, and no company has endorsed or sponsored this guide.
+</div>
+</main>
+<footer>The Beginner's Guide to Crypto  |  Prepared by David Cantrell  |  November 2026</footer>
+</div>
+</body>
+</html>

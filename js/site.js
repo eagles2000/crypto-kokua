@@ -24,7 +24,7 @@ const NAV=[
  {label:'Tools',cols:[
    {h:'Calculators',links:[['Sell, borrow or Roth','tools.html','','Compare your options'],['Dollar-cost averaging','#','soon','']]},
    {h:'Ask AI',links:[['Ask Claude, ChatGPT or Perplexity','learn.html#ask-ai','','Any question, filled in for you']]},
-   {h:'Downloads',links:[['Free starter guide (PDF)','downloads/Crypto_Kokua_Starter_Guide.pdf','','Print it or email it'],['Install the app','#install','','Chrome, Brave, iPhone']]}]},
+   {h:'Downloads',links:[['Free starter guide (PDF)','downloads/Crypto_Kokua_Starter_Guide.pdf','','Print it or email it'],['Starter guide (web page)','downloads/Crypto_Kokua_Starter_Guide.html','','Read it in your browser'],['Install the app','#install','','Chrome, Brave, iPhone']]}]},
  {label:'Company',cols:[
    {h:'About',links:[['About Crypto Kōkua','index.html#about','','Why this site exists'],['Shaka Software LLC','https://shakasoftware.com','','Veteran-owned, Kapolei'],['Transparency','#','soon',''],['Marketplace','#','soon','']]}]}
 ];
