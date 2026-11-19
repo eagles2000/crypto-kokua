@@ -337,3 +337,21 @@ label.f input,label.f select{display:block;width:100%;margin-top:6px;font:inheri
 .mtable .ext{font-size:12px;color:var(--mut);font-weight:600}
 @media(max-width:1020px){.newsgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.newsgrid,.newslist{grid-template-columns:1fr}}
+
+/* ask an AI */
+.airow{padding:12px 16px 14px;background:#f6f3f8;border-top:1px solid #eee}
+html[data-ck=dark] .airow{background:#1d1922;border-color:#2a2532}
+.airow>span{display:block;font-size:13px;font-weight:700;color:#8a8392;margin-bottom:8px}
+.airow>span:empty{display:none}
+.results .nomatch{margin:0;padding:14px 18px 4px;font-weight:700}
+.ais{display:flex;flex-wrap:wrap;gap:8px}
+.aib{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1.5px solid var(--line,#e9e4ee);background:var(--card,#fff);color:var(--ink,#121014);text-decoration:none;font-weight:700;font-size:14px;min-height:40px}
+.results .aib{border-color:#e2dce8;background:#fff;color:#121014}
+html[data-ck=dark] .results .aib{border-color:#2f2a36;background:#17141b;color:#f3f0f5}
+.aib:hover{border-color:var(--ember)}
+.aib i{width:10px;height:10px;border-radius:50%;flex:none}
+.ainote{margin:8px 0 0;font-size:12.5px;color:#8a8392}
+.dai{margin:0 26px 6px;padding:16px 18px;border-radius:16px;background:var(--soft)}
+.dai b{display:block;margin-bottom:10px}
+.askai{max-width:640px}
+.askai textarea{width:100%;min-height:96px;font:inherit;font-size:16px;padding:14px 16px;border-radius:16px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);resize:vertical;margin:16px 0 12px}

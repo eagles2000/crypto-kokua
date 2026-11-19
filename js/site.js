@@ -23,6 +23,7 @@ const NAV=[
    {h:'News',links:[['Crypto news','news.html','','Headlines from The Block, CoinDesk and more']]}]},
  {label:'Tools',cols:[
    {h:'Calculators',links:[['Sell, borrow or Roth','tools.html','','Compare your options'],['Dollar-cost averaging','#','soon','']]},
+   {h:'Ask AI',links:[['Ask Claude, ChatGPT or Perplexity','learn.html#ask-ai','','Any question, filled in for you']]},
    {h:'Downloads',links:[['Free starter guide (PDF)','downloads/Crypto_Kokua_Starter_Guide.pdf','','Print it or email it'],['Install the app','#install','','Chrome, Brave, iPhone']]}]},
  {label:'Company',cols:[
    {h:'About',links:[['About Crypto Kōkua','index.html#about','','Why this site exists'],['Shaka Software LLC','https://shakasoftware.com','','Veteran-owned, Kapolei'],['Transparency','#','soon',''],['Marketplace','#','soon','']]}]}
@@ -74,6 +75,7 @@ document.body.insertAdjacentHTML('beforeend',`
 <dialog id="dlg" aria-labelledby="dT"><div class="dh"><div class="t"><div class="cat" id="dC"></div><h2 id="dT"></h2>
  <div class="dacts"><button class="btn pri" id="listen">${svgI('<path d="M8 5v14l11-7z" fill="currentColor"/>')}<span>Listen</span></button><span id="dLinks"></span></div></div>
  <button class="x" id="dX" aria-label="Close">✕</button></div><div class="db" id="dB"></div>
+ <div class="dai"><b>Still have questions about this?</b><div class="ais" id="dAI"></div><p class="ainote">Never type your recovery phrase, passwords or account numbers into any AI or website.</p></div>
  <div class="dnav"><button class="btn sm" id="prev">← Previous</button><button class="btn sm" id="next">Next →</button></div></dialog>
 <dialog id="vdlg" aria-labelledby="vT"><div class="dh"><div class="t"><h2 id="vT">Voice settings</h2></div><button class="x" data-close aria-label="Close">✕</button></div>
  <div class="db vset"><p class="mut">Choose who reads the lessons to you. Voices come from your device, so the list varies by browser and phone.</p>
@@ -96,6 +98,7 @@ $$('dialog').forEach(d=>d.addEventListener('click',e=>{if(e.target===d)d.close()
 const dlg=$('#dlg');let idx=0;
 const openLesson=id=>{const i=T.findIndex(t=>t.id===id);if(i<0)return false;idx=i;const t=T[i];stop();
  $('#dC').textContent=t.cat;$('#dT').textContent=t.title;$('#dB').innerHTML=t.body;
+ if(typeof aiLinks==='function')$('#dAI').innerHTML=aiLinks(`Explain "${t.title}" for a crypto beginner, and answer the questions people most often have about it.`);
  $('#dLinks').innerHTML=(t.links||[]).map(([u,l])=>`<a class="btn" href="${u}" target="_blank" rel="noopener">${l} ↗</a>`).join(' ');
  if(!dlg.open)dlg.showModal();dlg.scrollTop=0;if(location.hash!=='#'+id)history.replaceState(null,'','#'+id);return true};
 $('#dX').onclick=()=>dlg.close();
@@ -137,6 +140,11 @@ let saved=null;try{saved=localStorage.getItem('ck-theme')}catch(e){}
 setTheme(saved||(root.dataset.theme==='dark'||root.dataset.theme==='light'?root.dataset.theme:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')));
 $('#themeBtn').onclick=()=>setTheme(root.dataset.ck==='dark'?'light':'dark');
 
+/* ---------- ask an AI (opens Claude, ChatGPT or Perplexity with the question filled in) ---------- */
+const AIS=[['Claude','https://claude.ai/new?q=','#d97757'],['ChatGPT','https://chatgpt.com/?q=','#10a37f'],['Perplexity','https://www.perplexity.ai/?q=','#20808d']];
+const aiPrompt=q=>`${q.trim()}\n\nI'm a beginner learning about crypto on Crypto Kōkua (cryptokokua.com). Please answer in plain English, point out anything that may have changed recently, and remind me never to share my recovery phrase. This is for learning, not financial advice.`;
+const aiLinks=q=>AIS.map(([n,u,c])=>`<a class="aib" href="${u}${encodeURIComponent(aiPrompt(q))}" target="_blank" rel="noopener"><i style="background:${c}"></i>Ask ${n} ↗</a>`).join('');
+const aiNote='<p class="ainote">Opens in a new tab. Never type your recovery phrase, passwords or account numbers into any AI or website.</p>';
 /* ---------- search ---------- */
 const plain=h=>{const d=document.createElement('div');d.innerHTML=h;return d.textContent.toLowerCase()};
 const IDX=T.map(t=>({t,s:(t.title+' '+t.blurb+' '+plain(t.body)).toLowerCase()}));
@@ -147,7 +155,8 @@ const search=q=>{q=q.toLowerCase().replace(/[^a-z0-9\s.]/g,' ').trim();if(!q)ret
 let autoRead=false;try{autoRead=localStorage.getItem('ck-autoread')==='1'}catch(e){}
 const readOpen=()=>setTimeout(()=>{const b=$('#listen');if(b&&dlg.open&&speakingBtn!==b)b.click()},250);
 $$('form.ask').forEach(f=>{const q=$('input',f),res=$('.results',f),mic=$('.mic',f);let viaVoice=false,rec=null,silence=null;
- const show=()=>{const r=search(q.value);res.innerHTML=r.length?r.map(o=>`<button type="button" data-ask="${o.t.id}">${o.t.title}<span>${o.t.blurb}</span></button>`).join(''):(q.value.trim()?'<button type="button" disabled>No lesson on that yet. Try words like "wallet", "taxes", "Kraken" or "prices".</button>':'');res.style.display=res.innerHTML?'block':'none'};
+ const show=()=>{const v=q.value.trim(),r=search(v);if(!v){res.innerHTML='';res.style.display='none';return}
+  res.innerHTML=(r.length?r.map(o=>`<button type="button" data-ask="${o.t.id}">${o.t.title}<span>${o.t.blurb}</span></button>`).join(''):'<p class="nomatch">No lesson on that yet. Ask an AI instead:</p>')+`<div class="airow"><span>${r.length?'Want a different answer? Ask an AI:':''}</span><div class="ais">${aiLinks(v)}</div>${aiNote}</div>`;res.style.display='block'};
  let typing=null;q.addEventListener('input',()=>{viaVoice=false;clearTimeout(typing);typing=setTimeout(show,350)});
  const go=id=>{res.style.display='none';if(openLesson(id)&&(viaVoice||autoRead))readOpen();viaVoice=false};
  res.addEventListener('click',e=>{const b=e.target.closest('[data-ask]');if(b){e.stopPropagation();go(b.dataset.ask)}});
@@ -246,7 +255,7 @@ let newsCache=null;
 const loadNews=async()=>{if(newsCache&&Date.now()-newsCache.t<5*60000)return newsCache.d;const r=await fetch('/api/news',{cache:'no-store'});if(!r.ok)throw new Error('news');const d=await r.json();newsCache={t:Date.now(),d};return d};
 const newsCard=i=>`<a class="news" href="${esc(i.link)}" target="_blank" rel="noopener"><span class="src">${esc(i.source)}<em>${ago(i.date)}</em></span><b>${esc(i.title)}</b><span class="go">Read at ${esc(i.source)} ↗</span></a>`;
 const renderNews=async(el,limit,filter)=>{try{const d=await loadNews();const items=d.items.filter(i=>!filter||filter==='All'||i.source===filter).slice(0,limit);el.innerHTML=items.length?items.map(newsCard).join(''):'<p class="mut">No headlines right now. Check back soon.</p>';return d}catch(e){el.innerHTML='<p class="mut">Headlines load on the published site. If they don\'t appear, try again in a few minutes.</p>';return null}};
-window.CK={$,$$,openLesson,speak,slug,renderNews,ago,
+window.CK={$,$$,openLesson,speak,slug,renderNews,ago,aiLinks,aiNote,
  lessonCard:t=>`<button class="tcard" data-open="${t.id}"><div class="ic">${ico(t.ic)}</div><div class="cat">${t.cat}</div><h3>${t.title}</h3><p>${t.blurb}</p><span class="more">Open lesson →</span></button>`,
  platformCard:(p,full)=>`<article class="pc" id="${slug(p)}"><div class="mk" style="background:${p.c}">${p.n[0]}</div><div><h3>${p.n}</h3><div class="kind">${p.k}</div></div>
   <div>${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div><p>${p.d}</p>${full?`<ul>${p.pts.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}

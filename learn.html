@@ -28,6 +28,12 @@
  <div class="sech"><h2>All lessons</h2><div class="filters" id="filters"></div></div>
  <div class="grid" id="grid"></div>
 </div></section>
+<section class="band t-night" id="ask-ai"><div class="wrap split">
+ <div><span class="kicker">Ask AI</span><h2>Can't find your answer? Ask an AI.</h2>
+  <p class="lead" style="margin-top:14px">Type any crypto question and open it in Claude, ChatGPT or Perplexity with your question already filled in. They can answer things our lessons don't cover, like a specific coin or a brand-new product.</p></div>
+ <div class="askai"><label for="aiQ" class="small mut">Your question</label><textarea id="aiQ" placeholder="Is a Tangem wallet a good fit for someone who mostly holds Bitcoin and XRP?"></textarea>
+  <div class="ais" id="aiBtns"></div><p class="ainote">Opens in a new tab. AI answers can be wrong or out of date, so double-check important details. Never type your recovery phrase, passwords or account numbers into any AI or website.</p></div>
+</div></section>
 </main>
 <script src="js/data.js"></script>
 <script src="js/site.js"></script>
@@ -36,6 +42,7 @@ const {$,$$}=CK;const cats=['All',...new Set(T.map(t=>t.cat))];let cur='All';
 const draw=()=>{$('#grid').innerHTML=T.filter(t=>cur==='All'||t.cat===cur).map(CK.lessonCard).join('')};
 $('#filters').innerHTML=cats.map(c=>`<button data-cat="${c}" aria-pressed="${c===cur}">${c}</button>`).join('');
 $('#filters').addEventListener('click',e=>{const b=e.target.closest('[data-cat]');if(!b)return;cur=b.dataset.cat;$$('#filters button').forEach(x=>x.setAttribute('aria-pressed',x===b));draw()});draw();
+const aiQ=$('#aiQ'),aiB=$('#aiBtns');const upd=()=>{aiB.innerHTML=CK.aiLinks(aiQ.value.trim()||aiQ.placeholder)};aiQ.addEventListener('input',upd);upd();
 }</script>
 </body>
 </html>
