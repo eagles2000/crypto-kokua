@@ -92,7 +92,7 @@ async function pulse(){const box=$('#pulse');if(!box)return;
  let g=null;try{const r=await fetch('https://api.coingecko.com/api/v3/global',{cache:'no-store'});if(r.ok)g=(await r.json()).data}catch(e){}
  const card=(lab,val,sub,cls='')=>`<div class="pc2 rv in"><span>${lab}</span><b class="${cls}">${val}</b><small>${sub}</small></div>`;
  box.innerHTML=(g?card('Total crypto market',big(g.total_market_cap.usd),P.pct(g.market_cap_change_percentage_24h_usd)+' in 24h',g.market_cap_change_percentage_24h_usd>=0?'up':'down')+card('Bitcoin dominance',g.market_cap_percentage.btc.toFixed(1)+'%','Bitcoin\'s share of all crypto value'):card('Bitcoin',P.fmt(P.by('BTC')),P.pct(P.by('BTC').ch)+' in 24h'))+
-  card('Top gainer today',best.n,P.pct(best.ch),best.ch>=0?'up':'down')+card('Biggest drop today',worst.n,P.pct(worst.ch),worst.ch>=0?'up':'down')}
+  card('Best performer today',best.n,P.pct(best.ch),best.ch>=0?'up':'down')+card('Weakest today',worst.n,P.pct(worst.ch),worst.ch>=0?'up':'down')}
 document.addEventListener('ck:prices',()=>{clearTimeout(pulse.t);pulse.t=setTimeout(pulse,200)});
 
 P.paint();$('#rf').onclick=()=>P.refresh();pulse();
