@@ -12,10 +12,11 @@ const NAV=[
  {label:'Learn',cols:[
    {h:'The basics',links:['basics','hot-cold','keys','safety','research','glossary'].map(L)},
    {h:'How-to guides',links:['buy','limit-orders','exodus-to-kraken','gift','cold-move','cash-out'].map(L)},
-   {h:'Money and retirement',links:[...['cards','taxes','borrow','roth','scenarios'].map(L),['All lessons','learn.html']]}]},
+   {h:'Money and retirement',links:['cards','taxes','borrow','roth','scenarios'].map(L)},
+   {h:'Security and family',links:[...['tangem','multisig','custody','inheritance'].map(L),['All lessons','learn.html']]}]},
  {label:'Platforms',cols:[
    {h:'Exchanges',links:[['Kraken','platforms.html#kraken','','Low fees, strong security'],['Coinbase','platforms.html#coinbase','','Easiest to start'],['Uphold','platforms.html#uphold','','Anything-to-anything trades'],['Crypto.com','platforms.html#cryptocom','','Mobile app and card perks']]},
-   {h:'Wallets and IRA',links:[['Exodus','platforms.html#exodus','','Free hot wallet'],['Ledger','platforms.html#ledger','','Hardware cold wallet'],['Trezor','platforms.html#trezor','','Open-source cold wallet'],['iTrustCapital','platforms.html#itrustcapital','','Crypto Roth IRA']]},
+   {h:'Wallets and IRA',links:[['Exodus','platforms.html#exodus','','Free hot wallet'],['Ledger','platforms.html#ledger','','Hardware cold wallet'],['Trezor','platforms.html#trezor','','Open-source cold wallet'],['Tangem','platforms.html#tangem','','Tap-to-sign card wallet'],['iTrustCapital','platforms.html#itrustcapital','','Crypto Roth IRA']]},
    {h:'Compare',links:[['Debit and credit cards','platforms.html#cards','','Rewards, fees, requirements'],['Exchange comparison','platforms.html#compare','','Side by side']]}]},
  {label:'Markets',cols:[
    {h:'Live prices',links:[['Crypto','markets.html#crypto','','Bitcoin, Ethereum, XRP and more'],['Stocks and indexes','markets.html#stocks','','S&P 500, Nasdaq, NVIDIA'],['Precious metals','markets.html#metals','','Gold, silver, platinum']]},
@@ -139,7 +140,7 @@ $('#themeBtn').onclick=()=>setTheme(root.dataset.ck==='dark'?'light':'dark');
 /* ---------- search ---------- */
 const plain=h=>{const d=document.createElement('div');d.innerHTML=h;return d.textContent.toLowerCase()};
 const IDX=T.map(t=>({t,s:(t.title+' '+t.blurb+' '+plain(t.body)).toLowerCase()}));
-const syn={ledger:'hot-cold',trezor:'hot-cold',hardware:'hot-cold',cold:'hot-cold',seed:'keys',phrase:'keys',words:'keys',password:'keys',address:'keys',scam:'safety',fraud:'safety',ira:'roth',itrust:'roth',retire:'roth',roth:'roth',loan:'borrow',borrow:'borrow',debit:'cards',card:'cards',tax:'taxes',irs:'taxes',1099:'taxes',sell:'cash-out',cash:'cash-out',withdraw:'cash-out',send:'exodus-to-kraken',transfer:'exodus-to-kraken',gift:'gift',coingecko:'research',coinmarketcap:'research',marketcap:'research',tradingview:'research',chart:'research',research:'research',explorer:'research',price:'research',prices:'research',buy:'buy',bank:'buy',limit:'limit-orders',maker:'limit-orders',taker:'limit-orders',order:'limit-orders',orders:'limit-orders',post:'limit-orders',fee:'limit-orders',fees:'limit-orders',cheap:'limit-orders',cheapest:'limit-orders',bid:'limit-orders',glossary:'glossary',meaning:'glossary'};
+const syn={tangem:'tangem',nfc:'tangem',ring:'tangem',multisig:'multisig',multi:'multisig',signature:'multisig',shamir:'multisig',split:'multisig',casa:'multisig',unchained:'multisig',nunchuk:'multisig',sparrow:'multisig',custody:'custody',custodian:'custody',institutional:'custody',bitgo:'custody',anchorage:'custody',fidelity:'custody',treasury:'custody',premium:'custody',business:'custody',inherit:'inheritance',heir:'inheritance',heirs:'inheritance',estate:'inheritance',will:'inheritance',trust:'inheritance',die:'inheritance',death:'inheritance',family:'inheritance',beneficiary:'inheritance',ledger:'hot-cold',trezor:'hot-cold',hardware:'hot-cold',cold:'hot-cold',seed:'keys',phrase:'keys',words:'keys',password:'keys',address:'keys',scam:'safety',fraud:'safety',ira:'roth',itrust:'roth',retire:'roth',roth:'roth',loan:'borrow',borrow:'borrow',debit:'cards',card:'cards',tax:'taxes',irs:'taxes',1099:'taxes',sell:'cash-out',cash:'cash-out',withdraw:'cash-out',send:'exodus-to-kraken',transfer:'exodus-to-kraken',gift:'gift',coingecko:'research',coinmarketcap:'research',marketcap:'research',tradingview:'research',chart:'research',research:'research',explorer:'research',price:'research',prices:'research',buy:'buy',bank:'buy',limit:'limit-orders',maker:'limit-orders',taker:'limit-orders',order:'limit-orders',orders:'limit-orders',post:'limit-orders',fee:'limit-orders',fees:'limit-orders',cheap:'limit-orders',cheapest:'limit-orders',bid:'limit-orders',glossary:'glossary',meaning:'glossary'};
 const STOP=new Set('a an and are as at be best can could do does for from get go good great how i if in is it its like look looking me my of on or place places should site sites some that the there this to use want what whats when where which who why will with would you your about tell explain'.split(' '));
 const search=q=>{q=q.toLowerCase().replace(/[^a-z0-9\s.]/g,' ').trim();if(!q)return[];const w=q.split(/\s+/).filter(x=>x.length>1&&!STOP.has(x));if(!w.length)return[];
  return IDX.map(o=>{let sc=0;const tl=o.t.title.toLowerCase();w.forEach(x=>{if(tl.includes(x))sc+=4;if(o.s.includes(x))sc+=1;for(const k in syn)if(x.startsWith(k)&&syn[k]===o.t.id)sc+=7});return{...o,sc}}).filter(o=>o.sc>=3).sort((a,b)=>b.sc-a.sc).slice(0,5)};
@@ -252,6 +253,6 @@ window.CK={$,$$,openLesson,speak,slug,renderNews,ago,
   <div class="act"><a class="btn pri sm" href="${p.u}" target="_blank" rel="noopener">Go to ${p.n} ↗</a>${full?`<a class="btn sm" href="${p.s}" target="_blank" rel="noopener">Help center</a>`:''}${p.topic?`<button class="btn sm" data-open="${p.topic}">Lesson</button>`:''}</div></article>`};
 
 /* open a lesson from the URL hash (works on every page) */
-const fromHash=()=>{const h=location.hash.slice(1);if(T.some(t=>t.id===h))openLesson(h)};
-addEventListener('hashchange',fromHash);setTimeout(fromHash,0);
+const fromHash=()=>{const h=location.hash.slice(1);if(!h||document.getElementById(h))return;if(T.some(t=>t.id===h))openLesson(h)};
+addEventListener('hashchange',fromHash);if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',fromHash);else setTimeout(fromHash,0);
 }

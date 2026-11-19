@@ -30,12 +30,13 @@ const T=[
 {id:'hot-cold',cat:'Basics',ic:'fire',title:'Hot wallets vs. cold wallets',blurb:'Your pocket wallet and your home safe. Which to use, when, and what they cost.',body:`
 <div class="tbl"><table><thead><tr><th></th><th>Hot wallet</th><th>Cold wallet (hardware)</th></tr></thead><tbody>
 <tr><td><b>What it is</b></td><td>Software on an internet-connected phone or computer</td><td>A small device that keeps your keys offline</td></tr>
-<tr><td><b>Examples</b></td><td>Exodus, exchange wallets, browser wallets</td><td>Ledger, Trezor</td></tr>
-<tr><td><b>Cost</b></td><td>Free</td><td>About $59 to $399, one time</td></tr>
+<tr><td><b>Examples</b></td><td>Exodus, exchange wallets, browser wallets</td><td>Ledger, Trezor, Tangem</td></tr>
+<tr><td><b>Cost</b></td><td>Free</td><td>About $55 to $399, one time</td></tr>
 <tr><td><b>Convenience</b></td><td>Very high. Send and swap in seconds</td><td>Lower. You press a button on the device to approve</td></tr>
 <tr><td><b>Security</b></td><td>Good, but exposed to malware and phishing</td><td>Best. A hacked computer still cannot sign for you</td></tr>
 <tr><td><b>Best for</b></td><td>Spending and smaller amounts</td><td>Long-term savings and larger amounts</td></tr></tbody></table></div>
-<div class="box"><b class="l">Rule of thumb</b>Keep a few hundred or a few thousand dollars in Exodus for everyday use, and everything you plan to hold for years on a Ledger or Trezor. Exodus can connect to a Trezor (desktop) or Ledger (mobile), so you get the easy Exodus screen with hardware protection.</div>`},
+<div class="box"><b class="l">Rule of thumb</b>Keep a few hundred or a few thousand dollars in Exodus for everyday use, and everything you plan to hold for years on a Ledger, Trezor or Tangem. Exodus can connect to a Trezor (desktop) or Ledger (mobile), so you get the easy Exodus screen with hardware protection.</div>
+<p>New to cold wallets? <a href="learn.html#tangem" data-open="tangem">Tangem</a> is the simplest: a card you tap to your phone.</p>`},
 {id:'keys',cat:'Basics',ic:'key',title:'Your keys and codes explained',blurb:'Public address, private key, 12 and 24-word recovery phrases, the passphrase, PIN and 2FA.',body:`
 <p>Every wallet uses the same handful of codes. Know which are safe to share and which must never leave your hands.</p>
 <div class="tbl"><table><thead><tr><th>Code</th><th>What it does</th><th>Share it?</th></tr></thead><tbody>
@@ -47,7 +48,8 @@ const T=[
 <tr><td><b>2FA code</b></td><td>A six-digit code from an authenticator app that protects exchange logins. Safer than text messages.</td><td>No</td></tr>
 <tr><td><b>Memo or tag</b></td><td>An extra number some coins (XRP, XLM, ATOM) need when sending to an exchange.</td><td>Yes, include it</td></tr></tbody></table></div>
 <h4>Storing your recovery phrase</h4>
-<ol><li>Write the words by hand, in order, on paper or a steel backup plate.</li><li>Never photograph it, type it into notes, email it or save it to the cloud.</li><li>Keep it fire-safe and private: a home safe or safe deposit box.</li><li>Make sure one trusted person knows <i>where</i> it is (not what it says) as part of your estate plan.</li></ol>`},
+<ol><li>Write the words by hand, in order, on paper or a steel backup plate.</li><li>Never photograph it, type it into notes, email it or save it to the cloud.</li><li>Keep it fire-safe and private: a home safe or safe deposit box.</li><li>Make sure one trusted person knows <i>where</i> it is (not what it says) as part of your estate plan.</li></ol>
+<div class="box"><b class="l">Want more protection?</b>See <a href="learn.html#multisig" data-open="multisig">Multisig and split backups</a> for ways to remove the single point of failure, and <a href="learn.html#inheritance" data-open="inheritance">Crypto inheritance</a> so your family can reach your crypto.</div>`},
 {id:'safety',cat:'Basics',ic:'shield',title:'The golden safety rules',blurb:'Eight rules that stop almost every scam and costly mistake. Read before you buy.',body:`
 <div class="box warn"><b class="l">No real company will ever ask for your recovery phrase</b>Not Exodus, Ledger, Trezor, Kraken or Coinbase. Anyone who asks is a scammer, every time.</div>
 <ol><li><b>Send a small test amount first</b> to any new address.</li>
@@ -182,6 +184,95 @@ const T=[
 <tr><td>$500,000</td><td class="n">$125,000</td><td class="n">$7,500</td><td class="n">$12,500</td><td class="n">$0</td></tr>
 <tr><td>$1,000,000</td><td class="n">$250,000</td><td class="n">$15,000</td><td class="n">$25,000</td><td class="n">$0</td></tr></tbody></table></div>
 <h4>Inside a Roth IRA</h4><p>A qualified withdrawal of $100,000, $500,000 or $1,000,000 owes <b>$0</b> in federal or state tax. Only the 1% trading fee applies along the way.</p>`},
+{id:'tangem',cat:'Basics',ic:'card',title:'Tangem: the tap-to-sign card wallet',blurb:'A cold wallet the size of a credit card. Tap it to your phone to approve. No battery, no cables, seed phrase optional.',links:[['https://tangem.com','Visit Tangem']],body:`
+<p><b>Tangem</b> is a hardware (cold) wallet made by Tangem AG of Zug, Switzerland, founded in 2017. Instead of a gadget with buttons and a screen, it is a set of <b>credit-card-sized cards</b>, or a ring, with a secure chip inside. You tap a card to the back of your phone to approve each transaction. It is one of the most popular cold wallets for everyday people because it is simple and inexpensive.</p>
+<h4>How it works</h4>
+<ul><li><b>Secure chip:</b> each card has a certified EAL6+ secure element (the same class of chip used in passports and bank cards), developed with Samsung. Your private key is created inside the card and never leaves it.</li>
+<li><b>NFC tap:</b> the card talks to your phone wirelessly when you hold it near. It has no battery; the phone powers it during the tap.</li>
+<li><b>Backup cards:</b> a set comes with 2 or 3 cards that all hold the same wallet. If one card is lost, any other card in the set still works.</li>
+<li><b>Seed phrase optional:</b> by default there are no words to write down. Newer cards also let you create a standard 12 or 24-word recovery phrase if you want a Ledger or Trezor-style backup too.</li>
+<li><b>Phone only:</b> it works through the free Tangem app on an NFC-capable iPhone or Android phone. There is no desktop app.</li></ul>
+<h4>What it costs (U.S. store, November 2026)</h4>
+<div class="tbl"><table><thead><tr><th>Pack</th><th class="n">Price</th><th>Notes</th></tr></thead><tbody>
+<tr><td>2-card set</td><td class="n">$54.90 to $59.90</td><td>One main card and one backup</td></tr>
+<tr><td>3-card set</td><td class="n">$69.90</td><td>The best choice for most people: two backups</td></tr>
+<tr><td>Tangem Ring + 2 cards</td><td class="n">About $140 to $160</td><td>A ceramic ring with the same chip, worn on your finger</td></tr></tbody></table></div>
+<p class="mut">No subscription. Cards carry a 25-year warranty and are water and dust resistant. Prices change; check tangem.com.</p>
+<h4>Setting it up</h4>
+<ol><li>Install the <b>Tangem</b> app from the official App Store or Google Play listing.</li>
+<li>Open the app and hold your first card flat against the back of your phone until it reads.</li>
+<li>Choose <b>Create wallet</b>. The keys are generated inside the card.</li>
+<li>Choose how to back up: <b>backup cards</b> (scan each extra card when asked) and, if you want, also <b>generate a seed phrase</b> and write the words on paper.</li>
+<li>Set an <b>access code</b>. You will enter it when you use a card, so a stolen card is useless without it. Write it down and keep it safe.</li>
+<li>To receive, tap the coin, then <b>Receive</b>, and share the address. To send, enter the details and <b>tap your card</b> to approve.</li>
+<li>Store the backup cards in <b>different safe places</b>, such as a home safe and a safe deposit box.</li></ol>
+<div class="box warn"><b class="l">Know the limits</b>If you lose <b>every</b> card and did not create a seed phrase, the crypto is gone for good. With a 2-card set, losing one card and forgetting your access code can also lock you out, which is why the 3-card set is recommended. The card has no screen, so you check addresses on your phone, and its firmware is closed-source (it has been independently audited instead). Buy only from tangem.com or an authorized reseller.</div>
+<h4>Tangem vs. Ledger and Trezor</h4>
+<div class="tbl"><table><thead><tr><th></th><th>Tangem</th><th>Ledger / Trezor</th></tr></thead><tbody>
+<tr><td><b>Price</b></td><td>About $55 to $70</td><td>About $59 to $399</td></tr>
+<tr><td><b>Backup</b></td><td>Extra cards; seed optional</td><td>12 to 24-word seed phrase</td></tr>
+<tr><td><b>Screen</b></td><td>No (uses your phone)</td><td>Yes, on the device</td></tr>
+<tr><td><b>Works with</b></td><td>Phone only</td><td>Computer and phone</td></tr>
+<tr><td><b>Best for</b></td><td>Simple, low-cost cold storage</td><td>Larger holdings, more control</td></tr></tbody></table></div>`},
+{id:'multisig',cat:'Security',ic:'shield',title:'Multisig and split backups: no single point of failure',blurb:'Require 2 of 3 keys to move your crypto, or split a backup into pieces. How it works and who offers it.',links:[['https://casa.io','Casa'],['https://www.unchained.com','Unchained']],body:`
+<p>A normal wallet has one recovery phrase. If someone steals it, they take everything. If you lose it, it is gone. That one phrase is a <b>single point of failure</b>. There are two ways to remove it.</p>
+<h4>1. Multisig (multi-signature)</h4>
+<p>A multisig wallet needs <b>several separate keys</b> to approve a transaction. The most common setup is <b>2-of-3</b>: there are three keys, each on its own device with its own recovery phrase, and any two of them can move the money.</p>
+<ul><li><b>A thief</b> who steals one key, or one recovery phrase, still cannot spend anything.</li><li><b>If you lose</b> one key, the other two can still move your funds to safety.</li><li>Keys are kept in <b>different places</b>, such as one at home, one in a safe deposit box, and one with a trusted company.</li></ul>
+<h4>2. Split backups (Shamir backup)</h4>
+<p>This is different from multisig. You still have <b>one wallet</b>, but its backup is split into several shares, for example 3 shares where any 2 can rebuild the wallet. Trezor's Safe models offer this as <b>multi-share backup</b>. One share alone reveals nothing.</p>
+<div class="box warn"><b class="l">Don't cut your 24 words in half yourself</b>Splitting a normal recovery phrase by hand (words 1 to 12 in one place, 13 to 24 in another) is risky. Each half gives a thief a big head start, and losing either half can lock you out. Use a real multisig wallet or Shamir backup instead.</div>
+<h4>Where to get multisig</h4>
+<div class="tbl"><table><thead><tr><th>Service</th><th>Setup</th><th class="n">Cost</th><th>Notes</th></tr></thead><tbody>
+<tr><td><b>Casa</b></td><td>2-of-3 (you hold 2, Casa holds 1 backup key); 3-of-5 on Premium</td><td class="n">About $250/yr; Premium about $2,100/yr</td><td>Easiest phone app; Bitcoin, also Ethereum</td></tr>
+<tr><td><b>Unchained</b></td><td>2-of-3 (you hold 2 on hardware wallets, Unchained holds 1)</td><td class="n">About $250/yr per vault</td><td>Bitcoin only; also offers Bitcoin IRAs and inheritance help</td></tr>
+<tr><td><b>Nunchuk</b></td><td>Do it yourself, or assisted 2-of-3</td><td class="n">Free; assisted from about $120/yr</td><td>Bitcoin; phone and desktop</td></tr>
+<tr><td><b>Sparrow Wallet</b></td><td>Do it yourself with your own hardware wallets</td><td class="n">Free</td><td>Bitcoin; desktop; for confident users</td></tr></tbody></table></div>
+<p class="mut">With Casa and Unchained the company holds only a backup key. It cannot move your coins by itself, and you can still spend if the company disappears. Prices as of 2026; check each site.</p>
+<h4>Is it right for you?</h4>
+<p>Multisig adds steps and usually a yearly fee. It makes the most sense for <b>larger amounts you plan to hold for years</b>, mainly Bitcoin. For smaller amounts, one well-protected hardware wallet (Ledger, Trezor or Tangem) is usually enough.</p>`},
+{id:'custody',cat:'Security',ic:'lock',title:'Custody explained: exchange, self, premium and institutional',blurb:'Who actually holds your crypto? The four kinds of custody, what a qualified custodian is, and options for businesses and trusts.',links:[['https://www.itrustcapital.com','iTrustCapital']],body:`
+<p><b>Custody</b> means who holds the keys that control your crypto. There are four main kinds.</p>
+<div class="tbl"><table><thead><tr><th>Type</th><th>Who holds the keys</th><th>Examples</th><th>Main risk</th></tr></thead><tbody>
+<tr><td><b>Exchange custody</b></td><td>The exchange</td><td>Kraken, Coinbase, Uphold, Crypto.com accounts</td><td>Hacks, account takeovers, or the company failing</td></tr>
+<tr><td><b>Self-custody</b></td><td>You alone</td><td>Exodus, Ledger, Trezor, Tangem</td><td>Losing your recovery phrase or cards</td></tr>
+<tr><td><b>Collaborative custody</b></td><td>You plus a company (multisig)</td><td>Casa, Unchained</td><td>More steps; yearly fee</td></tr>
+<tr><td><b>Qualified / institutional custody</b></td><td>A regulated bank or trust company</td><td>Coinbase Custody, BitGo, Anchorage Digital, Fidelity Digital Assets, Kraken Custody</td><td>You can't move coins to your own wallet; fees</td></tr></tbody></table></div>
+<h4>What is a qualified custodian?</h4>
+<p>A <b>qualified custodian</b> is a regulated bank or trust company allowed to hold other people's assets. It keeps each client's crypto <b>separate</b>, mostly in <b>offline cold storage</b>, is examined by regulators and outside auditors, and usually carries insurance. Assets are typically held so they stay the client's property even if the custodian goes bankrupt. Investment advisers, crypto ETFs and many funds are required to use one.</p>
+<ul><li><b>Coinbase Custody</b> (part of Coinbase Prime): holds the Bitcoin for many of the U.S. spot Bitcoin ETFs.</li>
+<li><b>BitGo:</b> a trust company serving institutions since 2013, with up to $250 million of insurance on assets in qualified custody.</li>
+<li><b>Anchorage Digital:</b> in 2021 it became the first crypto company with a federal (OCC) national trust charter.</li>
+<li><b>Fidelity Digital Assets:</b> the crypto custody arm of Fidelity Investments.</li>
+<li><b>Kraken Custody:</b> launched in 2024 through Kraken Financial, Kraken's Wyoming state-chartered bank, for institutional clients.</li></ul>
+<p class="mut">These services are built for institutions, funds and wealthy clients, usually with large minimums and custom pricing. Most individuals reach institutional-grade custody through a platform that uses these partners.</p>
+<h4>Premium custody for individuals: iTrustCapital</h4>
+<ul><li><b>Premium Custody Account (PCA):</b> a regular (non-IRA, taxable) account to buy, sell and hold crypto 24/7 with institutional custody behind it. It uses a <b>closed-loop</b> system: money goes in and out only as U.S. dollars to your own bank account. Crypto can't be sent to an outside wallet, which helps protect you if your login is ever stolen. Fees are similar to the 1% IRA trading fee.</li>
+<li><b>Crypto IRA:</b> the tax-advantaged retirement account (see the Roth IRA lesson).</li>
+<li><b>Treasury Account:</b> for <b>businesses, trusts and non-profits</b>. Fund it by bank wire or by depositing crypto in kind; withdrawals go only to the entity's U.S. bank account. Opening one requires the entity's legal name and federal tax ID (FEIN).</li></ul>
+<p class="mut">iTrustCapital is a technology platform; it states it is not itself a custodian and holds assets through regulated bank, trust and institutional storage partners.</p>
+<h4>Which is right for you?</h4>
+<ul><li><b>Spending money and active trading:</b> an exchange account.</li><li><b>Long-term savings you control:</b> a hardware wallet (self-custody).</li><li><b>Large Bitcoin holdings:</b> collaborative multisig.</li><li><b>Hands-off, no keys to manage, or holding for a business or trust:</b> a premium or institutional custody account.</li></ul>`},
+{id:'inheritance',cat:'Security',ic:'gift',title:'Crypto inheritance: making sure your family can get it',blurb:'If something happens to you, can your family reach your crypto? A simple plan that keeps it safe and findable.',body:`
+<p>Crypto has no "forgot password" button. If you pass away or become unable to manage your accounts and nobody knows how to reach your crypto, it can be lost forever. A little planning prevents that without putting your coins at risk today.</p>
+<h4>1. Make an inventory (no secrets in it)</h4>
+<ul><li>List every place you hold crypto: exchanges (Kraken, Coinbase, Uphold, Crypto.com), wallets (Exodus, Ledger, Trezor, Tangem), and IRAs or custody accounts (iTrustCapital).</li>
+<li>Note roughly what is in each and how to contact the company.</li>
+<li>Note <b>where</b> the recovery phrases, hardware wallets, backup cards and PINs are kept, but <b>not the words or codes themselves</b>.</li></ul>
+<h4>2. Write a letter of instruction</h4>
+<p>A plain-English letter to your family explaining what each item is and the steps to reach it, written as if they know nothing about crypto. Point them to this site. Keep it with your estate papers.</p>
+<h4>3. Keep the keys safe but findable</h4>
+<ul><li>Store recovery phrases (or Tangem backup cards) in secure places such as a home safe or safe deposit box, and make sure a trusted person or your executor can access them when the time comes.</li>
+<li><b>Never put recovery phrases in a will.</b> Wills can become public during probate, and anyone who reads the words can take the crypto.</li>
+<li>If you use a passphrase or access code, record where it is kept, separately from the recovery phrase.</li></ul>
+<h4>4. Use the tools built for this</h4>
+<ul><li><b>Name beneficiaries</b> wherever an account allows it. IRAs, including crypto IRAs, always let you name beneficiaries; ask each company about its other accounts.</li>
+<li>Exchanges have an <b>estate process</b>: heirs usually provide a death certificate and court or trust documents to claim the account.</li>
+<li>A <b>living trust</b> can hold crypto and pass it on privately without probate. iTrustCapital's Treasury Account can be opened for a trust.</li>
+<li>Multisig services such as <b>Casa</b> and <b>Unchained</b> offer inheritance features that let heirs recover funds with help, without the company ever being able to take them.</li></ul>
+<h4>5. Review it once a year</h4>
+<p>Update the inventory when you open or close accounts or move coins. Make sure your family still knows where the letter is.</p>
+<div class="box"><b class="l">Talk to a professional</b>For larger amounts, work with an estate-planning attorney who understands crypto. In Hawaiʻi, look for one licensed in the state who can set up a trust and make sure your instructions follow Hawaiʻi law.</div>`},
 {id:'research',cat:'Basics',ic:'chart',title:'Where to check prices and research coins',blurb:'CoinGecko, CoinMarketCap, TradingView and block explorers: the free sites to look things up.',links:[['https://www.coingecko.com','CoinGecko'],['https://coinmarketcap.com','CoinMarketCap']],body:`
 <p>Before you buy any coin, look it up. These free sites show live prices, charts and the basic facts about thousands of cryptocurrencies.</p>
 <h4>Price and coin information</h4>
@@ -196,7 +287,7 @@ const T=[
 <ol><li><b>Market size (market cap):</b> bigger, older coins tend to swing less than tiny new ones.</li><li><b>Where it trades:</b> if it isn't on Kraken, Coinbase or another major exchange, be extra careful.</li><li><b>How long it has existed:</b> brand-new coins are where most scams happen.</li><li><b>Who is promoting it:</b> strangers, influencers and "guaranteed" returns are red flags.</li></ol>
 <div class="box warn"><b class="l">Watch for fake look-alikes</b>Scammers copy the names of real coins. Always check a coin's official page on CoinGecko or CoinMarketCap before buying, and never buy because a stranger told you to.</div>`},
 {id:'glossary',cat:'Basics',ic:'book',title:'Glossary',blurb:'Airdrop to TXID: the crypto words you will hear, in plain English.',body:`
-<ul><li><b>Airdrop:</b> free tokens sent to wallets; taxable as income.</li><li><b>Cold storage:</b> keys kept offline on a hardware wallet.</li><li><b>Cost basis:</b> what you paid, including fees.</li><li><b>Custodial:</b> a company holds your crypto.</li><li><b>Dollar-cost averaging:</b> buying a fixed amount on a schedule.</li><li><b>Gas or network fee:</b> the fee paid to process a transaction.</li><li><b>KYC:</b> the ID check exchanges must do.</li><li><b>Liquidation:</b> automatic sale of loan collateral.</li><li><b>LTV:</b> loan amount divided by collateral value.</li><li><b>Self-custody:</b> you hold your own keys.</li><li><b>Spread:</b> the hidden cost built into a price.</li><li><b>Stablecoin:</b> a token designed to hold $1.</li><li><b>Staking:</b> locking coins to help run a network for rewards.</li><li><b>Swap:</b> trading one coin for another; taxable.</li><li><b>TXID:</b> a transaction's receipt number.</li></ul>`}
+<ul><li><b>Airdrop:</b> free tokens sent to wallets; taxable as income.</li><li><b>Cold storage:</b> keys kept offline on a hardware wallet.</li><li><b>Cost basis:</b> what you paid, including fees.</li><li><b>Custodial:</b> a company holds your crypto.</li><li><b>Dollar-cost averaging:</b> buying a fixed amount on a schedule.</li><li><b>Gas or network fee:</b> the fee paid to process a transaction.</li><li><b>KYC:</b> the ID check exchanges must do.</li><li><b>Multisig:</b> a wallet that needs several keys (for example 2 of 3) to approve a transaction.</li><li><b>NFC:</b> the short-range wireless tap a Tangem card uses to talk to your phone.</li><li><b>Qualified custodian:</b> a regulated bank or trust company that holds assets for others.</li><li><b>Liquidation:</b> automatic sale of loan collateral.</li><li><b>LTV:</b> loan amount divided by collateral value.</li><li><b>Self-custody:</b> you hold your own keys.</li><li><b>Spread:</b> the hidden cost built into a price.</li><li><b>Stablecoin:</b> a token designed to hold $1.</li><li><b>Staking:</b> locking coins to help run a network for rewards.</li><li><b>Swap:</b> trading one coin for another; taxable.</li><li><b>TXID:</b> a transaction's receipt number.</li></ul>`}
 ];
 
 const EX=[
@@ -208,5 +299,6 @@ const WA=[
 {n:'Exodus',k:'Hot wallet',c:'#1f1b3a',u:'https://www.exodus.com',s:'https://support.exodus.com',d:'Free, beginner-friendly self-custody wallet from a U.S. company. No account or ID needed. Phone, desktop and browser extension.',pts:['12-word secret recovery phrase','Swaps, staking and hundreds of coins','Pairs with Trezor (desktop) and Ledger (mobile)'],tags:['Free','Easiest wallet']},
 {n:'Ledger',k:'Cold wallet',c:'#141010',u:'https://www.ledger.com',s:'https://support.ledger.com',d:'Best-selling hardware wallet, made in France. Keys stay inside a certified secure chip; you approve every send on the device.',pts:['Nano S Plus $79, Nano X $149, Nano Gen5 $179','Flex $249, Stax $399','24-word phrase, optional passphrase; app: Ledger Wallet'],tags:['Buy only at ledger.com']},
 {n:'Trezor',k:'Cold wallet',c:'#0f6148',u:'https://trezor.io',s:'https://trezor.io/support',d:'The original hardware wallet (2014), from the Czech Republic, with fully open-source firmware.',pts:['Safe 3 about $59 to $79, Safe 5 about $129 to $169','Safe 7 $249 with Bluetooth for iPhone','12, 20 or 24 words; multi-share backup; app: Trezor Suite'],tags:['Open source','Buy only at trezor.io']},
+{n:'Tangem',k:'Cold wallet',c:'#0d0d0f',u:'https://tangem.com',s:'https://tangem.com/en/learning-hub/',d:'A cold wallet the size of a credit card, made in Switzerland. Tap a card to your phone to approve; backup cards replace the seed phrase.',pts:['2-card set about $55 to $60, 3-card set $69.90','Tangem Ring + 2 cards about $140 to $160','EAL6+ chip, no battery, phone app; seed phrase optional'],tags:['Easiest cold wallet','Buy only at tangem.com'],topic:'tangem'},
 {n:'iTrustCapital',k:'Crypto Roth IRA',c:'#0e5a8a',u:'https://www.itrustcapital.com',s:'https://help.itrustcapital.com',d:'Hold and trade crypto, gold and silver inside a Roth, Traditional or SEP IRA. No monthly fees, 1% per crypto trade.',pts:['$1,000 minimum to open','Phone (562) 600-8399, weekdays 7 to 5 Pacific','Tax-free withdrawals after 59½ and five years'],tags:['Tax-free growth'],topic:'roth'}];
 
