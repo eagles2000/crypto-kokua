@@ -205,6 +205,8 @@ const sparkPath=(arr,w,h)=>{if(!arr||arr.length<2)return'';const mn=Math.min(...
 P.fmt=fmt;P.pct=pct;P.sparkPath=sparkPath;
 P.url=a=>a.cg&&a.g==='crypto'?`https://www.coingecko.com/en/coins/${a.cg}`:a.y?`https://finance.yahoo.com/quote/${encodeURIComponent(a.y)}`:'#';
 P.where=a=>a.g==='crypto'?'CoinGecko':'Yahoo Finance';
+const CMC={BTC:'bitcoin',ETH:'ethereum',XRP:'xrp',SOL:'solana',ADA:'cardano',DOGE:'dogecoin',LTC:'litecoin',DGB:'digibyte'};
+P.cmc=a=>CMC[a.k]?`https://coinmarketcap.com/currencies/${CMC[a.k]}/`:null;
 const tween=(el,from,to,a)=>{if(!from||matchMedia('(prefers-reduced-motion: reduce)').matches||from===to){el.textContent=fmt(a,to);return}
  const t0=performance.now(),d=700;const step=t=>{const k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3);el.textContent=fmt(a,from+(to-from)*e);if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step);
  el.classList.remove('flash-up','flash-down');void el.offsetWidth;el.classList.add(to>=from?'flash-up':'flash-down')};
@@ -224,13 +226,13 @@ const paint=()=>{
 };
 P.paint=paint;
 const loadCrypto=async()=>{const ids=ASSETS.filter(a=>a.cg).map(a=>a.cg).join(',');
- const r=await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${ids}&sparkline=true&price_change_percentage=24h`,{cache:'no-store'});
+ const r=await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${ids}&sparkline=true&price_change_percentage=1h,24h,7d,30d,1y`,{cache:'no-store'});
  if(!r.ok)throw new Error('cg');const d=await r.json();let n=0;
  d.forEach(x=>{const a=ASSETS.find(a=>a.cg===x.id);if(!a||x.current_price==null)return;if(a.g==='metals'&&a.yLive)return;
-  a.p=x.current_price;a.ch=x.price_change_percentage_24h||0;a.img=a.g==='crypto'?x.image:null;const sp=x.sparkline_in_7d&&x.sparkline_in_7d.price;if(sp&&sp.length)a.spark=sp.filter((_,i)=>i%4===0).concat([a.p]);a.sample=false;n++});
+  a.p=x.current_price;a.ch=x.price_change_percentage_24h||0;a.m={mc:x.market_cap,rank:x.market_cap_rank,vol:x.total_volume,hi:x.high_24h,lo:x.low_24h,ath:x.ath,athp:x.ath_change_percentage,athd:x.ath_date,circ:x.circulating_supply,max:x.max_supply,c1h:x.price_change_percentage_1h_in_currency,c7:x.price_change_percentage_7d_in_currency,c30:x.price_change_percentage_30d_in_currency,c1y:x.price_change_percentage_1y_in_currency};a.img=a.g==='crypto'?x.image:null;const sp=x.sparkline_in_7d&&x.sparkline_in_7d.price;if(sp&&sp.length)a.spark=sp.filter((_,i)=>i%4===0).concat([a.p]);a.sample=false;n++});
  if(n){P.live.crypto=true;P.updated=new Date()}};
 const loadQuotes=async()=>{const r=await fetch('/api/quotes',{cache:'no-store'});if(!r.ok)throw new Error('q');const d=await r.json();let n=0;
- (d.quotes||[]).forEach(q=>{const a=ASSETS.find(a=>a.y===q.symbol);if(!a||q.price==null)return;a.p=q.price;a.ch=q.change??0;if(q.spark&&q.spark.length>2)a.spark=q.spark;a.sample=false;if(a.g==='metals')a.yLive=true;n++});
+ (d.quotes||[]).forEach(q=>{const a=ASSETS.find(a=>a.y===q.symbol);if(!a||q.price==null)return;a.p=q.price;a.ch=q.change??0;a.q=q;if(q.spark&&q.spark.length>2)a.spark=q.spark;a.sample=false;if(a.g==='metals')a.yLive=true;n++});
  if(n){P.live.stocks=true;P.updated=new Date()}};
 const refresh=async()=>{await Promise.allSettled([loadCrypto(),loadQuotes()]);paint()};
 P.refresh=refresh;

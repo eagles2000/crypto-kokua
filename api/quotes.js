@@ -17,7 +17,14 @@ async function quote(symbol) {
     symbol,
     price,
     change: prev ? ((price - prev) / prev) * 100 : 0,
-    spark: closes.length > 2 ? [prev, ...closes] : null
+    spark: closes.length > 2 ? [prev, ...closes] : null,
+    prevClose: prev ?? null,
+    dayHigh: m.regularMarketDayHigh ?? null,
+    dayLow: m.regularMarketDayLow ?? null,
+    yearHigh: m.fiftyTwoWeekHigh ?? null,
+    yearLow: m.fiftyTwoWeekLow ?? null,
+    volume: m.regularMarketVolume ?? null,
+    exchange: m.fullExchangeName || m.exchangeName || null
   };
 }
 

@@ -17,22 +17,18 @@
 <body>
 <main id="main">
 <section class="hero t-night"><div class="wrap">
- <span class="kicker">Markets</span><h1>Live prices, up or down at a glance.</h1>
- <p class="lead" style="margin-top:16px">Crypto, stock indexes, popular stocks and precious metals in one place. Green is up and red is down over the last 24 hours (stocks: since the last close).</p>
+ <span class="kicker">Markets</span><h1>Live prices, and the story behind them.</h1>
+ <p class="lead" style="margin-top:16px">Crypto, stock indexes, popular stocks and precious metals in one place. Green is up and red is down over the last 24 hours (stocks: since the last close). Hover over any row, or tap it on a phone, to open a closer look.</p>
  <div class="btns"><a class="btn pri" href="#crypto">Crypto</a><a class="btn ghost" href="#stocks">Stocks</a><a class="btn ghost" href="#metals">Metals</a><button class="btn ghost" id="rf">Refresh</button></div>
 </div></section>
-<section class="band " id="crypto"><div class="wrap"><div class="sech"><div><h2>Crypto</h2><p class="mut" style="margin-top:8px">Prices in U.S. dollars from CoinGecko. Trend shows the last 7 days. Tap any coin to see its full page on CoinGecko.</p></div><span class="status" data-status></span></div><div class="tblw"><table class="mtable" data-group="crypto"></table></div></div></section>
-<section class="band t-sand" id="stocks"><div class="wrap"><div class="sech"><div><h2>Stocks and indexes</h2><p class="mut" style="margin-top:8px">Major indexes and popular stocks, including crypto companies. May be delayed. Tap any row for details on Yahoo Finance.</p></div><span class="status" data-status></span></div><div class="tblw"><table class="mtable" data-group="stocks"></table></div></div></section>
-<section class="band t-gold" id="metals"><div class="wrap"><div class="sech"><div><h2>Precious metals</h2><p class="mut" style="margin-top:8px">Price per troy ounce, from futures markets. May be delayed.</p></div><span class="status" data-status></span></div><div class="tblw"><table class="mtable" data-group="metals"></table></div></div></section>
+<section class="band pulseb"><div class="wrap"><span class="kicker">Market pulse</span><div class="pulse" id="pulse"></div></div></section>
+<section class="band " id="crypto"><div class="wrap"><div class="sech"><div><h2>Crypto</h2><p class="mut" style="margin-top:8px">Prices in U.S. dollars from CoinGecko. Hover over a coin (or tap on a phone) for market cap, supply, all-time high and a 7-day chart. Click to open CoinGecko, or use the CoinMarketCap button in the panel.</p></div><span class="status" data-status></span></div><div class="tblw"><table class="mtable" data-group="crypto"></table></div></div></section>
+<section class="band t-sand" id="stocks"><div class="wrap"><div class="sech"><div><h2>Stocks and indexes</h2><p class="mut" style="margin-top:8px">Major indexes and popular stocks, including crypto companies. May be delayed. Hover or tap for today's range and the 52-week range.</p></div><span class="status" data-status></span></div><div class="tblw"><table class="mtable" data-group="stocks"></table></div></div></section>
+<section class="band t-gold" id="metals"><div class="wrap"><div class="sech"><div><h2>Precious metals</h2><p class="mut" style="margin-top:8px">Price per troy ounce, from futures markets. May be delayed. Hover or tap for the daily and 52-week ranges.</p></div><span class="status" data-status></span></div><div class="tblw"><table class="mtable" data-group="metals"></table></div></div></section>
 <section class="band t-night"><div class="wrap"><p class="mut small" style="margin:0">Prices are for education only, not trading advice. Stock and metal prices may be delayed up to 15 minutes or more.</p></div></section>
 </main>
 <script src="js/data.js"></script>
 <script src="js/site.js"></script>
-<script>{
-const {$,$$}=CK;
-$$('[data-group]').forEach(t=>{const g=t.dataset.group;t.innerHTML='<thead><tr><th>Asset</th><th class="n">Price</th><th class="n">Change</th><th class="n hide-sm">Trend</th></tr></thead><tbody>'+CKP.assets.filter(a=>a.g===g).map(a=>`<tr data-href="${CKP.url(a)}"><td><div class="who"><span class="coin" data-coin="${a.k}"></span><div><a href="${CKP.url(a)}" target="_blank" rel="noopener">${a.n}</a><span>${a.k}${a.unit?' · per ounce':''} · <span class="ext">${CKP.where(a)} ↗</span></span></div></div></td><td class="n"><b data-px="${a.k}"></b></td><td class="n"><b data-ch="${a.k}"></b></td><td class="n hide-sm"><svg class="spark" data-spark="${a.k}" width="110" height="34" viewBox="0 0 110 34" preserveAspectRatio="none"></svg></td></tr>`).join('')+'</tbody>'});
-CKP.paint();$('#rf').onclick=()=>CKP.refresh();
-document.addEventListener('click',e=>{const tr=e.target.closest('.mtable tr[data-href]');if(tr&&!e.target.closest('a'))window.open(tr.dataset.href,'_blank','noopener')});
-}</script>
+<script src="js/markets.js"></script>
 </body>
 </html>
