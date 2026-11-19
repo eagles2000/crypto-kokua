@@ -65,7 +65,7 @@ function panel(a){
 /* build tables */
 $$('[data-group]').forEach(t=>{const g=t.dataset.group;
  t.innerHTML='<thead><tr><th>Asset</th><th class="n">Price</th><th class="n">Change</th><th class="n hide-sm">Trend</th></tr></thead><tbody>'+
- P.assets.filter(a=>a.g===g).map((a,i)=>`<tr class="mrow" data-k="${a.k}" tabindex="0" aria-expanded="false" style="--d:${i*45}ms"><td><div class="who"><span class="coin" data-coin="${a.k}"></span><div><a href="${P.url(a)}" target="_blank" rel="noopener">${a.n}</a><span>${a.k}${a.unit?' · per ounce':''} · <span class="ext">${canHover?'hover for details':'tap for details'}</span></span></div></div></td><td class="n"><b data-px="${a.k}"></b></td><td class="n"><b data-ch="${a.k}"></b></td><td class="n hide-sm"><svg class="spark" data-spark="${a.k}" width="110" height="34" viewBox="0 0 110 34" preserveAspectRatio="none"></svg></td></tr>
+ P.assets.filter(a=>a.g===g).map((a,i)=>`<tr class="mrow" data-k="${a.k}" tabindex="0" aria-expanded="false" style="--d:${i*45}ms"><td><div class="who"><span class="coin" data-coin="${a.k}"></span><div><a href="${P.url(a)}" target="_blank" rel="noopener">${a.n}</a><span>${a.k}${a.unit?' · per ounce':''} · <span class="ext">${canHover?'hover or click for details':'tap for details'}</span></span></div></div></td><td class="n"><b data-px="${a.k}"></b></td><td class="n"><b data-ch="${a.k}"></b></td><td class="n hide-sm"><svg class="spark" data-spark="${a.k}" width="110" height="34" viewBox="0 0 110 34" preserveAspectRatio="none"></svg></td></tr>
  <tr class="dx" data-dx="${a.k}"><td colspan="4"><div class="dxw"><div class="dxi"></div></div></td></tr>`).join('')+'</tbody>'});
 
 let openK=null,tOpen=null,tClose=null;
@@ -75,15 +75,17 @@ function open(k){if(openK===k)return;if(openK)close(openK);const a=P.by(k),dx=dx
 function close(k){const dx=dxOf(k);if(dx)dx.classList.remove('open');const r=rowOf(k);if(r){r.classList.remove('on');r.setAttribute('aria-expanded','false')}if(openK===k)openK=null}
 document.addEventListener('ck:prices',()=>{if(openK){const a=P.by(openK),dx=dxOf(openK);if(a&&dx){const c=dx.querySelector('.dxi');const y=scrollY;c.innerHTML=panel(a);c.querySelectorAll('.ln').forEach(l=>l.style.animation='none');scrollTo(0,y)}}});
 
-if(canHover){
- $$('.mrow').forEach(r=>{const k=r.dataset.k;
-  r.addEventListener('mouseenter',()=>{clearTimeout(tClose);clearTimeout(tOpen);tOpen=setTimeout(()=>open(k),260)});
-  r.addEventListener('mouseleave',()=>{clearTimeout(tOpen)})});
- $$('.mtable').forEach(t=>t.addEventListener('mouseleave',()=>{clearTimeout(tOpen);tClose=setTimeout(()=>{if(openK)close(openK)},500)}));
- $$('.dx').forEach(d=>d.addEventListener('mouseenter',()=>{clearTimeout(tClose);clearTimeout(tOpen)}));
-}
+/* hover opens on any mouse, even on touchscreen laptops; taps toggle */
+let lastPointer=canHover?'mouse':'touch';
+document.addEventListener('pointerdown',e=>{lastPointer=e.pointerType||'mouse'},true);
+$$('.mrow').forEach(r=>{const k=r.dataset.k;
+ r.addEventListener('pointerenter',e=>{if(e.pointerType!=='mouse')return;lastPointer='mouse';clearTimeout(tClose);clearTimeout(tOpen);tOpen=setTimeout(()=>open(k),220)});
+ r.addEventListener('mouseenter',()=>{if(lastPointer!=='mouse')return;clearTimeout(tClose);clearTimeout(tOpen);tOpen=setTimeout(()=>open(k),220)});
+ r.addEventListener('mouseleave',()=>clearTimeout(tOpen))});
+$$('.mtable').forEach(t=>t.addEventListener('mouseleave',()=>{if(lastPointer!=='mouse')return;clearTimeout(tOpen);tClose=setTimeout(()=>{if(openK)close(openK)},600)}));
+$$('.dx').forEach(d=>d.addEventListener('mouseenter',()=>{clearTimeout(tClose);clearTimeout(tOpen)}));
 document.addEventListener('click',e=>{const r=e.target.closest('.mrow');if(!r||e.target.closest('a'))return;const k=r.dataset.k;
- if(canHover){const a=P.by(k);window.open(P.url(a),'_blank','noopener')}else{openK===k?close(k):open(k)}});
+ if(lastPointer==='mouse'&&openK===k){window.open(P.url(P.by(k)),'_blank','noopener')}else{openK===k?close(k):open(k)}});
 document.addEventListener('keydown',e=>{const r=e.target.closest&&e.target.closest('.mrow');if(r&&(e.key==='Enter'||e.key===' ')){e.preventDefault();const k=r.dataset.k;openK===k?close(k):open(k)}});
 
 /* market pulse */
