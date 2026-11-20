@@ -1,5 +1,5 @@
 // Crypto Kōkua offline support: pages and lessons work offline; live prices always come from the network.
-const CACHE='crypto-kokua-v19';
+const CACHE='crypto-kokua-v20';
 const SHELL=['./','./index.html','./learn.html','./platforms.html','./markets.html','./tools.html','./news.html','./css/site.css','./js/data.js','./js/site.js','./js/markets.js','./manifest.webmanifest','./icons/icon.svg','./icons/icon-192.png','./icons/icon-512.png','./images/hero-coins.jpg'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
