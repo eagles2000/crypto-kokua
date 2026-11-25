@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Prediction Markets: Kalshi and Polymarket | Crypto Kōkua</title>
+<style>
+  :root{
+    --navy:#0f2a44; --teal:#0e7c86; --teal-l:#e6f4f5; --gold:#c8962e; --gold-l:#fbf4e4;
+    --red:#a33a2f; --red-l:#fbeceb; --ink:#1f2933; --muted:#5b6876; --line:#d9e1e8; --bg:#f6f8fa;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;font-size:16px}
+  .page{max-width:900px;margin:0 auto;background:#fff;box-shadow:0 0 0 1px var(--line)}
+  .cover{background:linear-gradient(135deg,var(--navy) 0%,#163d61 60%,var(--teal) 100%);color:#fff;padding:72px 56px 56px}
+  .cover .eyebrow{letter-spacing:.18em;text-transform:uppercase;font-size:13px;color:#bfe3e6;margin:0 0 14px}
+  .cover h1{font-family:Georgia,"Times New Roman",serif;font-size:42px;line-height:1.15;margin:0 0 16px;font-weight:700}
+  .cover .sub{font-size:19px;color:#e3eef5;max-width:640px;margin:0 0 36px}
+  .cover .meta{display:flex;flex-wrap:wrap;gap:10px}
+  .cover .chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:6px 12px;border-radius:999px;font-size:13px}
+  .cover .prepared{margin-top:40px;font-size:14px;color:#cfe0ea}
+  main{padding:40px 56px 56px}
+  h2{font-family:Georgia,"Times New Roman",serif;color:var(--navy);font-size:28px;margin:56px 0 8px;padding-top:8px;border-top:3px solid var(--teal)}
+  h2 .num{color:var(--teal);margin-right:10px}
+  h3{color:var(--navy);font-size:20px;margin:30px 0 6px}
+  h4{color:var(--teal);font-size:16px;margin:20px 0 4px;text-transform:uppercase;letter-spacing:.05em}
+  p{margin:8px 0 12px}
+  .lead{font-size:17px;color:var(--muted)}
+  ul,ol{padding-left:24px;margin:8px 0 14px}
+  li{margin:4px 0}
+  a{color:var(--teal);text-decoration:underline;text-underline-offset:2px}
+  .toc a,.profile .hd a{text-decoration:none}
+  .profile .hd a{color:#fff}
+  .profile .hd span a{color:#bfe3e6}
+  .go{display:inline-block;margin:4px 8px 4px 0;padding:6px 14px;border-radius:999px;background:var(--teal);color:#fff !important;text-decoration:none !important;font-weight:600;font-size:14px}
+  table{width:100%;border-collapse:collapse;margin:14px 0 20px;font-size:14.5px}
+  th{background:var(--navy);color:#fff;text-align:left;padding:9px 10px;font-weight:600}
+  td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:nth-child(even) td{background:#fafcfd}
+  .box{border-radius:8px;padding:14px 18px;margin:16px 0;border-left:5px solid}
+  .tip{background:var(--teal-l);border-color:var(--teal)}
+  .warn{background:var(--red-l);border-color:var(--red)}
+  .note{background:var(--gold-l);border-color:var(--gold)}
+  .box strong.label{display:block;text-transform:uppercase;letter-spacing:.06em;font-size:12.5px;margin-bottom:4px}
+  .tip strong.label{color:var(--teal)} .warn strong.label{color:var(--red)} .note strong.label{color:#8a6414}
+  .toc{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:20px 26px;margin:10px 0 0}
+  .toc h3{margin-top:0}
+  .toc ol{columns:2;column-gap:36px;margin:0}
+  .toc li{break-inside:avoid}
+  .toc a{text-decoration:none;color:var(--ink)}
+  .toc a:hover{color:var(--teal)}
+  .steps{counter-reset:s;list-style:none;padding-left:0}
+  .steps>li{counter-increment:s;position:relative;padding:4px 0 8px 44px;margin:6px 0}
+  .steps>li::before{content:counter(s);position:absolute;left:0;top:3px;width:30px;height:30px;border-radius:50%;background:var(--teal);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0}
+  .card{border:1px solid var(--line);border-radius:10px;padding:16px 18px;background:#fff}
+  .card h4{margin-top:0}
+  .profile{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:22px 0}
+  .profile .hd{background:var(--navy);color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px}
+  .profile .hd h3{color:#fff;margin:0;font-size:21px}
+  .profile .hd span{font-size:13px;color:#bfe3e6}
+  .profile .bd{padding:6px 20px 14px}
+  .kv{display:grid;grid-template-columns:170px 1fr;gap:4px 14px;margin:10px 0}
+  .kv div:nth-child(odd){font-weight:600;color:var(--navy)}
+  .small{font-size:13.5px;color:var(--muted)}
+  .disclaimer{margin-top:48px;padding:18px 22px;background:var(--bg);border:1px solid var(--line);border-radius:8px;font-size:13.5px;color:var(--muted)}
+  footer{padding:22px 56px;background:var(--navy);color:#cfe0ea;font-size:13px}
+  @media (max-width:720px){
+    .cover,main,footer{padding-left:22px;padding-right:22px}
+    .cover h1{font-size:32px}
+    .toc ol{columns:1}
+    .grid2{grid-template-columns:1fr}
+    .kv{grid-template-columns:1fr}
+    table{font-size:13px}
+  }
+  @media print{
+    body{background:#fff;font-size:11.5pt}
+    .page{box-shadow:none;max-width:none}
+    .cover{-webkit-print-color-adjust:exact;print-color-adjust:exact;page-break-after:always;min-height:96vh}
+    th,.box,.profile .hd,footer,.steps>li::before{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    h2{page-break-before:always;margin-top:0}
+    h2.nobreak{page-break-before:avoid}
+    h3,h4{page-break-after:avoid}
+    tr,.box,.card{page-break-inside:avoid}
+    thead{display:table-header-group}
+    a{color:var(--teal);text-decoration:underline}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+<header class="cover">
+<p class="eyebrow">Crypto Kōkua Lesson</p>
+<h1>Prediction Markets: Kalshi and Polymarket</h1>
+<p class="sub">How Yes and No event contracts work, what they cost, the state rules and taxes, and step-by-step sign-up guides for Kalshi and the Polymarket US app.</p>
+<div class="meta"><span class="chip">Kalshi</span><span class="chip">Polymarket US</span><span class="chip">CFTC regulated</span><span class="chip">Event contracts</span></div>
+<p class="prepared">Prepared by David Cantrell  |  Crypto Kōkua by Shaka Software LLC  |  Information current as of November 2026</p>
+</header>
+<main>
+<h2 id="p1"><span class="num">1</span>How Prediction Markets Work</h2>
+<p><a class="go" href="https://kalshi.com">Kalshi ↗</a> <a class="go" href="https://polymarket.com">Polymarket ↗</a></p>
+
+<p>A <strong>prediction market</strong> lets you buy a contract on whether something will happen: will the Fed cut rates, will Bitcoin close above a price, who wins a game or an election. Each contract pays <strong>$1</strong> if you're right and <strong>$0</strong> if you're wrong.</p>
+<h4>How the price works</h4><p>The price is the crowd's guess at the odds. A "Yes" contract at <strong>30¢</strong> means traders think there's about a 30% chance. Buy 100 Yes contracts at 30¢ for $30. If it happens you collect $100; if not, you lose the $30. You can also sell before the event if the price moves your way.</p>
+<table><tr><th></th><th>Kalshi</th><th>Polymarket US</th></tr>
+<tr><td><strong>Regulated by</strong></td><td>CFTC (U.S. futures regulator) since 2020</td><td>CFTC, through its 2025 purchase of the exchange QCEX</td></tr>
+<tr><td><strong>How you use it</strong></td><td>Website and iPhone and Android apps</td><td>iPhone app (U.S. version)</td></tr>
+<tr><td><strong>Funding</strong></td><td>Bank, debit card, PayPal, Venmo, wire or USDC</td><td>See the Polymarket lesson</td></tr>
+<tr><td><strong>Markets</strong></td><td>Sports, economics, politics, weather, crypto, culture</td><td>Mostly sports and elections, plus economics, crypto and more</td></tr></table>
+<h4>Other places you'll see them</h4><p>Several apps you may already use offer event contracts, often built on Kalshi: Coinbase, Robinhood, Crypto.com and Gemini, plus sportsbook companies such as DraftKings and Fanatics.</p>
+<h4>State rules are in flux</h4><p>Prediction markets are federally regulated, but many states argue that <strong>sports</strong> contracts are really gambling, and dozens of lawsuits are underway. Some states block certain markets or the whole platform, and the lists change. Each app checks your location at sign-up, so trust what it says for your state.</p>
+<h4>Taxes</h4><p>Winnings are taxable even if you never get a tax form. The IRS hasn't issued one clear rule, so tax pros disagree on whether they count as capital gains, special futures treatment, or gambling. Keep your statements and ask a tax professional if you trade a lot.</p>
+<div class="box warn"><strong class="label">Treat it like entertainment money</strong>Many contracts end at $0. Only use money you can afford to lose, set a monthly limit, and remember the person on the other side of your trade may know more than you. If it stops being fun, both Kalshi and Polymarket let you set limits or take a break.</div>
+<p class="small">For help with problem gambling, call or text 1-800-GAMBLER.</p>
+<h3>Kalshi: sign up and place your first trade</h3>
+<p><a class="go" href="https://kalshi.com">Kalshi ↗</a> <a class="go" href="https://help.kalshi.com">Kalshi help ↗</a></p>
+
+<p><strong>Kalshi</strong> is a U.S. exchange for event contracts, regulated by the CFTC since 2020. You trade against other people, not against Kalshi.</p>
+<div class="box tip"><strong class="label">Have these ready</strong>Email, mobile phone, a government photo ID, your home address, and a bank account or debit card. You must be 18 or older.</div>
+<h4>Open your account</h4><ol><li>Go to <strong>kalshi.com</strong> (type it yourself) or download the <strong>Kalshi</strong> app and tap <strong>Sign up</strong>.</li><li>Enter your email and a strong password you don't use anywhere else, then verify your phone.</li><li>Complete identity verification with your name, address, date of birth and photo ID. Kalshi may ask for your SSN for tax reporting.</li><li>Check that your state is allowed. Kalshi blocks some markets or the whole app in a few states, and the list changes.</li><li>Turn on two-factor authentication in your account security settings if offered, using an authenticator app.</li></ol>
+<h4>Fund it</h4><ul><li><strong>Bank transfer (ACH):</strong> $10 minimum, no fee. Takes 1 to 3 business days to withdraw.</li><li>Also: debit card (fee), Apple Pay, Google Pay, PayPal, Venmo, wire, or <strong>USDC</strong> crypto.</li></ul>
+<h4>Place a trade</h4><ol><li>Open a market, such as "Will the Fed cut rates in March?"</li><li>Choose <strong>Yes</strong> or <strong>No</strong>. The price (for example 42¢) is the cost of one contract that pays $1.</li><li>For lower fees, use a <strong>limit order</strong>: set your own price and wait. Kalshi charges takers (instant orders) a fee that's largest near 50¢ prices, and makers (resting limit orders) little or nothing on many markets.</li><li>Review the maximum loss and maximum payout, then confirm.</li><li>Sell any time before the market closes, or hold until it settles.</li></ol>
+<div class="box warn"><strong class="label">Watch the fees on toss-ups</strong>Trading fees are highest when prices are near 50/50. Start small, use limit orders, and read each market's exact rules: they define precisely what counts as "Yes."</div>
+<h3>Polymarket: the U.S. app and how to start</h3>
+<p><a class="go" href="https://polymarket.com">Polymarket ↗</a> <a class="go" href="https://apps.apple.com/us/search?term=polymarket">Find it in the App Store ↗</a></p>
+
+<p><strong>Polymarket</strong> started in 2020 as a crypto-based site and became the world's largest prediction market. It left the U.S. in 2022, then bought the CFTC-licensed exchange <strong>QCEX</strong> and came back with a separate <strong>Polymarket US</strong> app. The waitlist ended in May 2026.</p>
+<table><tr><th></th><th>Polymarket US app</th><th>International Polymarket</th></tr>
+<tr><td><strong>Who can use it</strong></td><td>U.S. residents in most states</td><td>Not for U.S. residents</td></tr>
+<tr><td><strong>Regulation</strong></td><td>CFTC-regulated exchange</td><td>Outside U.S. rules</td></tr>
+<tr><td><strong>Account</strong></td><td>Regular account with ID check</td><td>Crypto wallet</td></tr></table>
+<p>Only use the <strong>U.S. app</strong>. Using a VPN or crypto wallet to reach the international site from the U.S. breaks its terms and could get funds frozen.</p>
+<h4>Sign up</h4><ol><li>On an iPhone, open the App Store and install <strong>Polymarket</strong> (check the publisher). An Android app was still coming as of mid-2026.</li><li>Sign in with your Apple ID or Google account. Make sure that account has 2FA turned on, since it now protects your Polymarket money.</li><li>Pick a username and enter your full name, date of birth and home address. Most identity checks pass instantly.</li><li>The app checks your state. Several states, such as Nevada, aren't available.</li><li>Add money with the options the app shows, then browse markets.</li></ol>
+<h4>Trading</h4><ul><li>Prices work the same as Kalshi: a Yes contract at 30¢ pays $1 if it happens.</li><li>Fees are charged per trade and are highest when the price is near 50/50.</li><li>Most U.S. markets are sports, with elections, economics, crypto and culture too.</li></ul>
+<div class="box warn"><strong class="label">Same rules as any market</strong>Start small, set a monthly limit, and read each market's resolution rules before you buy. Winnings are taxable.</div>
+
+<div class="box note"><strong class="label">More free lessons</strong>Read this and 41 other plain-English lessons, with live prices and read-aloud, at <a href="https://www.cryptokokua.com">cryptokokua.com</a>.</div>
+<p class="small">For education only, not financial, tax, legal or gambling advice. Availability, fees and rules change; check each app before acting.</p>
+</main>
+<footer>Prediction Markets Lesson  |  Crypto Kōkua  |  Prepared by David Cantrell  |  November 2026</footer>
+</div>
+</body></html>

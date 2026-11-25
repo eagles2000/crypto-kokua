@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css?v=21">
+<link rel="stylesheet" href="css/site.css?v=22">
 <script>try{var t=localStorage.getItem('ck-theme');if(t)document.documentElement.dataset.ck=t}catch(e){}</script>
 </head>
 <body>
@@ -19,7 +19,7 @@
 <section class="hero t-night"><div class="wrap">
  <span class="kicker">Platforms</span><h1>Exchanges, wallets and cards, side by side.</h1>
  <p class="lead" style="margin-top:16px">Where to buy, where to store, and how to spend. Every name links straight to the official site.</p>
- <div class="btns"><a class="btn pri" href="#exchanges">Exchanges</a><a class="btn ghost" href="#wallets">Wallets</a><a class="btn ghost" href="#cards">Cards</a><a class="btn ghost" href="#itrustcapital">Crypto IRA</a></div>
+ <div class="btns"><a class="btn pri" href="#exchanges">Exchanges</a><a class="btn ghost" href="#wallets">Wallets</a><a class="btn ghost" href="#cards">Cards</a><a class="btn ghost" href="#predictions">Prediction markets</a><a class="btn ghost" href="#itrustcapital">Crypto IRA</a></div>
 </div></section>
 <section class="band" id="exchanges"><div class="wrap"><span class="kicker">Exchanges</span><h2>Buy, sell and cash out.</h2>
  <p class="lead" style="margin-top:12px">All five exchanges and Robinhood serve U.S. customers, connect to U.S. banks and send IRS tax forms. Caleb & Brown is a personal broker: you trade through a person instead of an app. Binance.US isn't available in every state, so check yours.</p>
@@ -33,6 +33,11 @@
  <tr><td><b>Borrow cash</b></td><td>Flexline (high net worth)</td><td>Yes, USDC loans</td><td>Yes, Instant Credit (select states)</td><td>Check app</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
  <tr><td><b>Headquarters</b></td><td>U.S.</td><td>U.S. (public company)</td><td>U.S. and U.K.</td><td>Singapore, U.S. operations</td><td>U.S. (public company)</td><td>U.S.</td><td>U.S. (public company)</td><td>Australia, U.S. office</td></tr></tbody></table></div>
  <p class="small mut">*The Coinbase debit card is not offered to Hawaiʻi residents.</p></div></section>
+<section class="band t-night" id="predictions"><div class="wrap"><span class="kicker">Prediction markets</span><h2>Trade on real-world events.</h2>
+ <p class="lead" style="margin-top:12px">Buy Yes or No on sports, the economy, elections and crypto prices. Each contract pays $1 if you're right. Both of these are regulated by the CFTC, but state rules vary, so the app checks your location.</p>
+ <div class="pgrid two" id="pmG"></div>
+ <div class="btns" style="margin-top:18px"><button class="btn pri" data-open="prediction-markets">How prediction markets work</button><button class="btn ghost" data-open="kalshi">Kalshi sign-up guide</button><button class="btn ghost" data-open="polymarket">Polymarket sign-up guide</button></div>
+ <p class="small mut" style="margin-top:14px">Only trade money you can afford to lose. Winnings are taxable. Problem gambling help: 1-800-GAMBLER.</p></div></section>
 <section class="band t-lagoon" id="wallets"><div class="wrap"><span class="kicker" style="color:#ffb59c">Wallets and retirement</span><h2>Store it safely. Grow it tax-free.</h2>
  <div class="pgrid two" id="waG"></div>
  <div class="split" style="margin-top:30px;align-items:start">
@@ -55,10 +60,10 @@
 <div class="box"><b class="l">Tax tip</b>Every time a card spends crypto, you are selling that crypto, which can create a small taxable gain. Funding everyday spending from dollars or a stablecoin keeps records simple.</div>
  <div class="btns"><button class="btn pri" data-open="cards">Open the card lesson</button></div></div></section>
 </main>
-<script src="js/data.js?v=21"></script>
-<script src="js/site.js?v=21"></script>
+<script src="js/data.js?v=22"></script>
+<script src="js/site.js?v=22"></script>
 <script>{
-const {$}=CK;$('#exG').innerHTML=EX.map(p=>CK.platformCard(p,true)).join('');$('#waG').innerHTML=WA.map(p=>CK.platformCard(p,true)).join('');
+const {$}=CK;$('#exG').innerHTML=EX.map(p=>CK.platformCard(p,true)).join('');$('#waG').innerHTML=WA.map(p=>CK.platformCard(p,true)).join('');$('#pmG').innerHTML=PM.map(p=>CK.platformCard(p,true)).join('');
 if(location.hash){const el=document.getElementById(location.hash.slice(1));if(el)setTimeout(()=>el.scrollIntoView(),60)}
 }</script>
 </body>
