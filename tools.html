@@ -11,16 +11,17 @@
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css?v=22">
+<link rel="stylesheet" href="css/site.css?v=23">
 <script>try{var t=localStorage.getItem('ck-theme');if(t)document.documentElement.dataset.ck=t}catch(e){}</script>
 </head>
 <body>
 <main id="main">
 <section class="hero t-ember"><div class="wrap">
- <span class="kicker" style="color:#fff">Tools</span><h1>Sell, borrow or Roth?</h1>
- <p class="lead" style="margin-top:16px">Enter your own numbers to compare cashing out, borrowing against your crypto, and the same growth inside a Roth IRA. Long-term holdings, 2026 federal rates.</p>
+ <span class="kicker" style="color:#fff">Tools</span><h1>Crypto calculators.</h1>
+ <div class="btns"><a class="btn pri" href="#calc">Sell, borrow or Roth</a><a class="btn ghost" href="#dca">Dollar-cost averaging</a></div>
+ <p class="lead" style="margin-top:16px">Sell, borrow or Roth? Enter your own numbers to compare cashing out, borrowing against your crypto, and the same growth inside a Roth IRA. Long-term holdings, 2026 federal rates.</p>
 </div></section>
-<section class="band t-sand"><div class="wrap split" style="align-items:start">
+<section class="band t-sand" id="calc"><div class="wrap split" style="align-items:start">
  <div class="widget">
   <div class="tgl" id="presets" style="margin-bottom:18px"><button data-v="100000">$100K</button><button aria-pressed="true" data-v="500000">$500K</button><button data-v="1000000">$1M</button></div>
   <label class="f">Portfolio value today ($)<input id="cV" type="number" inputmode="numeric" value="500000" min="0"></label>
@@ -40,9 +41,34 @@
   <p class="small mut" style="margin:16px 0 0">Estimates only. Federal brackets: 0% / 15% / 20% plus 3.8% NIIT above $200,000 single or $250,000 joint. Hawaiʻi tax shown at the top 7.25% rate on the gain, so yours may be lower. Talk to a tax professional before acting.</p>
  </div>
 </div></section>
+<section class="band" id="dca"><div class="wrap">
+ <span class="kicker">Dollar-cost averaging</span><h2>What if you'd bought a little every week?</h2>
+ <p class="lead" style="margin-top:12px">Dollar-cost averaging (DCA) means buying a fixed dollar amount on a schedule, no matter the price. Pick a coin and an amount to see how it would have worked over the past year using real prices, compared with investing it all at once on day one.</p>
+ <div class="split" style="align-items:start;margin-top:22px">
+  <div class="widget">
+   <label class="f">Coin<select id="dC"><option value="bitcoin">Bitcoin (BTC)</option><option value="ethereum">Ethereum (ETH)</option><option value="ripple">XRP</option><option value="solana">Solana (SOL)</option><option value="cardano">Cardano (ADA)</option><option value="dogecoin">Dogecoin (DOGE)</option><option value="litecoin">Litecoin (LTC)</option></select></label>
+   <div class="row2"><label class="f">Amount each time ($)<input id="dA" type="number" inputmode="numeric" value="50" min="1"></label>
+    <label class="f">How often<select id="dF"><option value="1">Every day</option><option value="7" selected>Every week</option><option value="14">Every 2 weeks</option><option value="30">Every month</option></select></label></div>
+   <div class="tgl" id="dP" style="margin-top:6px"><button data-v="90">3 months</button><button data-v="180">6 months</button><button aria-pressed="true" data-v="365">1 year</button></div>
+   <p class="small mut" style="margin-top:14px">Uses daily closing prices from CoinGecko for the past year. Ignores fees and taxes. Past results don't predict future ones.</p>
+  </div>
+  <div class="widget t-night" style="background:var(--night);color:#f6f3f8">
+   <div class="wout" style="grid-template-columns:1fr 1fr">
+    <div class="o"><h4>You put in</h4><div class="v" id="dIn">…</div><p id="dInP"></p></div>
+    <div class="o"><h4>Worth today with DCA</h4><div class="v acc" id="dNow">…</div><p id="dNowP"></p></div>
+    <div class="o"><h4>All at once on day one</h4><div class="v" id="dLump">…</div><p id="dLumpP"></p></div>
+    <div class="o"><h4>Your average price</h4><div class="v" id="dAvg">…</div><p id="dAvgP"></p></div>
+   </div>
+   <svg id="dChart" viewBox="0 0 600 180" preserveAspectRatio="none" style="width:100%;height:180px;margin-top:16px" aria-label="Value of DCA purchases over time"></svg>
+   <p class="small" style="margin:6px 0 0;color:#cfc7d6"><span style="color:#f97316">━</span> Value of your coins &nbsp; <span style="color:#9aa3ad">━</span> Total you put in</p>
+   <p class="small mut" id="dMsg" style="margin:10px 0 0"></p>
+  </div>
+ </div>
+ <div class="box" style="margin-top:22px"><b class="l">Why people use DCA</b>It takes the guessing out of timing. You buy more coins when prices are low and fewer when they're high, and you never put everything in at the top. Many exchanges offer automatic recurring buys, and setting one up with a limit-order or low-fee mode keeps costs down.</div>
+</div></section>
 </main>
-<script src="js/data.js?v=22"></script>
-<script src="js/site.js?v=22"></script>
+<script src="js/data.js?v=23"></script>
+<script src="js/site.js?v=23"></script>
 <script>{
 const {$,$$}=CK;const BR={s:{z:49450,f:545500,n:200000},m:{z:98900,f:613700,n:250000}};
 const num=id=>Math.max(0,+$(id).value||0),money=n=>'$'+Math.round(n).toLocaleString('en-US');
@@ -54,6 +80,29 @@ const calc=()=>{const V=num('#cV'),B=Math.min(num('#cB'),V),O=num('#cI'),b=BR[$(
  $('#oRoth').textContent=money(V);$('#oRothP').textContent='All of it, tax-free, after age 59½ and five years. Only the 1% trade fee along the way.'};
 ['#cV','#cB','#cI','#cS','#cL','#cR','#cH'].forEach(id=>$(id).addEventListener('input',calc));
 $('#presets').addEventListener('click',e=>{const b=e.target.closest('[data-v]');if(!b)return;$('#cV').value=b.dataset.v;$('#cB').value=b.dataset.v*.4;$$('#presets button').forEach(x=>x.setAttribute('aria-pressed',x===b));calc()});calc();
+}</script>
+<script>{
+const {$,$$}=CK;const money=n=>'$'+(n>=100?Math.round(n).toLocaleString('en-US'):n.toFixed(2));const px=n=>n>=1000?'$'+Math.round(n).toLocaleString('en-US'):n>=1?'$'+n.toFixed(2):'$'+n.toPrecision(3);
+const cache={};let days=365;
+const get=async id=>{if(cache[id])return cache[id];const r=await fetch(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=365&interval=daily`);if(!r.ok)throw new Error('cg');const d=await r.json();return cache[id]=d.prices};
+const run=async()=>{const id=$('#dC').value,amt=Math.max(1,+$('#dA').value||0),every=+$('#dF').value;
+ $('#dMsg').textContent='Loading prices…';
+ let prices;try{prices=await get(id)}catch(e){$('#dMsg').textContent='Live prices could not load right now. Try again in a minute.';return}
+ const p=prices.slice(-days-1);if(p.length<10){$('#dMsg').textContent='Not enough price history.';return}
+ let coins=0,inv=0;const vals=[],ins=[];
+ p.forEach(([t,v],i)=>{if(i%every===0){coins+=amt/v;inv+=amt}vals.push(coins*v);ins.push(inv)});
+ const last=p[p.length-1][1],now=coins*last,lump=inv/p[0][1]*last,avg=inv/coins,ch=(now/inv-1)*100,lc=(lump/inv-1)*100;
+ const nm=$('#dC').selectedOptions[0].textContent;
+ $('#dIn').textContent=money(inv);$('#dInP').textContent=`${Math.ceil(p.length/every)} buys of ${money(amt)}`;
+ $('#dNow').textContent=money(now);$('#dNowP').textContent=`${ch>=0?'Up':'Down'} ${Math.abs(ch).toFixed(1)}%, holding ${coins<1?coins.toFixed(4):coins.toLocaleString('en-US',{maximumFractionDigits:2})} coins`;
+ $('#dLump').textContent=money(lump);$('#dLumpP').textContent=`${lc>=0?'Up':'Down'} ${Math.abs(lc).toFixed(1)}% if you'd bought it all at ${px(p[0][1])}`;
+ $('#dAvg').textContent=px(avg);$('#dAvgP').textContent=`vs. ${px(last)} today`;
+ const W=600,H=180,mx=Math.max(...vals,...ins)||1,path=a=>a.map((v,i)=>`${i?'L':'M'}${(i/(a.length-1)*W).toFixed(1)} ${(H-4-v/mx*(H-12)).toFixed(1)}`).join(' ');
+ $('#dChart').innerHTML=`<path d="${path(ins)}" fill="none" stroke="#9aa3ad" stroke-width="2" stroke-dasharray="5 4"/><path d="${path(vals)}" fill="none" stroke="#f97316" stroke-width="2.5" stroke-linejoin="round"/>`;
+ $('#dMsg').textContent=`${nm}, ${days===365?'past year':`past ${Math.round(days/30)} months`}. ${now>=lump?'DCA came out ahead of the lump sum this time.':'The lump sum came out ahead this time; DCA mainly lowers the risk of bad timing.'}`};
+['#dC','#dA','#dF'].forEach(i=>$(i).addEventListener('input',run));
+$('#dP').addEventListener('click',e=>{const b=e.target.closest('[data-v]');if(!b)return;days=+b.dataset.v;$$('#dP button').forEach(x=>x.setAttribute('aria-pressed',x===b));run()});
+run();
 }</script>
 </body>
 </html>

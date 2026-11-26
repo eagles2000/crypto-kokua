@@ -407,3 +407,4 @@ html[data-ck=dark] .results .aib{border-color:#2f2a36;background:#17141b;color:#
 .mnav a:nth-of-type(8n+1){--dot:#f97316}.mnav a:nth-of-type(8n+2){--dot:#22c55e}.mnav a:nth-of-type(8n+3){--dot:#38bdf8}.mnav a:nth-of-type(8n+4){--dot:#a78bfa}
 .mnav a:nth-of-type(8n+5){--dot:#facc15}.mnav a:nth-of-type(8n+6){--dot:#f472b6}.mnav a:nth-of-type(8n+7){--dot:#2dd4bf}.mnav a:nth-of-type(8n+8){--dot:#fb7185}
 .mnav a span{display:block;font-size:13px;color:#8a8392;margin-top:2px}
+@media(min-width:900px){.pillars.four{grid-template-columns:repeat(4,minmax(0,1fr))}}
