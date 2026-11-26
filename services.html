@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css?v=24">
+<link rel="stylesheet" href="css/site.css?v=25">
 <script>try{var t=localStorage.getItem('ck-theme');if(t)document.documentElement.dataset.ck=t}catch(e){}</script>
 </head>
 <body>
@@ -23,7 +23,7 @@
 </div></section>
 <section class="band"><div class="wrap">
  <div class="pgrid three">
-  <article class="pc"><div><h3>Video setup session</h3><div class="kind">One-on-one by Zoom, Google Meet or FaceTime</div></div>
+  <article class="pc"><div><h3>Video setup session</h3><div class="kind">One-on-one by Google Meet</div></div>
    <p>I walk you through it on a video call while you do each step on your own phone or computer. You stay in control the whole time.</p>
    <ul><li>Open an exchange account (Kraken, Coinbase, Uphold, Crypto.com, Gemini, Robinhood and more)</li><li>Turn on 2FA with Google Authenticator</li><li>Link your bank and make a first small purchase</li><li>Set up Exodus or another wallet and write down your recovery phrase safely</li><li>Move savings to a Ledger, Trezor or Tangem</li></ul>
    <p><b>$75</b> for a 60-minute session · <b>$120</b> for 90 minutes (best for hardware wallets)</p>
@@ -39,7 +39,7 @@
    <p><b>$25</b> printed · <b>$15</b> premium PDF · Custom guides quoted per group</p>
    <div class="act"><a class="btn pri sm" href="#request" data-svc="Printed or custom guide">Request a guide</a></div></article>
  </div>
- <p class="small mut" style="margin-top:16px">Prices are in U.S. dollars. After we agree on the details, I'll send an invoice you can pay online. The free guide and all lessons on this site stay free.</p>
+ <p class="small mut" style="margin-top:16px">Prices are in U.S. dollars. After we agree on the details, I'll email you the total. You can <a href="#pay">pay by Venmo, Zelle or crypto</a>. The free guide and all lessons on this site stay free.</p>
 </div></section>
 <section class="band t-sand" id="scam"><div class="wrap split" style="align-items:start">
  <div><span class="kicker">Scam check</span><h2>Got a message that feels off?</h2>
@@ -54,10 +54,18 @@
   <button class="btn pri" id="scamSend" type="button">Send it to David</button>
  </div>
 </div></section>
+<section class="band t-night" id="pay"><div class="wrap">
+ <span class="kicker">How to pay</span><h2>Venmo, Zelle or crypto.</h2>
+ <p class="lead" style="margin-top:12px">Once we agree on a session or guide, I'll email you the total. Pay any of these ways, then reply to that email so I can match your payment. Please don't pay before we've agreed on the details.</p>
+ <div class="pgrid three" id="payG" style="margin-top:22px"></div>
+ <div id="cryptoPay" style="margin-top:26px"></div>
+ <div class="box warn" style="margin-top:22px"><b class="l">Paying in crypto</b>Double-check the first and last few characters of the address against the one in my email, and send on the network listed. Crypto sent to the wrong address or network can't be recovered. For larger amounts, send a small test first. I'll confirm the dollar amount in your coin at the time you pay.</div>
+ <p class="small mut" style="margin-top:12px">Payments go to Shaka Software LLC. Crypto received counts as income for me, and the dollar value on the day you pay is what I record.</p>
+</div></section>
 <section class="band" id="request"><div class="wrap split" style="align-items:start">
  <div><span class="kicker">Request help</span><h2>Tell me what you need.</h2>
   <p class="lead" style="margin-top:12px">Fill this in and press Send. It opens your email with everything filled in, so you just hit send. I'll reply within a day or two to set a time, usually in Hawaiʻi time.</p>
-  <h3 style="margin-top:22px">How sessions work</h3><ol><li>We agree on a time and I send the invoice and a video link.</li><li>On the call, you share your screen only when I ask, and <b>you</b> do every step. I never take control of your computer.</li><li>I will never ask for, look at or write down your recovery phrase, passwords or 2FA codes.</li><li>I never hold or move your money.</li></ol>
+  <h3 style="margin-top:22px">How sessions work</h3><ol><li>We agree on a time and I email you the total and a Google Meet link.</li><li>You pay by Venmo, Zelle or crypto before the session.</li><li>On the call, you share your screen only when I ask, and <b>you</b> do every step. I never take control of your computer.</li><li>I will never ask for, look at or write down your recovery phrase, passwords or 2FA codes.</li><li>I never hold or move your money.</li></ol>
   <p class="small mut">I teach setup, safety and how things work. I don't tell anyone what to buy or sell, and this isn't financial, tax or legal advice.</p>
   <p>Prefer plain email? Write to <a href="mailto:shakasoftware1@gmail.com">shakasoftware1@gmail.com</a>.</p></div>
  <form class="widget" id="reqForm">
@@ -72,8 +80,8 @@
  </form>
 </div></section>
 </main>
-<script src="js/data.js?v=24"></script>
-<script src="js/site.js?v=24"></script>
+<script src="js/data.js?v=25"></script>
+<script src="js/site.js?v=25"></script>
 <script>{
 const {$,$$}=CK;const TO='shakasoftware1@gmail.com';
 const mail=(subj,body)=>{location.href=`mailto:${TO}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`};
@@ -87,6 +95,32 @@ $('#reqForm').addEventListener('submit',e=>{e.preventDefault();const v=id=>$(id)
  const body=`Aloha David,\n\nService: ${v('#rSvc')}${$('#rKup').checked?' (Kūpuna rate, 60+)':''}\nName: ${v('#rName')}\nEmail: ${v('#rEmail')}\nPhone: ${v('#rPhone')||'n/a'}\nTime zone / island: ${v('#rTz')||'n/a'}\nBest times: ${v('#rWhen')||'n/a'}\n\nWhat I need help with:\n${v('#rNeed')||'n/a'}\n\nSent from cryptokokua.com/services`;
  mail(`Crypto Kōkua request: ${v('#rSvc')}`,body);
  $('#rMsg').innerHTML=`Your email app should open with the message ready to send. If it doesn't, email <a href="mailto:${TO}">${TO}</a>.`});
+}</script>
+<script src="js/qrcode.js?v=25"></script>
+<script>{
+/* ===== Payment details: fill these in. Leave a value empty ('') to hide it. ===== */
+const PAY={
+ venmo:'',          // Venmo username without the @, for example 'ShakaSoftware'
+ zelle:'',          // Zelle email or phone, for example 'shakasoftware1@gmail.com'
+ zelleName:'Shaka Software LLC',
+ crypto:[           // [coin, network, address, note]
+  ['Bitcoin (BTC)','Bitcoin network',''],
+  ['Ethereum (ETH)','Ethereum mainnet',''],
+  ['XRP','XRP Ledger','','No destination tag needed unless my email lists one.'],
+  ['Solana (SOL)','Solana network',''],
+  ['USDC','Ethereum or Solana (match the address)','']
+ ]};
+const {$}=CK;const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const qr=t=>{try{const q=qrcode(0,'M');q.addData(t);q.make();return q.createSvgTag({cellSize:4,margin:2,scalable:true})}catch(e){return''}};
+const copyBtn=t=>`<button class="btn sm" type="button" data-copy="${esc(t)}">Copy</button>`;
+const cards=[];
+if(PAY.venmo)cards.push(`<article class="pc"><div><h3>Venmo</h3><div class="kind">@${esc(PAY.venmo)}</div></div><div style="width:150px;background:#fff;border-radius:12px;padding:6px">${qr('https://venmo.com/u/'+PAY.venmo)}</div><p>Scan with your phone camera or search <b>@${esc(PAY.venmo)}</b> in Venmo. Add "Crypto Kōkua" and your name in the note.</p><div class="act"><a class="btn pri sm" href="https://venmo.com/u/${encodeURIComponent(PAY.venmo)}" target="_blank" rel="noopener">Open Venmo ↗</a>${copyBtn('@'+PAY.venmo)}</div></article>`);
+if(PAY.zelle)cards.push(`<article class="pc"><div><h3>Zelle</h3><div class="kind">${esc(PAY.zelleName)}</div></div><p>In your bank's app, choose Zelle and send to:</p><p><b>${esc(PAY.zelle)}</b></p><p class="small mut">Confirm the name shows as ${esc(PAY.zelleName)} before sending.</p><div class="act">${copyBtn(PAY.zelle)}</div></article>`);
+const cr=PAY.crypto.filter(c=>c[2]);
+$('#payG').innerHTML=cards.join('')||'';
+$('#cryptoPay').innerHTML=cr.length?`<h3>Crypto addresses</h3><div class="pgrid three">${cr.map(([n,net,a,note])=>`<article class="pc"><div><h3>${esc(n)}</h3><div class="kind">${esc(net)}</div></div><div style="width:150px;background:#fff;border-radius:12px;padding:6px">${qr(a)}</div><p style="word-break:break-all;font-family:ui-monospace,monospace;font-size:13px">${esc(a)}</p>${note?`<p class="small mut">${esc(note)}</p>`:''}<div class="act">${copyBtn(a)}</div></article>`).join('')}</div>`:'';
+if(!cards.length&&!cr.length)$('#payG').outerHTML='<p class="mut" style="margin-top:18px">Payment details are sent with your confirmation email.</p>';
+document.addEventListener('click',async e=>{const b=e.target.closest('[data-copy]');if(!b)return;try{await navigator.clipboard.writeText(b.dataset.copy);b.textContent='Copied ✓';setTimeout(()=>b.textContent='Copy',1800)}catch(_){prompt('Copy this:',b.dataset.copy)}});
 }</script>
 </body>
 </html>
