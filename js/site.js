@@ -28,7 +28,7 @@ const NAV=[
    {h:'Ask AI',links:[['Ask Claude, ChatGPT or Perplexity','learn.html#ask-ai','','Any question, filled in for you']]},
    {h:'Downloads',links:[['Free starter guide (PDF)','downloads/Crypto_Kokua_Starter_Guide.pdf','','Print it or email it'],['Starter guide (web page)','downloads/Crypto_Kokua_Starter_Guide.html','','Read it in your browser'],['Robinhood lesson (PDF)','downloads/Crypto_Kokua_Robinhood_Lesson.pdf','','Print it or email it'],['Prediction markets lesson (PDF)','downloads/Crypto_Kokua_Prediction_Markets_Lesson.pdf','','Kalshi and Polymarket'],['Install the app','#install','','Chrome, Brave, iPhone']]}]},
  {label:'Company',cols:[
-   {h:'About',links:[['About Crypto Kōkua','index.html#about','','Why this site exists'],['Shaka Software LLC','https://shakasoftware.com','','Veteran-owned, Kapolei'],['Transparency','transparency.html','','How this site works']]}]}
+   {h:'About',links:[['About Crypto Kōkua','index.html#about','','Why this site exists'],['Shaka Software LLC','https://shakasoftware.com','','Veteran-owned, Kapolei'],['Services','services.html','','Video setup help and guides'],['Transparency','transparency.html','','How this site works']]}]}
 ];
 const linkHTML=([t,h,id,sub])=>id==='soon'?`<a class="soon" href="#" tabindex="-1">${t}</a>`:`<a href="${h}"${id?` data-open="${id}"`:''}${/^https?:/.test(h)?' target="_blank" rel="noopener"':''}${/\.pdf$/.test(h)?' download':''}>${t}${sub?`<span>${sub}</span>`:''}</a>`;
 
@@ -69,7 +69,7 @@ F.innerHTML=`<div class="wrap"><div class="cols">
  ${NAV.slice(0,4).map(n=>`<div><h5>${n.label}</h5>${n.cols.flatMap(c=>c.links).slice(0,7).map(([t,h,id])=>id==='soon'?`<a class="soon">${t} (soon)</a>`:`<a href="${h}"${id?` data-open="${id}"`:''}${/^https?:/.test(h)?' target="_blank" rel="noopener"':''}>${t}</a>`).join('')}</div>`).join('')}
  </div>
  <div class="legal"><p><b>Good to know:</b> Crypto Kōkua is for general education only and is not financial, investment, legal or tax advice. Crypto, stocks and metals can lose value. Fees, rates, card rewards, state availability and tax figures change often, so confirm details with each company and a qualified tax professional. Information current as of November 2026. Company names are used for identification only; no company sponsors this site and it contains no affiliate links.</p>
- <p>Crypto prices from CoinGecko. Stock and metal prices may be delayed. <a href="transparency.html" style="display:inline;color:inherit;text-decoration:underline">How this site works</a>. © 2026 Shaka Software LLC.</p></div></div>`;
+ <p>Crypto prices from CoinGecko. Stock and metal prices may be delayed. <a href="transparency.html" style="display:inline;color:inherit;text-decoration:underline">How this site works</a> · <a href="services.html" style="display:inline;color:inherit;text-decoration:underline">Services</a>. © 2026 Shaka Software LLC.</p></div></div>`;
 document.body.append(F);
 
 /* ---------- dialogs ---------- */

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Services · Crypto Kōkua</title>
+<meta name="description" content="One-on-one video setup help, patient Kūpuna crypto help with scam checks, and printed or custom crypto guides from David Cantrell of Shaka Software LLC.">
+<meta name="theme-color" content="#0b0a0f">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css?v=24">
+<script>try{var t=localStorage.getItem('ck-theme');if(t)document.documentElement.dataset.ck=t}catch(e){}</script>
+</head>
+<body>
+<main id="main">
+<section class="hero t-night"><div class="wrap">
+ <span class="kicker">Services</span><h1>Get a hand from a real person.</h1>
+ <p class="lead" style="margin-top:16px">Hi, I'm David Cantrell. I've invested in crypto for years and used to teach friends at my kitchen table. Now I help people by <b>video call</b>, from setting up your first exchange to keeping your coins safe from scams, at whatever pace suits you.</p>
+ <div class="btns"><a class="btn pri" href="#request">Request help</a><a class="btn ghost" href="#scam">Is this message a scam?</a></div>
+</div></section>
+<section class="band"><div class="wrap">
+ <div class="pgrid three">
+  <article class="pc"><div><h3>Video setup session</h3><div class="kind">One-on-one by Zoom, Google Meet or FaceTime</div></div>
+   <p>I walk you through it on a video call while you do each step on your own phone or computer. You stay in control the whole time.</p>
+   <ul><li>Open an exchange account (Kraken, Coinbase, Uphold, Crypto.com, Gemini, Robinhood and more)</li><li>Turn on 2FA with Google Authenticator</li><li>Link your bank and make a first small purchase</li><li>Set up Exodus or another wallet and write down your recovery phrase safely</li><li>Move savings to a Ledger, Trezor or Tangem</li></ul>
+   <p><b>$75</b> for a 60-minute session · <b>$120</b> for 90 minutes (best for hardware wallets)</p>
+   <div class="act"><a class="btn pri sm" href="#request" data-svc="Video setup session">Request a session</a></div></article>
+  <article class="pc"><div><h3>Kūpuna crypto help</h3><div class="kind">Patient help for seniors and their families</div></div>
+   <p>Slow, friendly sessions with no jargon and no rush. Family members are welcome on the call, and we can repeat anything as many times as you like.</p>
+   <ul><li>Everything in a setup session, at an easy pace</li><li>A simple written record of what we set up and where things are</li><li>Scam awareness: the tricks aimed at seniors and how to spot them</li><li><b>Scam checks:</b> forward a suspicious text, email or call script and I'll tell you if it's real</li></ul>
+   <p><b>$60</b> per hour for ages 60+ · Scam check <b>free</b> for clients, <b>$15</b> otherwise</p>
+   <div class="act"><a class="btn pri sm" href="#request" data-svc="Kūpuna crypto help">Request Kūpuna help</a><a class="btn sm" href="#scam">Check a message</a></div></article>
+  <article class="pc"><div><h3>Printed and custom guides</h3><div class="kind">No meeting needed</div></div>
+   <p>The Beginner's Guide to Crypto, ready to keep on the shelf or tailored for your group.</p>
+   <ul><li><b>Printed copy</b> of the full guide, mailed to you</li><li><b>Premium PDF</b> with fill-in worksheets: your accounts list, 2FA backup log and a letter of instruction for your family</li><li><b>Custom guide</b> for a church, veterans' group, club or business, with only the exchanges and wallets your members use and your group's name on the cover</li></ul>
+   <p><b>$25</b> printed · <b>$15</b> premium PDF · Custom guides quoted per group</p>
+   <div class="act"><a class="btn pri sm" href="#request" data-svc="Printed or custom guide">Request a guide</a></div></article>
+ </div>
+ <p class="small mut" style="margin-top:16px">Prices are in U.S. dollars. After we agree on the details, I'll send an invoice you can pay online. The free guide and all lessons on this site stay free.</p>
+</div></section>
+<section class="band t-sand" id="scam"><div class="wrap split" style="align-items:start">
+ <div><span class="kicker">Scam check</span><h2>Got a message that feels off?</h2>
+  <p class="lead" style="margin-top:12px">"Your account is locked." "Verify your wallet." "I'm from Coinbase support." Paste the message here and get a second opinion in seconds from an AI, or send it to me for a personal answer.</p>
+  <div class="box warn" style="margin-top:18px"><b class="l">Before you paste</b>Remove your name, account numbers and phone number. Never paste a recovery phrase, password or 2FA code anywhere, including here. No real company will ever ask for them.</div>
+  <h3 style="margin-top:22px">Red flags</h3><ul><li>Urgency: "act now or lose your account"</li><li>Someone contacted <i>you</i> first, by text, call, email or social media</li><li>Asks for your recovery phrase, password, codes, or to install a "support" app</li><li>Promises guaranteed returns or "double your crypto"</li><li>Asks you to send crypto or buy gift cards to "fix" something</li><li>Links that look close to a real site but aren't quite right</li></ul></div>
+ <div class="widget">
+  <label class="f">Paste the suspicious message<textarea id="scamTxt" rows="8" style="display:block;width:100%;margin-top:6px;font:inherit;font-size:16px;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:var(--bg);color:inherit" placeholder="Example: Coinbase Alert: Unusual sign-in detected. Call 1-888-... to secure your account."></textarea></label>
+  <p class="small mut" style="margin:0 0 10px">Ask an AI (opens in a new tab):</p>
+  <div class="ais" id="scamAI"></div>
+  <p class="small mut" style="margin:16px 0 10px">Or get my personal answer by email:</p>
+  <button class="btn pri" id="scamSend" type="button">Send it to David</button>
+ </div>
+</div></section>
+<section class="band" id="request"><div class="wrap split" style="align-items:start">
+ <div><span class="kicker">Request help</span><h2>Tell me what you need.</h2>
+  <p class="lead" style="margin-top:12px">Fill this in and press Send. It opens your email with everything filled in, so you just hit send. I'll reply within a day or two to set a time, usually in Hawaiʻi time.</p>
+  <h3 style="margin-top:22px">How sessions work</h3><ol><li>We agree on a time and I send the invoice and a video link.</li><li>On the call, you share your screen only when I ask, and <b>you</b> do every step. I never take control of your computer.</li><li>I will never ask for, look at or write down your recovery phrase, passwords or 2FA codes.</li><li>I never hold or move your money.</li></ol>
+  <p class="small mut">I teach setup, safety and how things work. I don't tell anyone what to buy or sell, and this isn't financial, tax or legal advice.</p>
+  <p>Prefer plain email? Write to <a href="mailto:shakasoftware1@gmail.com">shakasoftware1@gmail.com</a>.</p></div>
+ <form class="widget" id="reqForm">
+  <label class="f">Which service?<select id="rSvc"><option>Video setup session</option><option>Kūpuna crypto help</option><option>Printed or custom guide</option><option>Not sure yet</option></select></label>
+  <div class="row2"><label class="f">Your name<input id="rName" required autocomplete="name"></label><label class="f">Email<input id="rEmail" type="email" required autocomplete="email"></label></div>
+  <div class="row2"><label class="f">Phone (optional)<input id="rPhone" type="tel" autocomplete="tel"></label><label class="f">Time zone or island<input id="rTz" placeholder="Oʻahu, HST"></label></div>
+  <label class="f">What would you like help with?<textarea id="rNeed" rows="4" style="display:block;width:100%;margin-top:6px;font:inherit;font-size:16px;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:var(--bg);color:inherit" placeholder="Example: Open a Kraken account and set up a Tangem wallet. I have an iPhone."></textarea></label>
+  <label class="f">Best days and times<input id="rWhen" placeholder="Weekday mornings"></label>
+  <label class="f" style="display:flex;gap:10px;align-items:center"><input id="rKup" type="checkbox" style="width:auto;margin:0"> I'm 60 or older (Kūpuna rate)</label>
+  <button class="btn pri" type="submit">Send request</button>
+  <p class="small mut" id="rMsg" style="margin:12px 0 0"></p>
+ </form>
+</div></section>
+</main>
+<script src="js/data.js?v=24"></script>
+<script src="js/site.js?v=24"></script>
+<script>{
+const {$,$$}=CK;const TO='shakasoftware1@gmail.com';
+const mail=(subj,body)=>{location.href=`mailto:${TO}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`};
+const scamPrompt=t=>`Is this message a scam? Please explain the warning signs in plain English for a crypto beginner, say what the real company would or would not do, and tell me what to do next. Remind me never to share my recovery phrase, passwords or 2FA codes.\n\nThe message:\n"""\n${t.trim()}\n"""`;
+const AIS=[['Claude','https://claude.ai/new?q=','#d97757'],['ChatGPT','https://chatgpt.com/?q=','#10a37f'],['Perplexity','https://www.perplexity.ai/?q=','#20808d']];
+const drawAI=()=>{const t=$('#scamTxt').value||'(paste the message here)';$('#scamAI').innerHTML=AIS.map(([n,u,c])=>`<a class="aib" href="${u}${encodeURIComponent(scamPrompt(t))}" target="_blank" rel="noopener"><i style="background:${c}"></i>Ask ${n} ↗</a>`).join('')};
+$('#scamTxt').addEventListener('input',drawAI);drawAI();
+$('#scamSend').onclick=()=>{const t=$('#scamTxt').value.trim();if(!t){$('#scamTxt').focus();return}mail('Scam check request',`Aloha David,\n\nCan you check whether this message is real?\n\n---\n${t}\n---\n\nWhere I got it (text, email, call, social media):\n\nThank you!`)};
+$$('[data-svc]').forEach(a=>a.addEventListener('click',()=>{$('#rSvc').value=a.dataset.svc}));
+$('#reqForm').addEventListener('submit',e=>{e.preventDefault();const v=id=>$(id).value.trim();
+ const body=`Aloha David,\n\nService: ${v('#rSvc')}${$('#rKup').checked?' (Kūpuna rate, 60+)':''}\nName: ${v('#rName')}\nEmail: ${v('#rEmail')}\nPhone: ${v('#rPhone')||'n/a'}\nTime zone / island: ${v('#rTz')||'n/a'}\nBest times: ${v('#rWhen')||'n/a'}\n\nWhat I need help with:\n${v('#rNeed')||'n/a'}\n\nSent from cryptokokua.com/services`;
+ mail(`Crypto Kōkua request: ${v('#rSvc')}`,body);
+ $('#rMsg').innerHTML=`Your email app should open with the message ready to send. If it doesn't, email <a href="mailto:${TO}">${TO}</a>.`});
+}</script>
+</body>
+</html>
