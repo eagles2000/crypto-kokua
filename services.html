@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css?v=25">
+<link rel="stylesheet" href="css/site.css?v=26">
 <script>try{var t=localStorage.getItem('ck-theme');if(t)document.documentElement.dataset.ck=t}catch(e){}</script>
 </head>
 <body>
@@ -60,7 +60,7 @@
  <div class="pgrid three" id="payG" style="margin-top:22px"></div>
  <div id="cryptoPay" style="margin-top:26px"></div>
  <div class="box warn" style="margin-top:22px"><b class="l">Paying in crypto</b>Double-check the first and last few characters of the address against the one in my email, and send on the network listed. Crypto sent to the wrong address or network can't be recovered. For larger amounts, send a small test first. I'll confirm the dollar amount in your coin at the time you pay.</div>
- <p class="small mut" style="margin-top:12px">Payments go to Shaka Software LLC. Crypto received counts as income for me, and the dollar value on the day you pay is what I record.</p>
+ <p class="small mut" style="margin-top:12px">Payments go to David Cantrell for Shaka Software LLC. Crypto received counts as income for me, and the dollar value on the day you pay is what I record.</p>
 </div></section>
 <section class="band" id="request"><div class="wrap split" style="align-items:start">
  <div><span class="kicker">Request help</span><h2>Tell me what you need.</h2>
@@ -80,8 +80,8 @@
  </form>
 </div></section>
 </main>
-<script src="js/data.js?v=25"></script>
-<script src="js/site.js?v=25"></script>
+<script src="js/data.js?v=26"></script>
+<script src="js/site.js?v=26"></script>
 <script>{
 const {$,$$}=CK;const TO='shakasoftware1@gmail.com';
 const mail=(subj,body)=>{location.href=`mailto:${TO}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`};
@@ -96,26 +96,28 @@ $('#reqForm').addEventListener('submit',e=>{e.preventDefault();const v=id=>$(id)
  mail(`Crypto Kōkua request: ${v('#rSvc')}`,body);
  $('#rMsg').innerHTML=`Your email app should open with the message ready to send. If it doesn't, email <a href="mailto:${TO}">${TO}</a>.`});
 }</script>
-<script src="js/qrcode.js?v=25"></script>
+<script src="js/qrcode.js?v=26"></script>
 <script>{
 /* ===== Payment details: fill these in. Leave a value empty ('') to hide it. ===== */
 const PAY={
- venmo:'',          // Venmo username without the @, for example 'ShakaSoftware'
- zelle:'',          // Zelle email or phone, for example 'shakasoftware1@gmail.com'
- zelleName:'Shaka Software LLC',
+ venmo:'Crusher10',          // Venmo username without the @, for example 'ShakaSoftware'
+ zelle:'shakasoftware1@gmail.com',
+ zelleTag:'crusher78',          // Zelle email or phone, for example 'shakasoftware1@gmail.com'
+ zelleName:'David Cantrell',
  crypto:[           // [coin, network, address, note]
-  ['Bitcoin (BTC)','Bitcoin network',''],
-  ['Ethereum (ETH)','Ethereum mainnet',''],
-  ['XRP','XRP Ledger','','No destination tag needed unless my email lists one.'],
-  ['Solana (SOL)','Solana network',''],
-  ['USDC','Ethereum or Solana (match the address)','']
+  ['Bitcoin (BTC)','Bitcoin network','bc1qeyx3n2lvfakzd6v8pw67v5usdu980n32vuvv0d'],
+  ['Ethereum (ETH)','Ethereum mainnet','0xf3210B291fb9Ff2b860fcBEc5666AE5b1AbF833F','Send ETH on Ethereum mainnet only, not Base, Arbitrum or another network.'],
+  ['XRP','XRP Ledger','r9ekiRvrqZARvvAVQJfY2uZshteaJo9Qn9','No destination tag needed. If your exchange insists on one, leave it blank or enter 0.'],
+  ['Solana (SOL)','Solana network','4GrRgSboViBgooJKdZc7FChk2RqM7Hj76oomD8LzHsQ4'],
+  ['USDC','Solana network only','4GrRgSboViBgooJKdZc7FChk2RqM7Hj76oomD8LzHsQ4','Choose Solana as the network when you send. Don\'t send USDC on Ethereum to this address.'],
+  ['USDT','Solana network only','4GrRgSboViBgooJKdZc7FChk2RqM7Hj76oomD8LzHsQ4','Choose Solana as the network when you send. Don\'t send USDT on Ethereum or Tron to this address.']
  ]};
 const {$}=CK;const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const qr=t=>{try{const q=qrcode(0,'M');q.addData(t);q.make();return q.createSvgTag({cellSize:4,margin:2,scalable:true})}catch(e){return''}};
 const copyBtn=t=>`<button class="btn sm" type="button" data-copy="${esc(t)}">Copy</button>`;
 const cards=[];
-if(PAY.venmo)cards.push(`<article class="pc"><div><h3>Venmo</h3><div class="kind">@${esc(PAY.venmo)}</div></div><div style="width:150px;background:#fff;border-radius:12px;padding:6px">${qr('https://venmo.com/u/'+PAY.venmo)}</div><p>Scan with your phone camera or search <b>@${esc(PAY.venmo)}</b> in Venmo. Add "Crypto Kōkua" and your name in the note.</p><div class="act"><a class="btn pri sm" href="https://venmo.com/u/${encodeURIComponent(PAY.venmo)}" target="_blank" rel="noopener">Open Venmo ↗</a>${copyBtn('@'+PAY.venmo)}</div></article>`);
-if(PAY.zelle)cards.push(`<article class="pc"><div><h3>Zelle</h3><div class="kind">${esc(PAY.zelleName)}</div></div><p>In your bank's app, choose Zelle and send to:</p><p><b>${esc(PAY.zelle)}</b></p><p class="small mut">Confirm the name shows as ${esc(PAY.zelleName)} before sending.</p><div class="act">${copyBtn(PAY.zelle)}</div></article>`);
+if(PAY.venmo)cards.push(`<article class="pc"><div><h3>Venmo</h3><div class="kind">@${esc(PAY.venmo)} · David Cantrell</div></div><div style="width:150px;background:#fff;border-radius:12px;padding:6px">${qr('https://venmo.com/u/'+PAY.venmo)}</div><p>Scan with your phone camera or search <b>@${esc(PAY.venmo)}</b> in Venmo. Add "Crypto Kōkua" and your name in the note.</p><div class="act"><a class="btn pri sm" href="https://venmo.com/u/${encodeURIComponent(PAY.venmo)}" target="_blank" rel="noopener">Open Venmo ↗</a>${copyBtn('@'+PAY.venmo)}</div></article>`);
+if(PAY.zelle)cards.push(`<article class="pc"><div><h3>Zelle</h3><div class="kind">${esc(PAY.zelleName)} · no fees</div></div><p>In your bank's app, choose Zelle and send to:</p><p><b>${esc(PAY.zelle)}</b></p>${PAY.zelleTag?`<p class="small">Zelle tag: <b>${esc(PAY.zelleTag)}</b></p>`:''}<p class="small mut">Confirm the name shows as ${esc(PAY.zelleName)} before sending. Add "Crypto Kōkua" and your name in the memo.</p><div class="act">${copyBtn(PAY.zelle)}</div></article>`);
 const cr=PAY.crypto.filter(c=>c[2]);
 $('#payG').innerHTML=cards.join('')||'';
 $('#cryptoPay').innerHTML=cr.length?`<h3>Crypto addresses</h3><div class="pgrid three">${cr.map(([n,net,a,note])=>`<article class="pc"><div><h3>${esc(n)}</h3><div class="kind">${esc(net)}</div></div><div style="width:150px;background:#fff;border-radius:12px;padding:6px">${qr(a)}</div><p style="word-break:break-all;font-family:ui-monospace,monospace;font-size:13px">${esc(a)}</p>${note?`<p class="small mut">${esc(note)}</p>`:''}<div class="act">${copyBtn(a)}</div></article>`).join('')}</div>`:'';
